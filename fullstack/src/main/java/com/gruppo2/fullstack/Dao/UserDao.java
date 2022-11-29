@@ -17,7 +17,7 @@ List<User>findByPassword(String password);
 @Query(value = "select *  from user  where email= :email and password = :password",nativeQuery=true)
 	public User login(String email, String password) ;
 
-@Query(value = "select * from user where email:=email",nativeQuery=true)
+@Query(value = "select * from user where email= :email",nativeQuery=true)
 	public User verificaMail(String email);
    
 }
