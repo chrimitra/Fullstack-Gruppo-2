@@ -81,9 +81,11 @@ public class MainController {
 							@RequestParam("email") String email,
 							@RequestParam("password1") String password,
 							@RequestParam("password2") String password2){
-	
-	User persona = new User(null,name,surname,email,password);
-	if (password.equals(password2)){
+		//verificaMail
+		User verifica = UserRepository.verificaMail(email);
+		
+	if ((password.equals(password2))&&(verifica == null)){
+		User persona = new User(null,name,surname,email,password);
 		UserRepository.save(persona);
 		return "redirect:/ciao";
 	}else {
