@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 
-	public interface FeedbackDao extends CrudRepository<FeedbackDao, Long> {
+public interface FeedbackDao extends CrudRepository<FeedbackDao, Long> {
 		List<FeedbackDao> findByIDfeedback(int id);
 		List<FeedbackDao> findByIDuser(int user);
 	    List<FeedbackDao> findByIddomande(int id); 

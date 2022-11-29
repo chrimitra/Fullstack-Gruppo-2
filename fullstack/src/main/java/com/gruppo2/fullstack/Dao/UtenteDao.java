@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+
 public class UtenteDao {
 
 	public interface UserDao extends CrudRepository<UserDao, Long> {
