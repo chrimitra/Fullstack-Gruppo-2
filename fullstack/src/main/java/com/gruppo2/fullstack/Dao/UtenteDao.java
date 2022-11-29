@@ -17,5 +17,5 @@ public class UtenteDao {
 	    @Query("select s from User s where username= :username and password = :password")
 		public UserDao login(String username, String Cognome, String Email, String password);
 	}
-		
+		//*//
 }
