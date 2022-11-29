@@ -46,7 +46,7 @@ public class User {
 
 	public User(Integer idUser) {
 		super();
-		this.id_user	 = idUser;
+		this.id_user = idUser;
 	}
 
 	public User() {
