@@ -2,15 +2,23 @@ package com.gruppo2.fullstack.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.gruppo2.fullstack.Dao.UserDao;
+import com.gruppo2.fullstack.model.User;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("")
 public class MainController {
 
-	//@Autowired
-	//private UserDao UserRepository;
+	@Autowired
+	private UserDao UserRepository;
 	
 	@GetMapping("")
 	public String index() {
@@ -53,5 +61,16 @@ public class MainController {
 	public String profilo() {
 		return "profilo";
 	}
+	
+//  -------------------- LOG IN ------------------------
+@RequestMapping(value="/login", method=RequestMethod.POST)
+public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
+	User user = UserRepository.login(email, password);
+	if(user == null)
+		return "redirect:/index";
+	else {
+		return"redirect:/ciao";
+	}
+}
 	
 }
