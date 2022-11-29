@@ -8,7 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gruppo2.fullstack.Dao.UserDao;
+
+import com.gruppo2.fullstack.Dao.DomandeRepository;
+import com.gruppo2.fullstack.Dao.FeedbackRepository;
+import com.gruppo2.fullstack.Dao.RuoliRepository;
+
+import com.gruppo2.fullstack.Dao.UserRepository;
 import com.gruppo2.fullstack.model.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,7 +23,14 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 
 	@Autowired
-	private UserDao UserRepository;
+	UserRepository UserDao;
+	@Autowired
+	DomandeRepository DomandeDao;
+	@Autowired
+	FeedbackRepository FeedbackDao;
+	@Autowired
+	RuoliRepository RuoliDao;
+	
 	
 	@GetMapping("")
 	public String index() {
@@ -65,7 +77,7 @@ public class MainController {
 //  -------------------- LOG IN ------------------------//
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-		User user = UserRepository.login(email, password);
+		User user = UserDao.login(email, password);
 		if(user == null)
 			return "redirect:/index";
 		else {
@@ -82,11 +94,11 @@ public class MainController {
 							@RequestParam("password1") String password,
 							@RequestParam("password2") String password2){
 		//verificaMail
-		User verifica = UserRepository.verificaMail(email);
+		User verifica = UserDao.verificaMail(email);
 		
 	if ((password.equals(password2))&&(verifica == null)){
 		User persona = new User(null,name,surname,email,password);
-		UserRepository.save(persona);
+		UserDao.save(persona);
 		return "redirect:/ciao";
 	}else {
 		System.out.println("male male male");
