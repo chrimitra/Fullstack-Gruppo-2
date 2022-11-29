@@ -62,7 +62,7 @@ public class MainController {
 		return "profilo";
 	}
 	
-//  -------------------- LOG IN ------------------------//
+//  -------------------- LOG IN ------------------------////
 @RequestMapping(value="/login", method=RequestMethod.POST)
 public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 	User user = UserRepository.login(email, password);
