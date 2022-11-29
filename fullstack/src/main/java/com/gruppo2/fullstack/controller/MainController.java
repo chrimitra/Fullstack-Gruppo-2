@@ -63,14 +63,31 @@ public class MainController {
 	}
 	
 //  -------------------- LOG IN ------------------------////
-@RequestMapping(value="/login", method=RequestMethod.POST)
-public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-	User user = UserRepository.login(email, password);
-	if(user == null)
-		return "redirect:/index";
-	else {
-		return"redirect:/ciao";
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
+		User user = UserRepository.login(email, password);
+		if(user == null)
+			return "redirect:/index";
+		else {
+			return"redirect:/ciao";
+		}
 	}
-}
+
+//---------------------- REGISTRAZIONE ------------------
+
+	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
+	public String signin(@RequestParam("nome") String name,
+							@RequestParam("cognome") String surname,
+							@RequestParam("email") String email,
+							@RequestParam("password1") String password,
+							@RequestParam("password2") String password2){
 	
+	User persona = new User(null,name,surname,email,password);
+	if (password.equals(password2)){
+		UserRepository.save(persona);
+		return "redirect:/ciao";
+	}else {
+		System.out.println("male male male");
+		return "redirect:/registrazione";}	
+	}
 }
