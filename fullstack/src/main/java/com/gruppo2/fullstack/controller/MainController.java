@@ -73,7 +73,7 @@ public class MainController {
 		}
 	}
 
-//---------------------- REGISTRAZIONE ------------------
+//---------------------- REGISTRAZIONE ------------------//
 
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
 	public String signin(@RequestParam("nome") String name,
