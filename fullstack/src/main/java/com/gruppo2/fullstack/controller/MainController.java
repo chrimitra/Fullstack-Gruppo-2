@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import com.gruppo2.fullstack.Dao.DomandeRepository;
-import com.gruppo2.fullstack.Dao.FeedbackRepository;
-import com.gruppo2.fullstack.Dao.RuoliRepository;
+import com.gruppo2.fullstack.Dao.DomandeDao;
+import com.gruppo2.fullstack.Dao.FeedbackDao;
+import com.gruppo2.fullstack.Dao.RuoliDao;
 
-import com.gruppo2.fullstack.Dao.UserRepository;
+import com.gruppo2.fullstack.Dao.UserDao;
 import com.gruppo2.fullstack.model.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,13 +23,13 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 
 	@Autowired
-	UserRepository UserDao;
+	UserDao UserDao;
 	@Autowired
-	DomandeRepository DomandeDao;
+	DomandeDao DomandeDao;
 	@Autowired
-	FeedbackRepository FeedbackDao;
+	FeedbackDao FeedbackDao;
 	@Autowired
-	RuoliRepository RuoliDao;
+	RuoliDao RuoliDao;
 	
 	
 	@GetMapping("")

@@ -9,7 +9,7 @@ import com.gruppo2.fullstack.model.Domande;
 
 
 @Repository
-public interface FeedbackRepository extends CrudRepository<Domande, Integer> {
+public interface FeedbackDao extends CrudRepository<Domande, Integer> {
 	
 
 

@@ -5,13 +5,14 @@ package com.gruppo2.fullstack.Dao;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.gruppo2.fullstack.model.User;
+import com.gruppo2.fullstack.model.Ruoli;
+
 
 
 @Repository
-public interface DomandeRepository extends CrudRepository<User, Integer> {
+public interface RuoliDao extends CrudRepository<Ruoli, Integer> {
 	
+
+
+
 }
-
-
-
