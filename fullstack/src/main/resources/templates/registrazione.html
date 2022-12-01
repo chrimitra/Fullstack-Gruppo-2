@@ -28,34 +28,37 @@
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Nome</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" name="nome" id="nome" placeholder="inserisci il nome" required>
+                              <input type="text" class="form-control" name="nome" id="nome" placeholder="Inserisci il nome..." required>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Cognome</label>
                             <div class="col-sm-10">
-                              <input type="text" class="form-control" name="cognome"  id="cognome" placeholder="inserisci il cognome" required>
+                              <input type="text" class="form-control" name="cognome"  id="cognome" placeholder="Inserisci il cognome..." required>
                             </div>
                           </div>
                           <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                              <input type="email" class="form-control" name="email"  id="email" placeholder="Email" required>
+                              <input type="email" class="form-control" name="email"  id="email" placeholder="Inserisci l'email..." required>
                             </div>
                           </div>
-                          // select di ruoli
-                          	<select class="form-control" id="ruoli" name="idruoli">
-              					<option th:each="r:${ruoli}" th:value="${r.idruolo}" th:text="${r.ruoli}"></option>
-              				</select>
+	                	  <div class="form-group row">
+	                	  	<label for="inputRuolo" class="col-sm-2 col-form-label">Ruolo</label>
+	                	  	<div class="col-sm-10">
+	                          	<select class="form-control" id="ruolo" name="ruolo" required>
+	              					<option th:each="r:${ruolo}" th:value="${r.idruolo}" th:text="${r.ruoli}" ></option>
+	              				</select>
+	                	  	</div>
                           </div>
-                          <form>                         
-                            <div class="form-group">
+                                   <!-- Ho tolto il tag form, ma non se c'è bisogno per il captcha -->
+                            <div class="form-group row">
                               <div class="g-recaptcha" data-sitekey="6LfOIysjAAAAAEoBl8tDQvc_7qtOb-2z3cm1sX-p"></div>
                               
                             </div>
                             <a href="login" class="btn btn-secondary  active" role="button" aria-pressed="true">Indietro</a>
                             <button  type="submit" class="btn btn-primary ">Registrati</button>
-                      </form>
+                 </form>
                 </div>
                 
                 <div class="col">        
@@ -63,11 +66,9 @@
                 
               </div>
           </div>
-        </div>
         <div class="row align-items-end">
           
         </div>
-      </div>
  
     
       <script type="text/javascript">

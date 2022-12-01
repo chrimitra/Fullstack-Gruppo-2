@@ -41,8 +41,9 @@ public class MainController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String postLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 		User user = UserDao.login(email, password);
-		
+		session.setAttribute("loggedUser", user);
 		if(user != null) {
+			
 			// controllare se l'utente ha la password o no
 			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
 			// se si logga admin va nel menu
@@ -57,24 +58,34 @@ public class MainController {
 	
 	// REGISTRAZIONE (solo admin)
 	@GetMapping("/registrazione")
-	public ModelAndView registrazione() {
-		ModelAndView mavRegistrazione = new ModelAndView();
-		mavRegistrazione.setViewName("registrazione");
-		mavRegistrazione.addObject("ruoli", RuoloDao.findAll());
+	public ModelAndView registrazione(HttpSession session) {
+		User loggedUser = (User) session.getAttribute("loggedUser");
+		System.out.println(loggedUser.getRuolo().idruolo);
+		if ((loggedUser.getRuolo().getidruolo() == 1) && (loggedUser != null) ) {
+			ModelAndView mavRegistrazione = new ModelAndView();
+			mavRegistrazione.setViewName("registrazione");
+			mavRegistrazione.addObject("ruolo", RuoloDao.findAll());
+			
 		return mavRegistrazione;
+		} else {
+			ModelAndView mavLogin = new ModelAndView();
+			mavLogin.setViewName("login");
+			return mavLogin;
+		}
+		
 	}
 	
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
 	public String signin(@RequestParam("nome") String name,
 							@RequestParam("cognome") String surname,
 							@RequestParam("email") String email,
-							@RequestParam("ruolo") int password) { //cambiare html, levando password e mettendo una select con i ruoli
+							@RequestParam("ruolo") String ruolo) { //cambiare html, levando password e mettendo una select con i ruoli
 		
 	//verificaMail se è gia esistente
 	User verifica = UserDao.verificaMail(email);
 	
 	if (verifica == null){
-		User newUser = new User(null,name,surname,email,null);
+		User newUser = new User(null,name,surname,email,ruolo);
 		UserDao.save(newUser);
 		return "redirect:/"; // appena registrato mi porta alla login
 	}else {
