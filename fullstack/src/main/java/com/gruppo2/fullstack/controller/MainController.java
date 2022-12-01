@@ -60,7 +60,7 @@ public class MainController {
 	@GetMapping("/registrazione")
 	public ModelAndView registrazione(HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
-		System.out.println(loggedUser.getRuolo().idruolo);
+
 		if ((loggedUser.getRuolo().getidruolo() == 1) && (loggedUser != null) ) {
 			ModelAndView mavRegistrazione = new ModelAndView();
 			mavRegistrazione.setViewName("registrazione");
