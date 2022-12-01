@@ -36,6 +36,66 @@ public class Feedback {
 	@ManyToOne
 	@JoinColumn(name="domande_id")
 	private Domande domanda;
+
+
+	public Feedback(Integer id_feedback, @NotNull Integer voto, @NotNull Date data, User utente, Domande domanda) {
+		super();
+		this.id_feedback = id_feedback;
+		this.voto = voto;
+		this.data = data;
+		this.utente = utente;
+		this.domanda = domanda;
+	}
+
+
+	public Integer getId_feedback() {
+		return id_feedback;
+	}
+
+
+	public void setId_feedback(Integer id_feedback) {
+		this.id_feedback = id_feedback;
+	}
+
+
+	public Integer getVoto() {
+		return voto;
+	}
+
+
+	public void setVoto(Integer voto) {
+		this.voto = voto;
+	}
+
+
+	public Date getData() {
+		return data;
+	}
+
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+
+	public User getUtente() {
+		return utente;
+	}
+
+
+	public void setUtente(User utente) {
+		this.utente = utente;
+	}
+
+
+	public Domande getDomanda() {
+		return domanda;
+	}
+
+
+	public void setDomanda(Domande domanda) {
+		this.domanda = domanda;
+	}
 	
 
 	
