@@ -58,6 +58,7 @@ public class MainController {
 	// REGISTRAZIONE (solo admin)
 	@GetMapping("/registrazione")
 	public String registrazione() {
+		
 		return "registrazione";
 	}
 	
@@ -93,6 +94,7 @@ public class MainController {
 	public String report() {
 		return "report";
 	}
+	
 	
 }
 
