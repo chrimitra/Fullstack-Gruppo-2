@@ -21,7 +21,7 @@ import jakarta.validation.constraints.Size;
 public class User {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public Integer id_user	;
+    public Integer iduser	;
 	
 	@NotNull
     @Size(min=4, max=45)
@@ -39,8 +39,8 @@ public class User {
 	public String password;
 	
 	@ManyToOne
-	@JoinColumn(name="ruolo_id")
-	private Ruoli ruolo;
+	@JoinColumn(name="idruolo")
+	private Ruolo ruolo;
 	
 	
 	@OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
@@ -56,11 +56,11 @@ public class User {
 
 
 
-	public User(Integer id_user, @NotNull @Size(min = 4, max = 45) String name,
+	public User(Integer iduser, @NotNull @Size(min = 4, max = 45) String name,
 			@NotNull @Size(min = 4, max = 45) String surname, @NotNull @Size(min = 4, max = 45) String email,
 			@NotNull @Size(min = 4, max = 45) String password) {
 		super();
-		this.id_user = id_user;
+		this.iduser = iduser;
 		this.name = name;
 		this.surname = surname;
 		this.email = email;
@@ -71,13 +71,13 @@ public class User {
 
 
 
-	public Integer getId_user() {
-		return id_user;
+	public Integer getiduser() {
+		return iduser;
 	}
 
 
-	public void setId_user(Integer id_user) {
-		this.id_user = id_user;
+	public void setiduser(Integer iduser) {
+		this.iduser = iduser;
 	}
 
 
@@ -121,12 +121,12 @@ public class User {
 	}
 
 
-	public Ruoli getRuolo() {
+	public Ruolo getRuolo() {
 		return ruolo;
 	}
 
 
-	public void setRuolo(Ruoli ruolo) {
+	public void setRuolo(Ruolo ruolo) {
 		this.ruolo = ruolo;
 	}
 
@@ -143,7 +143,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id_user=" + id_user + ", name=" + name + ", surname=" + surname + ", email=" + email
+		return "User [iduser=" + iduser + ", name=" + name + ", surname=" + surname + ", email=" + email
 				+ ", password=" + password + ", ruolo=" + ruolo + ", feedback=" + feedback + "]";
 	}	
 	

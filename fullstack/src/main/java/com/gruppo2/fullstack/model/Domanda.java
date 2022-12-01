@@ -14,11 +14,11 @@ import jakarta.validation.constraints.NotNull;
 
 
 @Entity
-public class Domande {
+public class Domanda {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public Integer id_domanda;
+    public Integer iddomanda;
 	
 	
 	@NotNull    
@@ -27,19 +27,19 @@ public class Domande {
 	@OneToMany(mappedBy = "domanda", fetch = FetchType.EAGER)
 	private Set<Feedback> feedback;
 
-	public Domande(Integer id_domanda, @NotNull String domanda, Set<Feedback> feedback) {
+	public Domanda(Integer iddomanda, @NotNull String domanda, Set<Feedback> feedback) {
 		super();
-		this.id_domanda = id_domanda;
+		this.iddomanda = iddomanda;
 		this.domanda = domanda;
 		this.feedback = feedback;
 	}
 
-	public Integer getId_domanda() {
-		return id_domanda;
+	public Integer getiddomanda() {
+		return iddomanda;
 	}
 
-	public void setId_domanda(Integer id_domanda) {
-		this.id_domanda = id_domanda;
+	public void setiddomanda(Integer iddomanda) {
+		this.iddomanda = iddomanda;
 	}
 
 	public String getDomanda() {

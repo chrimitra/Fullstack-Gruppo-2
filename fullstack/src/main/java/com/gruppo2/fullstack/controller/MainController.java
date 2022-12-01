@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gruppo2.fullstack.Dao.DomandeDao;
+import com.gruppo2.fullstack.Dao.DomandaDao;
 import com.gruppo2.fullstack.Dao.FeedbackDao;
-import com.gruppo2.fullstack.Dao.RuoliDao;
+import com.gruppo2.fullstack.Dao.RuoloDao;
 
 import com.gruppo2.fullstack.Dao.UserDao;
 import com.gruppo2.fullstack.model.User;
@@ -25,11 +25,11 @@ public class MainController {
 	@Autowired
 	UserDao UserDao;
 	@Autowired
-	DomandeDao DomandeDao;
+	DomandaDao DomandaDao;
 	@Autowired
 	FeedbackDao FeedbackDao;
 	@Autowired
-	RuoliDao RuoliDao;
+	RuoloDao RuoloDao;
 	
 	
 	//LOG IN  (sarà uguale sia per admin, sia per utente)
@@ -60,7 +60,7 @@ public class MainController {
 	public ModelAndView registrazione() {
 		ModelAndView mavRegistrazione = new ModelAndView();
 		mavRegistrazione.setViewName("registrazione");
-		mavRegistrazione.addObject("ruoli", RuoliDao.findAll());
+		mavRegistrazione.addObject("ruoli", RuoloDao.findAll());
 		return mavRegistrazione;
 	}
 	

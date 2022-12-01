@@ -11,7 +11,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Ruoli {
+public class Ruolo {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,17 +23,13 @@ public class Ruoli {
 	
 	@OneToMany(mappedBy = "ruolo", fetch = FetchType.EAGER)
 	private Set<User> ruolo;
-<<<<<<< HEAD
-	
-=======
 
-	public Ruoli(Integer id_ruolo, @NotNull String ruoli) {
+
+	public Ruolo(Integer idruolo, @NotNull String ruoli) {
 		super();
-		this.id_ruolo = id_ruolo;
+		this.idruolo = idruolo;
 		this.ruoli = ruoli;
 	}
-
->>>>>>> branch 'main' of https://github.com/chrimitra/Fullstack-Gruppo-2.git
 	public Integer getId_ruolo() {
 		return idruolo;
 	}

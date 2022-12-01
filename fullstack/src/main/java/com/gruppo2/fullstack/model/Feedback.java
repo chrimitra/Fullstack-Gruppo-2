@@ -19,7 +19,7 @@ public class Feedback {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public Integer id_feedback;
+    public Integer idfeedback;
 	
 	@NotNull  
 	public Integer voto;
@@ -29,18 +29,18 @@ public class Feedback {
 	public Date data;
 	
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="iduser")
 	private User utente;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="domande_id")
-	private Domande domanda;
+	@JoinColumn(name="iddomanda")
+	private Domanda domanda;
 
 
-	public Feedback(Integer id_feedback, @NotNull Integer voto, @NotNull Date data, User utente, Domande domanda) {
+	public Feedback(Integer idfeedback, @NotNull Integer voto, @NotNull Date data, User utente, Domanda domanda) {
 		super();
-		this.id_feedback = id_feedback;
+		this.idfeedback = idfeedback;
 		this.voto = voto;
 		this.data = data;
 		this.utente = utente;
@@ -48,13 +48,13 @@ public class Feedback {
 	}
 
 
-	public Integer getId_feedback() {
-		return id_feedback;
+	public Integer getidfeedback() {
+		return idfeedback;
 	}
 
 
-	public void setId_feedback(Integer id_feedback) {
-		this.id_feedback = id_feedback;
+	public void setidfeedback(Integer idfeedback) {
+		this.idfeedback = idfeedback;
 	}
 
 
@@ -88,12 +88,12 @@ public class Feedback {
 	}
 
 
-	public Domande getDomanda() {
+	public Domanda getDomanda() {
 		return domanda;
 	}
 
 
-	public void setDomanda(Domande domanda) {
+	public void setDomanda(Domanda domanda) {
 		this.domanda = domanda;
 	}
 	
