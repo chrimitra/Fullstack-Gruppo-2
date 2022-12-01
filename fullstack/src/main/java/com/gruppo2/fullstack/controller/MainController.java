@@ -84,6 +84,8 @@ public class MainController {
 		return mavLogin;
 	}
 	
+	
+	
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
 	public String signin(@RequestParam("nome") String name,
 							@RequestParam("cognome") String surname,
@@ -107,6 +109,7 @@ public class MainController {
 	// MENU (solo admin) 
 	@GetMapping("/menu")
 	public String menu() {
+		
 		return "menu";
 	}
 	
@@ -114,6 +117,7 @@ public class MainController {
 	// REPORT (solo admin)
 	@GetMapping("/report")
 	public String report() {
+		
 		return "report";
 	}
 	
