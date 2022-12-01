@@ -35,7 +35,6 @@ public class User {
     @Size(min=4, max=45)
 	public String email;
 	
-	@NotNull
     @Size(min=4, max=45)
 	public String password;
 	

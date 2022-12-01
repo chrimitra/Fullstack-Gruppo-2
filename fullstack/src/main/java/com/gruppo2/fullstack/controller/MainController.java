@@ -65,13 +65,13 @@ public class MainController {
 	public String signin(@RequestParam("nome") String name,
 							@RequestParam("cognome") String surname,
 							@RequestParam("email") String email,
-							@RequestParam("password1") String password,
-							@RequestParam("password2") String password2){
+							@RequestParam("ruolo") int password) { //cambiare html, levando password e mettendo una select con i ruoli
 		
 	//verificaMail se è gia esistente
 	User verifica = UserDao.verificaMail(email);
-	if ((password.equals(password2))&&(verifica == null)){
-		User newUser = new User(null,name,surname,email,password);
+	
+	if (verifica == null){
+		User newUser = new User(null,name,surname,email,null);
 		UserDao.save(newUser);
 		return "redirect:/"; // appena registrato mi porta alla login
 	}else {
