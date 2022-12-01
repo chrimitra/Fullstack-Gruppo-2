@@ -32,68 +32,60 @@ public class MainController {
 	RuoliDao RuoliDao;
 	
 	
+	//LOG IN  (sarà uguale sia per admin, sia per utente)
 	@GetMapping("/")
-	public String login2() {
+	public String login() {
 		return "login";
 	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String postLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
+		User user = UserDao.login(email, password);
+		
+		if(user != null) {
+			// controllare se l'utente ha la password o no
+			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
+			
+			return"redirect:/menu";
+			
+		} else {
+			return "redirect:/login";
+		}
+	}
 
+	
+	// REGISTRAZIONE (solo admin)
 	@GetMapping("/registrazione")
 	public String registrazione() {
 		return "registrazione";
 	}
-
 	
-	@GetMapping("/ciao")
-	public String ciao() {
-		return "ciao";
-	}
-	
-	
-	@GetMapping("/recuperapass")
-	public String recuperaPassword() {
-		return "recuperapass";
-	}
-	
-	@GetMapping("/confermatoken")
-	public String confarmaToken() {
-		return "confermatoken";
-	}
-	
-	
-	@GetMapping("/profilo")
-	public String profilo() {
-		return "profilo";
-	}
-	
-//  -------------------- LOG IN ------------------------// sarà uguale sia per admin, sia per utente
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-		User user = UserDao.login(email, password);
-		if(user == null)
-			return "redirect:/login";
-		else {
-			return"redirect:/ciao";
-		}
-	}
-
-//---------------------- REGISTRAZIONE ------------------// va messo nell'admin
-
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
 	public String signin(@RequestParam("nome") String name,
 							@RequestParam("cognome") String surname,
 							@RequestParam("email") String email,
 							@RequestParam("password1") String password,
 							@RequestParam("password2") String password2){
-		//verificaMail se è gia esistente
-		User verifica = UserDao.verificaMail(email);
 		
+	//verificaMail se è gia esistente
+	User verifica = UserDao.verificaMail(email);
 	if ((password.equals(password2))&&(verifica == null)){
-		User persona = new User(null,name,surname,email,password);
-		UserDao.save(persona);
-		return "redirect:/ciao";
+		User newUser = new User(null,name,surname,email,password);
+		UserDao.save(newUser);
+		return "redirect:/"; // appena registrato mi porta alla login
 	}else {
+		// se non ha tutti i requisiti necessari
 		System.out.println("male male male");
 		return "redirect:/registrazione";}	
 	}
+	
+	
+	// MENU (solo admin) 
+	@GetMapping("/menu")
+	public String ciao() {
+		return "menu";
+	}
+	
+	
 }
+
