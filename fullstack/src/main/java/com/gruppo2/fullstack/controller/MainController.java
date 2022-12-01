@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gruppo2.fullstack.Dao.DomandeDao;
 import com.gruppo2.fullstack.Dao.FeedbackDao;
@@ -57,9 +57,11 @@ public class MainController {
 	
 	// REGISTRAZIONE (solo admin)
 	@GetMapping("/registrazione")
-	public String registrazione() {
-		
-		return "registrazione";
+	public ModelAndView registrazione() {
+		ModelAndView mavRegistrazione = new ModelAndView();
+		mavRegistrazione.setViewName("registrazione");
+		mavRegistrazione.addObject("ruoli", RuoliDao.findAll());
+		return mavRegistrazione;
 	}
 	
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)

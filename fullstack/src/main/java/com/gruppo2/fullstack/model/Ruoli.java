@@ -15,7 +15,7 @@ public class Ruoli {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public Integer id_ruolo;
+	public Integer idruolo;
 	
 	
 	@NotNull    
@@ -24,22 +24,12 @@ public class Ruoli {
 	@OneToMany(mappedBy = "ruolo", fetch = FetchType.EAGER)
 	private Set<User> ruolo;
 	
-	
-	
-	
-	
-	
-	
-
-	
-
-
 	public Integer getId_ruolo() {
-		return id_ruolo;
+		return idruolo;
 	}
 
 	public void setId_ruolo(Integer id_ruolo) {
-		this.id_ruolo = id_ruolo;
+		this.idruolo = id_ruolo;
 	}
 
 
