@@ -23,7 +23,17 @@ public class Ruoli {
 	
 	@OneToMany(mappedBy = "ruolo", fetch = FetchType.EAGER)
 	private Set<User> ruolo;
+<<<<<<< HEAD
 	
+=======
+
+	public Ruoli(Integer id_ruolo, @NotNull String ruoli) {
+		super();
+		this.id_ruolo = id_ruolo;
+		this.ruoli = ruoli;
+	}
+
+>>>>>>> branch 'main' of https://github.com/chrimitra/Fullstack-Gruppo-2.git
 	public Integer getId_ruolo() {
 		return idruolo;
 	}
@@ -32,7 +42,15 @@ public class Ruoli {
 		this.idruolo = id_ruolo;
 	}
 
+	public String getRuoli() {
+		return ruoli;
+	}
 
+	public void setRuoli(String ruoli) {
+		this.ruoli = ruoli;
+	}
+	
+	
 	
 	
 }
