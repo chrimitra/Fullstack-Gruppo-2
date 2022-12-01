@@ -14,12 +14,15 @@ import jakarta.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "feedbacks")
+@Table(name = "feedback")
 public class Feedback {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     public Integer idfeedback;
+	
+	
+	
 	
 	@NotNull  
 	public Integer voto;
@@ -29,74 +32,80 @@ public class Feedback {
 	public Date data;
 	
 	@ManyToOne
-	@JoinColumn(name="iduser")
-	private User utente;
+	@JoinColumn(name="idutente")
+	private Utente utente;
 	
 	
 	@ManyToOne
 	@JoinColumn(name="iddomanda")
 	private Domanda domanda;
+	
+	@ManyToOne
+	@JoinColumn(name="idmodulo")
+	private Modulo modulo;
 
 
-	public Feedback(Integer idfeedback, @NotNull Integer voto, @NotNull Date data, User utente, Domanda domanda) {
+	public Feedback(Integer idfeedback, @NotNull Integer voto, @NotNull Date data, Utente utente, Domanda domanda,
+			Modulo modulo) {
 		super();
 		this.idfeedback = idfeedback;
 		this.voto = voto;
 		this.data = data;
 		this.utente = utente;
 		this.domanda = domanda;
+		this.modulo = modulo;
 	}
 
-
-	public Integer getidfeedback() {
+	public Integer getIdfeedback() {
 		return idfeedback;
 	}
 
-
-	public void setidfeedback(Integer idfeedback) {
+	public void setIdfeedback(Integer idfeedback) {
 		this.idfeedback = idfeedback;
 	}
-
 
 	public Integer getVoto() {
 		return voto;
 	}
 
-
 	public void setVoto(Integer voto) {
 		this.voto = voto;
 	}
-
 
 	public Date getData() {
 		return data;
 	}
 
-
 	public void setData(Date data) {
 		this.data = data;
 	}
 
-
-	public User getUtente() {
+	public Utente getUtente() {
 		return utente;
 	}
 
-
-	public void setUtente(User utente) {
+	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
-
 
 	public Domanda getDomanda() {
 		return domanda;
 	}
 
-
 	public void setDomanda(Domanda domanda) {
 		this.domanda = domanda;
 	}
-	
+
+	public Modulo getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(Modulo modulo) {
+		this.modulo = modulo;
+	}
+
+
+
 
 	
 	

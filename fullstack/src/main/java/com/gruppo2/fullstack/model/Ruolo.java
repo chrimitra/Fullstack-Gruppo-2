@@ -21,16 +21,16 @@ public class Ruolo {
 	
 	
 	@NotNull    
-	public String ruoli;
+	public String ruolo;
 	
 	@OneToMany(mappedBy = "ruolo", fetch = FetchType.EAGER)
-	private Set<User> ruolo;
+	private Set<Utente> ruoloUtente;
 
 
-	public Ruolo(Integer idruolo, @NotNull String ruoli) {
+	public Ruolo(Integer idruolo, @NotNull String ruolo) {
 		super();
 		this.idruolo = idruolo;
-		this.ruoli = ruoli;
+		this.ruolo = ruolo;
 	}
 	
 	
@@ -45,12 +45,12 @@ public class Ruolo {
 		this.idruolo = idruolo;
 	}
 
-	public String getRuoli() {
-		return ruoli;
+	public String getruolo() {
+		return ruolo;
 	}
 
-	public void setRuoli(String ruoli) {
-		this.ruoli = ruoli;
+	public void setruolo(String ruolo) {
+		this.ruolo = ruolo;
 	}
 	
 	

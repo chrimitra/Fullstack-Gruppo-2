@@ -13,8 +13,8 @@ import com.gruppo2.fullstack.Dao.DomandaDao;
 import com.gruppo2.fullstack.Dao.FeedbackDao;
 import com.gruppo2.fullstack.Dao.RuoloDao;
 
-import com.gruppo2.fullstack.Dao.UserDao;
-import com.gruppo2.fullstack.model.User;
+import com.gruppo2.fullstack.Dao.UtenteDao;
+import com.gruppo2.fullstack.model.Utente;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
 public class MainController {
 
 	@Autowired
-	UserDao UserDao;
+	UtenteDao UtenteDao;
 	@Autowired
 	DomandaDao DomandaDao;
 	@Autowired
@@ -40,10 +40,10 @@ public class MainController {
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String postLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
-		User user = UserDao.login(email, password);
-		session.setAttribute("loggedUser", user);
+		Utente utente = UtenteDao.login(email, password);
+		session.setAttribute("loggedUser", utente);
 		
-		if((user != null) && (user.getRuolo().getidruolo() == 1)) { //Se è admin
+		if((utente != null) && (utente.getRuolo().getidruolo() == 1)) { //Se è admin
 			
 			// controllare se l'utente ha la password o no
 			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
@@ -51,9 +51,9 @@ public class MainController {
 			// se si logga l'utente va nel modulo
 			return"redirect:/menu";
 			
-		} else if ((user != null) && (user.getRuolo().getidruolo() == 2)) { //SE è docente
+		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //SE è docente
 			return "redirect:/login"; // da cambiare con la pagina "modulo bianco"----------------------------------
-		}else if ((user != null) && (user.getRuolo().getidruolo() == 3)) { //SE è studente
+		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //SE è studente
 			
 			return"redirect:/modulo";
 		}
@@ -64,7 +64,7 @@ public class MainController {
 	// REGISTRAZIONE (solo admin)
 	@GetMapping("/registrazione")
 	public ModelAndView registrazione(HttpSession session) {
-		User loggedUser = (User) session.getAttribute("loggedUser");
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 
 		if (loggedUser == null){
 			ModelAndView mavLogin = new ModelAndView();
@@ -93,11 +93,11 @@ public class MainController {
 							@RequestParam("ruolo") String ruolo) { //cambiare html, levando password e mettendo una select con i ruoli
 		
 	//verificaMail se è gia esistente
-	User verifica = UserDao.verificaMail(email);
+	Utente verifica = UtenteDao.verificaMail(email);
 	
 	if (verifica == null){
-		User newUser = new User(null,name,surname,email,ruolo);
-		UserDao.save(newUser);
+		Utente newUser = new Utente(null,name,surname,email,ruolo);
+		UtenteDao.save(newUser);
 		return "redirect:/"; // appena registrato mi porta alla login
 	}else {
 		// se non ha tutti i requisiti necessari

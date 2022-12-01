@@ -17,19 +17,19 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(name = "Utente")
+public class Utente {
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    public Integer iduser	;
+    public Integer idutente	;
 	
 	@NotNull
     @Size(min=4, max=45)
-	public String name;
+	public String nome;
 	
 	@NotNull
     @Size(min=4, max=45)
-	public String surname;
+	public String cognome;
 	
 	@NotNull
     @Size(min=4, max=45)
@@ -47,7 +47,7 @@ public class User {
 	private Set<Feedback> feedback;
 
 
-	public User() {
+	public Utente() {
 		super();
 		
 	}
@@ -56,13 +56,13 @@ public class User {
 
 
 
-	public User(Integer iduser, @NotNull @Size(min = 4, max = 45) String name,
-			@NotNull @Size(min = 4, max = 45) String surname, @NotNull @Size(min = 4, max = 45) String email,
+	public Utente(Integer idutente, @NotNull @Size(min = 4, max = 45) String nome,
+			@NotNull @Size(min = 4, max = 45) String cognome, @NotNull @Size(min = 4, max = 45) String email,
 			@NotNull @Size(min = 4, max = 45) String password) {
 		super();
-		this.iduser = iduser;
-		this.name = name;
-		this.surname = surname;
+		this.idutente = idutente;
+		this.nome = nome;
+		this.cognome = cognome;
 		this.email = email;
 		this.password = password;
 	}
@@ -71,33 +71,33 @@ public class User {
 
 
 
-	public Integer getiduser() {
-		return iduser;
+	public Integer getidutente() {
+		return idutente;
 	}
 
 
-	public void setiduser(Integer iduser) {
-		this.iduser = iduser;
+	public void setidutente(Integer idutente) {
+		this.idutente = idutente;
 	}
 
 
-	public String getName() {
-		return name;
+	public String getnome() {
+		return nome;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setnome(String nome) {
+		this.nome = nome;
 	}
 
 
-	public String getSurname() {
-		return surname;
+	public String getcognome() {
+		return cognome;
 	}
 
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setcognome(String cognome) {
+		this.cognome = cognome;
 	}
 
 
@@ -143,7 +143,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [iduser=" + iduser + ", name=" + name + ", surname=" + surname + ", email=" + email
+		return "User [idutente=" + idutente + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email
 				+ ", password=" + password + ", ruolo=" + ruolo + ", feedback=" + feedback + "]";
 	}	
 	
