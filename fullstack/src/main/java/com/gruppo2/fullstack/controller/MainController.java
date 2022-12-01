@@ -42,7 +42,8 @@ public class MainController {
 	public String postLogin(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 		User user = UserDao.login(email, password);
 		session.setAttribute("loggedUser", user);
-		if(user != null) {
+		
+		if((user != null) && (user.getRuolo().getidruolo() == 1)) { //Se è admin
 			
 			// controllare se l'utente ha la password o no
 			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
@@ -50,9 +51,13 @@ public class MainController {
 			// se si logga l'utente va nel modulo
 			return"redirect:/menu";
 			
-		} else {
-			return "redirect:/login";
+		} else if ((user != null) && (user.getRuolo().getidruolo() == 2)) { //SE è docente
+			return "redirect:/login"; // da cambiare con la pagina "modulo bianco"----------------------------------
+		}else if ((user != null) && (user.getRuolo().getidruolo() == 3)) { //SE è studente
+			
+			return"redirect:/modulo";
 		}
+	 return "redirect:/login";
 	}
 
 	
@@ -61,18 +66,22 @@ public class MainController {
 	public ModelAndView registrazione(HttpSession session) {
 		User loggedUser = (User) session.getAttribute("loggedUser");
 
-		if ((loggedUser.getRuolo().getidruolo() == 1) && (loggedUser != null) ) {
-			ModelAndView mavRegistrazione = new ModelAndView();
-			mavRegistrazione.setViewName("registrazione");
-			mavRegistrazione.addObject("ruolo", RuoloDao.findAll());
-			
-		return mavRegistrazione;
-		} else {
+		if (loggedUser == null){
 			ModelAndView mavLogin = new ModelAndView();
 			mavLogin.setViewName("login");
 			return mavLogin;
 		}
 		
+		else if ((loggedUser.getRuolo().getidruolo() == 1) && (loggedUser != null) ) {
+			ModelAndView mavRegistrazione = new ModelAndView();
+			mavRegistrazione.setViewName("registrazione");
+			mavRegistrazione.addObject("ruolo", RuoloDao.findAll());
+			
+		return mavRegistrazione;
+		} 
+		ModelAndView mavLogin = new ModelAndView();//pagina di (errore da sostituire)
+		mavLogin.setViewName("login");
+		return mavLogin;
 	}
 	
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
