@@ -45,7 +45,8 @@ public class MainController {
 		if(user != null) {
 			// controllare se l'utente ha la password o no
 			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
-			
+			// se si logga admin va nel menu
+			// se si logga l'utente va nel modulo
 			return"redirect:/menu";
 			
 		} else {
@@ -82,10 +83,16 @@ public class MainController {
 	
 	// MENU (solo admin) 
 	@GetMapping("/menu")
-	public String ciao() {
+	public String menu() {
 		return "menu";
 	}
 	
+	
+	// REPORT (solo admin)
+	@GetMapping("/report")
+	public String report() {
+		return "report";
+	}
 	
 }
 
