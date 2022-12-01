@@ -23,16 +23,12 @@ public class Ruoli {
 	
 	@OneToMany(mappedBy = "ruolo", fetch = FetchType.EAGER)
 	private Set<User> ruolo;
-	
-	
-	
-	
-	
-	
-	
 
-	
-
+	public Ruoli(Integer id_ruolo, @NotNull String ruoli) {
+		super();
+		this.id_ruolo = id_ruolo;
+		this.ruoli = ruoli;
+	}
 
 	public Integer getId_ruolo() {
 		return id_ruolo;
@@ -42,7 +38,15 @@ public class Ruoli {
 		this.id_ruolo = id_ruolo;
 	}
 
+	public String getRuoli() {
+		return ruoli;
+	}
 
+	public void setRuoli(String ruoli) {
+		this.ruoli = ruoli;
+	}
+	
+	
 	
 	
 }
