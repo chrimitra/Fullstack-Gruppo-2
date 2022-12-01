@@ -32,8 +32,8 @@ public class MainController {
 	RuoliDao RuoliDao;
 	
 	
-	@GetMapping("")
-	public String index() {
+	@GetMapping("/")
+	public String login2() {
 		return "login";
 	}
 	
@@ -42,11 +42,7 @@ public class MainController {
 	public String registrazione() {
 		return "registrazione";
 	}
-	
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
+
 	
 	@GetMapping("/ciao")
 	public String ciao() {
@@ -75,7 +71,7 @@ public class MainController {
 	public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 		User user = UserDao.login(email, password);
 		if(user == null)
-			return "redirect:/index";
+			return "redirect:/login";
 		else {
 			return"redirect:/ciao";
 		}
