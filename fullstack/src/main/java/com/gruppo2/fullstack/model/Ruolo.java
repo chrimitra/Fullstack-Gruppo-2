@@ -30,12 +30,12 @@ public class Ruolo {
 		this.idruolo = idruolo;
 		this.ruoli = ruoli;
 	}
-	public Integer getId_ruolo() {
+	public Integer getidruolo() {
 		return idruolo;
 	}
 
-	public void setId_ruolo(Integer id_ruolo) {
-		this.idruolo = id_ruolo;
+	public void setidruolo(Integer idruolo) {
+		this.idruolo = idruolo;
 	}
 
 	public String getRuoli() {
