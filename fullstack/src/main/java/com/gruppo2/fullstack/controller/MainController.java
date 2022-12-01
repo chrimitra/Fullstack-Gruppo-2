@@ -34,13 +34,9 @@ public class MainController {
 	
 	@GetMapping("")
 	public String index() {
-		return "index";
+		return "login";
 	}
 	
-	@GetMapping("/index")
-	public String index2() {
-		return "index";
-	}
 
 	@GetMapping("/registrazione")
 	public String registrazione() {
@@ -74,7 +70,7 @@ public class MainController {
 		return "profilo";
 	}
 	
-//  -------------------- LOG IN ------------------------//
+//  -------------------- LOG IN ------------------------// sarà uguale sia per admin, sia per utente
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String postLOGIN(@RequestParam("email") String email, @RequestParam("password") String password, Model model, HttpSession session) {
 		User user = UserDao.login(email, password);
@@ -85,7 +81,7 @@ public class MainController {
 		}
 	}
 
-//---------------------- REGISTRAZIONE ------------------//
+//---------------------- REGISTRAZIONE ------------------// va messo nell'admin
 
 	@RequestMapping(value="/registrazione", method=RequestMethod.POST)
 	public String signin(@RequestParam("nome") String name,
@@ -93,7 +89,7 @@ public class MainController {
 							@RequestParam("email") String email,
 							@RequestParam("password1") String password,
 							@RequestParam("password2") String password2){
-		//verificaMail
+		//verificaMail se è gia esistente
 		User verifica = UserDao.verificaMail(email);
 		
 	if ((password.equals(password2))&&(verifica == null)){
