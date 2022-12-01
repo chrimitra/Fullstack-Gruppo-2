@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -38,6 +39,9 @@ public class Utente {
     
 	public String password;
 	
+	@OneToOne(mappedBy = "insegnante")
+    private Modulo insegnanteMateria;
+	
 	@ManyToOne
 	@JoinColumn(name="idruolo")
 	private Ruolo ruolo;
@@ -45,6 +49,8 @@ public class Utente {
 	
 	@OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
 	private Set<Feedback> feedback;
+	
+	
 
 
 	public Utente() {

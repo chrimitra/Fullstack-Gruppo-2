@@ -55,7 +55,7 @@ public class MainController {
 			return "redirect:/login"; // da cambiare con la pagina "modulo bianco"----------------------------------
 		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //SE è studente
 			
-			return"redirect:/modulo";
+			return"redirect:/studente/modulo";
 		}
 	 return "redirect:/login";
 	}
