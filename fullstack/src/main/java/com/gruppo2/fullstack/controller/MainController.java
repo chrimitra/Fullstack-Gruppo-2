@@ -49,7 +49,7 @@ public class MainController {
 			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
 			// se si logga admin va nel menu
 			// se si logga l'utente va nel modulo
-			return"redirect:/menu";
+			return"redirect:/admin/report";
 			
 		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //SE è docente
 			return "redirect:/login"; // da cambiare con la pagina "modulo bianco"----------------------------------

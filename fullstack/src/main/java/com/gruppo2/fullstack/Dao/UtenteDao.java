@@ -20,10 +20,10 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 
 
 
-	@Query(value = "select *  from user  where email= :email and password = :password",nativeQuery=true)
+	@Query(value = "select *  from utente where email= :email and password = :password",nativeQuery=true)
 		public Utente login(String email, String password) ;
 
-	@Query(value = "select * from user where email= :email",nativeQuery=true)
+	@Query(value = "select * from utente where email= :email",nativeQuery=true)
 		public Utente verificaMail(String email);
 
 }

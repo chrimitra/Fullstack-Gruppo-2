@@ -8,7 +8,11 @@
 </head>
 <body>
 	<h3 align="center"> Report </h3>
-
+		<th:block th:each="m : ${modulo}">	
+  			<tr>
+        		<td th:text="${m.modulo}"></td>
+     		</tr>
+		</th:block>
 
 </body>
 </html>
