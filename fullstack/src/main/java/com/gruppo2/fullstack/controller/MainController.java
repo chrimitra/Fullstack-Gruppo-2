@@ -1,5 +1,7 @@
 package com.gruppo2.fullstack.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +16,12 @@ import com.gruppo2.fullstack.Dao.FeedbackDao;
 import com.gruppo2.fullstack.Dao.RuoloDao;
 
 import com.gruppo2.fullstack.Dao.UtenteDao;
+import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Utente;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Controller
 @RequestMapping("")
@@ -93,10 +98,13 @@ public class MainController {
 							@RequestParam("ruolo") String ruolo) { //cambiare html, levando password e mettendo una select con i ruoli
 		
 	//verificaMail se è gia esistente
+	Ruolo role = (Ruolo) RuoloDao.findByruolo(ruolo);
+	String password = "psw";
 	Utente verifica = UtenteDao.verificaMail(email);
 	
 	if (verifica == null){
-		Utente newUser = new Utente(null,name,surname,email,ruolo);
+		Utente newUser = new Utente(null,name,surname, email,password, role);
+		
 		UtenteDao.save(newUser);
 		return "redirect:/"; // appena registrato mi porta alla login
 	}else {

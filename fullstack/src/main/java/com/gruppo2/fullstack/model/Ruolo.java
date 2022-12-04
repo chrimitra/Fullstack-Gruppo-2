@@ -37,6 +37,8 @@ public class Ruolo {
 	public Ruolo () {
 		
 	}
+	
+	
 	public Integer getidruolo() {
 		return idruolo;
 	}
@@ -51,6 +53,12 @@ public class Ruolo {
 
 	public void setruolo(String ruolo) {
 		this.ruolo = ruolo;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Ruolo [idruolo=" + idruolo + ", ruolo=" + ruolo + "]";
 	}
 	
 	
