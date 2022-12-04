@@ -36,7 +36,9 @@ public class Modulo {
 	private Set<Feedback> moduloFeedback;
 	
 	
-	
+	public Modulo() {
+		
+	}
 	
 	public Modulo(Integer idmodulo, @NotNull String modulo) {
 		super();

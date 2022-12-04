@@ -11,6 +11,8 @@ import com.gruppo2.fullstack.model.Domanda;
 
 @Repository
 public interface DomandaDao extends CrudRepository<Domanda, Integer> {
+
+	Domanda findByiddomanda(Integer iddomanda);
 	
 }
 

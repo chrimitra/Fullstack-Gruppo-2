@@ -29,7 +29,7 @@ public class Feedback {
 	
 	
 	@NotNull  
-	public Date data;
+	public String data;
 	
 	@ManyToOne
 	@JoinColumn(name="idutente")
@@ -43,9 +43,13 @@ public class Feedback {
 	@ManyToOne
 	@JoinColumn(name="idmodulo")
 	private Modulo modulo;
+	
+	
+	public Feedback () {
+		
+	}
 
-
-	public Feedback(Integer idfeedback, @NotNull Integer voto, @NotNull Date data, Utente utente, Domanda domanda,
+	public Feedback(Integer idfeedback, @NotNull Integer voto, String data, Utente utente, Domanda domanda,
 			Modulo modulo) {
 		super();
 		this.idfeedback = idfeedback;
@@ -72,11 +76,11 @@ public class Feedback {
 		this.voto = voto;
 	}
 
-	public Date getData() {
+	public String getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 

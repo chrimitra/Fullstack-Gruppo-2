@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+	<h1>Report Details </h1>
+	<div align= "center" class="box-modulo">
+		<p th:text="${modulo.modulo}"></p>  
+		<th:block th:each="feedback : ${feedback}">	
+		    			<tr>
+			         		<td th:text="${feedback.domanda.domanda}"></td>
+			         		<td th:text="${feedback.voto}"></td>
+			      		</tr>
+			</tbody>
+		</th:block>
+	</div>
+</body>
+</html>

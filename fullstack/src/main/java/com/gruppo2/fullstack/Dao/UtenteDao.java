@@ -18,7 +18,7 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	List<Utente>findByEmail(String email);
 	List<Utente>findByPassword(String password);
 
-
+	
 
 	@Query(value = "select *  from utente where email= :email and password = :password",nativeQuery=true)
 		public Utente login(String email, String password) ;

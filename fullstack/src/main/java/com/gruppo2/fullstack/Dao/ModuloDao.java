@@ -12,6 +12,6 @@ import com.gruppo2.fullstack.model.Modulo;
 @Repository
 public interface ModuloDao extends CrudRepository<Modulo, Integer> {
 
-	List<Modulo> findByidmodulo(Integer idmodulo);
+	Modulo findByIdmodulo(Integer idmodulo);
 	List<Modulo> findBymodulo(String modulo);
 }

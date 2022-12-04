@@ -29,6 +29,10 @@ public class Domanda {
 	@OneToMany(mappedBy = "domanda", fetch = FetchType.EAGER)
 	private Set<Feedback> feedback;
 
+	
+	public Domanda() {
+		
+	}
 	public Domanda(Integer iddomanda, @NotNull String domanda, Set<Feedback> feedback) {
 		super();
 		this.iddomanda = iddomanda;

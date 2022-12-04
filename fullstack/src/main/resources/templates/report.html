@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,12 +7,153 @@
     <title>Menu</title>
 </head>
 <body>
-	<h3 align="center"> Report </h3>
-		<th:block th:each="m : ${modulo}">	
-  			<tr>
-        		<td th:text="${m.modulo}"></td>
-     		</tr>
-		</th:block>
+	<!-- NavBar on the left -->
+	<!-- <div class="navbar-left">
+	        <div class="back">
+	            <p> Indietro </p>
+	        </div>
+	        <div class="registration">
+	            <p> Registrazione </p>
+	        </div>
+	        <div class="login">
+	            <p> Login </p>
+	        </div>
+	        <div class="user-list">
+	            <p> Lista Utenti </p>
+	        </div>
+	        <div class="logout">
+	            <p> logout </p>
+	        </div>
+	 </div>  -->
+	  
+  <!-- Reportistica -->
 
+    <h1 class="report-title"> REPORT </h1>
+    <div class="container-report">
+        <div align= "center" class="box-modulo" th:each="m : ${modulo}">	
+            <a th:href="@{'/admin/reportDetails/' + ${m.getIdmodulo()}}" ><p th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p></a>
+            <div id="details">
+            </div>
+        </div>
+     	
+     	
+    </div>
+
+
+<!-- JavaScript -->
+<script>
+	
+
+
+	
+	
+	/*function loadDoc() {
+		  const xhttp = new XMLHttpRequest();
+		  xhttp.onload = function() {
+		    document.getElementById("details").innerHTML = this.responseText;
+		  }
+		  let paragraphs = document.getElementsByTagName("p");
+		 
+		  
+		  for(let i = 0; i < box.getElementsByTagName("p").length; i++) {
+			  let id = document.getElementsByTagName("p")[i].id;	  
+		  }
+		  
+		  document.getElementById("details").innerHTML = id;
+		  console.log(id);
+		  xhttp.open("GET", `/admin/reportDetails/${id}`);
+		  xhttp.send();
+		} */
+</script>
 </body>
+
+<!-- CSS STYLE -->
+<style>
+.navbar-left {
+    position: absolute;
+    width: 232px;
+    height: 782px;
+    left: 0px;
+    top: 0px;
+    background-color: rgb(132, 131, 131);
+}
+
+.back {
+    position: absolute;
+    width: 87px;
+    height: 29px;
+    left: 39px;
+    top: 21px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.registration {
+    position: absolute;
+    width: 155px;
+    height: 29px;
+    left: 39px;
+    top: 313px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.login {
+    position: absolute;
+    width: 63px;
+    height: 29px;
+    left: 39px;
+    top: 367px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.user-list {
+    position: absolute;
+    width: 130px;
+    height: 29px;
+    left: 39px;
+    top: 421px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.logout {
+    position: absolute;
+    width: 80px;
+    height: 29px;
+    left: 47px;
+    top: 591px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.box-modulo {
+    left: 0px;
+    top: 0px;
+    background: #A7A7A7;
+    border: 1px solid #000000;
+}
+
+</style>
 </html>
