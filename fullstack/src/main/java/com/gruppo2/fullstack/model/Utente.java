@@ -2,8 +2,7 @@ package com.gruppo2.fullstack.model;
 
 import java.util.Set;
 
-
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -37,72 +37,73 @@ public class Utente {
 	public String email;
 	
     
-	public String password;
+	public String password;	
 	
-	@OneToOne(mappedBy = "insegnante")
-    private Modulo insegnanteMateria;
 	
 	@ManyToOne
 	@JoinColumn(name="idruolo")
 	private Ruolo ruolo;
+
+
+
+
+	@OneToOne(mappedBy = "utente", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Modulo modulo;
 	
 	
 	@OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
 	private Set<Feedback> feedback;
+
 	
 	
-
-
-	public Utente() {
-		super();
-		
-	}
-
-
-
-
 
 	public Utente(Integer idutente, @NotNull @Size(min = 4, max = 45) String nome,
 			@NotNull @Size(min = 4, max = 45) String cognome, @NotNull @Size(min = 4, max = 45) String email,
-			@NotNull @Size(min = 4, max = 45) String password) {
+			String password, Ruolo ruolo) {
 		super();
 		this.idutente = idutente;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.email = email;
 		this.password = password;
+		this.ruolo = ruolo;
 	}
 
 
+	@Override
+	public String toString() {
+		return "Utente [idutente=" + idutente + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email
+				+ ", password=" + password + ", ruolo=" + ruolo + "]";
+	}
 
 
-
-	public Integer getidutente() {
+	public Integer getIdutente() {
 		return idutente;
 	}
 
 
-	public void setidutente(Integer idutente) {
+	public void setIdutente(Integer idutente) {
 		this.idutente = idutente;
 	}
 
 
-	public String getnome() {
+	public String getNome() {
 		return nome;
 	}
 
 
-	public void setnome(String nome) {
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
 
-	public String getcognome() {
+	public String getCognome() {
 		return cognome;
 	}
 
 
-	public void setcognome(String cognome) {
+	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
 
@@ -137,21 +138,13 @@ public class Utente {
 	}
 
 
-	public Set<Feedback> getFeedback() {
-		return feedback;
-	}
+
+	
+	
+	
 
 
-	public void setFeedback(Set<Feedback> feedback) {
-		this.feedback = feedback;
-	}
-
-
-	@Override
-	public String toString() {
-		return "User [idutente=" + idutente + ", nome=" + nome + ", cognome=" + cognome + ", email=" + email
-				+ ", password=" + password + ", ruolo=" + ruolo + ", feedback=" + feedback + "]";
-	}	
+	
 	
 	
 
