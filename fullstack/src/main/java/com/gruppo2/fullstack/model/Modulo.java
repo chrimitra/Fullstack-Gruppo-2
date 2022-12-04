@@ -34,8 +34,7 @@ public class Modulo {
 	
 	@OneToMany(mappedBy = "modulo", fetch = FetchType.EAGER)
 	private Set<Feedback> moduloFeedback;
-<<<<<<< HEAD
-	
+
 	
 	public Modulo() {
 		
@@ -62,8 +61,7 @@ public class Modulo {
 	public void setModulo(String modulo) {
 		this.modulo = modulo;
 	}
-=======
->>>>>>> branch 'main' of https://github.com/chrimitra/Fullstack-Gruppo-2.git
+
 
 	@Override
 	public String toString() {
