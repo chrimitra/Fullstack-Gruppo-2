@@ -17,6 +17,7 @@ import com.gruppo2.fullstack.Dao.ModuloDao;
 import com.gruppo2.fullstack.Dao.RuoloDao;
 import com.gruppo2.fullstack.Dao.UtenteDao;
 import com.gruppo2.fullstack.model.Feedback;
+import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Utente;
 
 
@@ -46,6 +47,7 @@ public class AdminController {
 			ModelAndView mavReport = new ModelAndView();
 			mavReport.setViewName("report");
 			mavReport.addObject("modulo", ModuloDao.findAll());
+			mavReport.addObject("utente", loggedUser);
 			return mavReport;
 		} else {
 			ModelAndView mavError = new ModelAndView();
@@ -80,6 +82,54 @@ public class AdminController {
 			return mavError;
 		}
 	}
+	
+	// REGISTRAZIONE (solo admin)
+		@GetMapping("/registrazione")
+		public ModelAndView registrazione(HttpSession session) {
+			Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+
+			if (loggedUser == null){
+				ModelAndView mavLogin = new ModelAndView();
+				mavLogin.setViewName("login");
+				return mavLogin;
+			}
+			
+			else if ((loggedUser.getRuolo().getidruolo() == 1) && (loggedUser != null) ) {
+				ModelAndView mavRegistrazione = new ModelAndView();
+				mavRegistrazione.setViewName("registrazione");
+				mavRegistrazione.addObject("ruolo", RuoloDao.findAll());
+				
+			return mavRegistrazione;
+			} 
+			ModelAndView mavLogin = new ModelAndView();//pagina di (errore da sostituire)
+			mavLogin.setViewName("login");
+			return mavLogin;
+		}
+		
+		
+		
+		@RequestMapping(value="/registrazione", method=RequestMethod.POST)
+		public String signin(@RequestParam("nome") String name,
+								@RequestParam("cognome") String surname,
+								@RequestParam("email") String email,
+								@RequestParam("ruolo") String ruolo) { //cambiare html, levando password e mettendo una select con i ruoli
+			
+		//verificaMail se è gia esistente
+		Ruolo role = (Ruolo) RuoloDao.findByruolo(ruolo);
+		String password = "psw";
+		Utente verifica = UtenteDao.verificaMail(email);
+		
+		if (verifica == null){
+			Utente newUser = new Utente(null,name,surname, email,password, role);
+			
+			UtenteDao.save(newUser);
+			return "redirect:/"; // appena registrato mi porta alla login
+		}else {
+			// se non ha tutti i requisiti necessari
+			System.out.println("male male male");
+			return "redirect:/registrazione";}	
+		}
+	
 
 	// Lista Utenti
 	@GetMapping("/listaUtenti")

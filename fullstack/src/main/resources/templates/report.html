@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <title> Responsive Sidebar Menu  | CodingLab </title>
+    <title> Report </title>
     <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -19,14 +19,8 @@
 
         
         <ul class="nav-list">
-        <!-- <li>
-            <i class='bx bx-search' ></i>
-            <input type="text" placeholder="Search...">
-            <span class="tooltip">Search</span>
-        </li> -->
-
         <li>
-            <a href="#"> <!-- /admin/listaUtenti -->
+            <a href="/admin/listaUtenti">
             <i class='bx bxs-user-detail'></i>
             <span class="links_name">Lista Utenti</span>
             </a>
@@ -35,7 +29,7 @@
 
 
         <li>
-            <a href="#"> <!-- /admin/listaUtenti -->
+            <a href="/admin/registrazione"> 
                 <i class='bx bxs-user-plus' ></i>
             <span class="links_name">Registrazione</span>
             </a>
@@ -45,7 +39,7 @@
             
 
         <li> 
-            <a href="#"> <!-- / -->
+            <a href="/"> 
             <i class='bx bxs-user' ></i>
             <span class="links_name">Login</span>
             </a>
@@ -57,11 +51,11 @@
             <div class="profile-details">
             <!--<img src="profile.jpg" alt="profileImg">-->
             <div class="name_job">
-                <div class="name">Prem Shahi</div> <!-- Nome Utente -->
-                <div class="job">Web designer</div> <!-- Ruolo -->
+                <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
+                <div class="job"><p th:text="${utente.ruolo.ruolo}"></div> <!-- Ruolo -->
             </div>
             </div>
-            <a href="#"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
+            <a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
         </li>
         </ul>
     </div>
@@ -150,7 +144,7 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: #6f6ba3;
+  background: #002F56;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -402,7 +396,7 @@
 }
 
 .title-container {
-    border: 2px solid black;
+  
     justify-content: center;
     width: 30%;
     text-align: center;
