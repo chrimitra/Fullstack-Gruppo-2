@@ -116,6 +116,7 @@ public class Feedback {
 		return "Feedback [idfeedback=" + idfeedback + ", voto=" + voto + ", data=" + data + ", utente=" + utente
 				+ ", domanda=" + domanda + ", modulo=" + modulo + "]";
 	}
+
 	
 	
 

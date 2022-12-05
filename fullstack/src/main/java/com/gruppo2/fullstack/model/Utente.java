@@ -56,9 +56,16 @@ public class Utente {
 	private Set<Feedback> feedback;
 
 	
+	
+	
+	
+
 	public Utente() {
+		super();
 		
 	}
+
+
 
 	public Utente(Integer idutente, @NotNull @Size(min = 4, max = 45) String nome,
 			@NotNull @Size(min = 4, max = 45) String cognome, @NotNull @Size(min = 4, max = 45) String email,

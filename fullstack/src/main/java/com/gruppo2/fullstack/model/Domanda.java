@@ -30,6 +30,7 @@ public class Domanda {
 	private Set<Feedback> feedback;
 
 	
+
 	public Domanda() {
 		
 	}
@@ -55,7 +56,6 @@ public class Domanda {
 	public void setDomanda(String domanda) {
 		this.domanda = domanda;
 	}
-
 
 	
 	

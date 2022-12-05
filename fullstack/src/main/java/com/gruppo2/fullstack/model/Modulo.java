@@ -39,12 +39,15 @@ public class Modulo {
 	public Modulo() {
 		
 	}
-	
-	public Modulo(Integer idmodulo, @NotNull String modulo) {
+
+
+	public Modulo(Integer idmodulo, @NotNull String modulo, Utente utente) {
 		super();
 		this.idmodulo = idmodulo;
 		this.modulo = modulo;
+		this.utente = utente;
 	}
+
 
 	public Integer getIdmodulo() {
 		return idmodulo;
