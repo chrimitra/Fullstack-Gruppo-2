@@ -1,6 +1,5 @@
-<!-- NavBar on the left -->
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://thymeleaf.org">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
     <title> Responsive Sidebar Menu  | CodingLab </title>
@@ -35,13 +34,15 @@
         </li>
 
 
-        <li> 
-            <a href="#"> <!-- /admin/registrazione -->
-            <i class='bx bxs-user-plus' ></i>
+        <li>
+            <a href="#"> <!-- /admin/listaUtenti -->
+                <i class='bx bxs-user-plus' ></i>
             <span class="links_name">Registrazione</span>
             </a>
             <span class="tooltip">Registrazione</span>
         </li>
+            
+            
 
         <li> 
             <a href="#"> <!-- / -->
@@ -60,23 +61,29 @@
                 <div class="job">Web designer</div> <!-- Ruolo -->
             </div>
             </div>
-            <i class='bx bx-log-out' id="log_out" ></i> <!-- Mapping che mi fa il logout -->
+            <a href="#"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
         </li>
         </ul>
     </div>
 
     <!-- Qua va messo tutto il contenuto ovvero il report --> 
     <section class="home-section">
-  	<!-- Reportistica -->
-    <h1 class="report-title"> Report </h1>
-    <div class="container-report">
-        <div align= "center" class="box-modulo" th:each="m : ${modulo}">	
-            <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p>
-            <div th:id="details + ${m.idmodulo}"></div>
+        <div class="title-container">
+            <p class="report-title"> Report  </p>
         </div>
-    </div>
+        <div class="container-report">
+            <div class="box-modulo" th:each="m : ${modulo}">
+                <div class="title-modulo">
+                    <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p>
+                </div>
+            
+                <div class="details" th:id="details + ${m.idmodulo}">      
+      			</div>
+      			
+            </div>
     
-    </section>  
+        </div>
+	</section>
     
 <!-- JavaScript -->
 <script type="text/javascript">
@@ -143,7 +150,7 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: #11101D;
+  background: #6f6ba3;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -393,11 +400,89 @@
   font-weight: 500;
   margin: 18px
 }
+
+.title-container {
+    border: 2px solid black;
+    justify-content: center;
+    width: 30%;
+    text-align: center;
+    position: relative;
+    height: 100%;
+    display: flex;
+    margin: auto;
+    top: 20px;
+    font-size: 40px;
+    
+}
+
+
+.container-report {
+    
+    justify-content: center;
+    width: 70%;
+    text-align: center;
+    position: relative;
+    height: 100%;
+    margin: 20px auto;
+    top: 20px;
+    font-size: 25px;
+}
+
+.box-modulo {
+    border: 2px solid black;
+   
+}
+
+
+.title-modulo {
+    border-bottom: 2px solid black;
+}
+
+
+
+
+/* CSS reportDetails */
+
+
+.details-container {
+    display: flex;
+}
+
+
+.number-question {
+    border-right: 2px solid black;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+
+
+.content-question {
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    justify-content: center;
+    margin: auto;
+    font-size: 15px;
+}
+
+.rating {
+    border-left: 2px solid black;
+    padding: 20px 20px 20px 20px;
+    text-align: center;
+    justify-content: center;
+    
+    font-size: 15px;
+}
+
+
 @media (max-width: 420px) {
   .sidebar li .tooltip{
     display: none;
   }
 }
+
 
 </style>
 </html>

@@ -21,7 +21,7 @@ public interface FeedbackDao extends CrudRepository<Feedback, Integer> {
 	List <Feedback> findByIdfeedback (Integer idfeedback);
 	Feedback findByvoto(double voto);
 	List<Feedback>findBydata(String data);
-	List<Feedback>findBydomanda(Domanda domanda);
+	Feedback findBydomanda(Domanda domanda);
 	List<Feedback>findByutente(Utente utente);
 	List<Feedback>findBymodulo(Modulo modulo);
 	

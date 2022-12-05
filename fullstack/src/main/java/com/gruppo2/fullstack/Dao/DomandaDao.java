@@ -13,6 +13,7 @@ import com.gruppo2.fullstack.model.Domanda;
 public interface DomandaDao extends CrudRepository<Domanda, Integer> {
 
 	Domanda findByiddomanda(Integer iddomanda);
+	Domanda findBydomanda(String domanda);
 	
 }
 

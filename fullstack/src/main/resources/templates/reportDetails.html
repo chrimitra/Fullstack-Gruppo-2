@@ -7,16 +7,24 @@
     <title>Menu</title>
 </head>
 <body>
-	<div align= "center" class="box-modulo">
-		<th:block th:each="feedback : ${feedback}">	
-		    			<tr>
-			         		<td th:text="${feedback.modulo.modulo}"></td>
-			         		<td th:text="${feedback.voto}"></td>
-			         		<td th:text="${feedback.utente.nome}"></td>
-			         		<td th:text="${feedback.domanda.domanda}"></td>
-			      		</tr>
-			</tbody>
-		</th:block> 
-	</div>
+	<th:block th:each="feedback : ${feedback}">	
+	<div class="details-container">
+		<div class="number-question"> 
+               <p th:text= "Domanda + ${feedback.domanda.iddomanda}"></p>
+        </div>
+        
+        <div class="content-question">
+            <p th:text= "${feedback.domanda.domanda}"></p>
+        </div>
+
+        <div class="rating">
+            <p th:text="${feedback.voto}"></p> 
+        </div>
+    </div>
+	</th:block> 
 </body>
+<style>
+
+
+</style>
 </html>
