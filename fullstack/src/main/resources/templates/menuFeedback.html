@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <title>menu</title>
    
 </head>
@@ -12,9 +12,9 @@
 
 
 <div class="pusalntiera"  >
-	<div  class="button" th:each="materia : ${materie}">		
+	<div  class="button"  th:each="materia : ${materie}">		
 		
-		<a role="button" th:text="${materia.modulo}" th:href="@{/studente/menu/{id}(id=${materia.modulo})}">
+		<a style="text-decoration: none; color: black;" role="button" th:text="${materia.modulo}" th:href="@{/studente/menu/{id}(id=${materia.modulo})}">
 		
 		</a>	
 	
