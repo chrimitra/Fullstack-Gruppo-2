@@ -16,12 +16,12 @@
     <div class="card" th:each="domanda : ${domande}" >               
       <div class="card-body">        
         <p class="card-text" th:text="${domanda.domanda}"></p>
-        <select class="form-control form-control-sm" style="max-width: 200px; " >
-          <option>Per niente soodisfatto</option>
-          <option>Poco soddisfatto</option>
-          <option>Indifferente</option>
-          <option>Abbastanza soddisfatto</option>
-          <option>soddisfatto</option>
+        <select th:field="${domanda.iddomanda}"  class="form-control form-control-sm" style="max-width: 200px; " >
+          <option value="1">Per niente soodisfatto</option>
+          <option value="2">Poco soddisfatto</option>
+          <option value="3">Indifferente</option>
+          <option value="4">Abbastanza soddisfatto</option>
+          <option value="5">soddisfatto</option>
         </select>
       </div>
     </div>  

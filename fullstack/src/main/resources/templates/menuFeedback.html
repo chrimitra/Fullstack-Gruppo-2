@@ -12,14 +12,13 @@
 
 
 <div class="pusalntiera"  >
-	<div  class="button"  th:each="materia : ${materie}">		
+	
 		
-		<a style="text-decoration: none; color: black;" role="button" th:text="${materia.modulo}" th:href="@{/studente/menu/{id}(id=${materia.modulo})}">
+		<a class="button"  th:each="materia : ${materie}" role="button" th:text="${materia.modulo}" th:href="@{/studente/menu/{id}(id=${materia.modulo})}">
 		
 		</a>	
 	
-		
-	</div>
+	
 	
 	
 </div>
