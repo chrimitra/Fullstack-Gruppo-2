@@ -9,19 +9,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-  <form th:action="@{sondaggio/{id}(id=${materia)}" th:object="${risposte}" method="post" >
+  <form action="studente/sondaggio"  method="post" >
  
   
   	 <h1>SONDAGGIO</h1>
     <div class="card" th:each="domanda : ${domande}" >               
       <div class="card-body">        
         <p class="card-text" th:text="${domanda.domanda}"></p>
-        <select th:field="${domanda.iddomanda}"  class="form-control form-control-sm" style="max-width: 200px; " >
-          <option value="1">Per niente soodisfatto</option>
-          <option value="2">Poco soddisfatto</option>
-          <option value="3">Indifferente</option>
-          <option value="4">Abbastanza soddisfatto</option>
-          <option value="5">soddisfatto</option>
+        <input type="hidden" id="insegnamento" th:value="${insegnamento}" name="insegnamento">   
+        <input type="hidden" id="domanda" th:value="${domanda.iddomanda}" name="domanda">
+        <select id="risposta" name="risposta"   class="form-control form-control-sm" style="max-width: 200px;" >
+          <option value="1" >Per niente soodisfatto</option>
+          <option value="2" >Poco soddisfatto"</option>
+          <option value="3" >Indifferente"</option>
+          <option value="4" >Abbastanza soddisfatto"</option>
+          <option value="5" >soddisfatto"</option>
+          
+      		
+          
+          
         </select>
       </div>
     </div>  

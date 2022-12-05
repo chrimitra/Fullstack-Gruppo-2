@@ -56,6 +56,12 @@ public class Domanda {
 	public void setDomanda(String domanda) {
 		this.domanda = domanda;
 	}
+	@Override
+	public String toString() {
+		return "Domanda [iddomanda=" + iddomanda + ", domanda=" + domanda + "]";
+	}
+	
+	
 
 	
 	

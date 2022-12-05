@@ -14,7 +14,7 @@
 <div class="pusalntiera"  >
 	
 		
-		<a class="button"  th:each="materia : ${materie}" role="button" th:text="${materia.modulo}" th:href="@{/studente/menu/{id}(id=${materia.modulo})}">
+		<a class="button"  th:each="materia : ${materie}" role="button" th:text="${materia.modulo}" th:href="@{/studente/menu/{id}(id=${materia.idmodulo})}">
 		
 		</a>	
 	
