@@ -33,11 +33,11 @@ public class Domanda {
 	public Domanda() {
 		
 	}
-	public Domanda(Integer iddomanda, @NotNull String domanda, Set<Feedback> feedback) {
+	public Domanda(Integer iddomanda, @NotNull String domanda) {
 		super();
 		this.iddomanda = iddomanda;
 		this.domanda = domanda;
-		this.feedback = feedback;
+		
 	}
 
 	public Integer getiddomanda() {
@@ -56,13 +56,7 @@ public class Domanda {
 		this.domanda = domanda;
 	}
 
-	public Set<Feedback> getFeedback() {
-		return feedback;
-	}
 
-	public void setFeedback(Set<Feedback> feedback) {
-		this.feedback = feedback;
-	}	
 	
 	
 	

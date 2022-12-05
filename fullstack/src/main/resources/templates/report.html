@@ -8,7 +8,7 @@
 </head>
 <body>
 	<!-- NavBar on the left -->
-	<!-- <div class="navbar-left">
+	<div class="navbar-left">
 	        <div class="back">
 	            <p> Indietro </p>
 	        </div>
@@ -19,40 +19,39 @@
 	            <p> Login </p>
 	        </div>
 	        <div class="user-list">
-	            <p> Lista Utenti </p>
+	            <a href="/admin/listaUtenti"><p> Lista Utenti </p></a>
 	        </div>
 	        <div class="logout">
 	            <p> logout </p>
 	        </div>
-	 </div>  -->
+	 </div>
 	  
   <!-- Reportistica -->
 
     <h1 class="report-title"> REPORT </h1>
     <div class="container-report">
         <div align= "center" class="box-modulo" th:each="m : ${modulo}">	
-            <a th:href="@{'/admin/reportDetails/' + ${m.getIdmodulo()}}" ><p th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p></a>
-            <div id="details">
-            </div>
+            <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p>
+            <div th:id="details + ${m.idmodulo}"></div>
         </div>
      	
+         
      	
     </div>
 
 
 <!-- JavaScript -->
-<script>
-	
-
-
+<script type="text/javascript">
 	
 	
-	/*function loadDoc() {
+	function loadDoc(clicked_id) {
+		  let id = clicked_id;
+		  console.log(id);
 		  const xhttp = new XMLHttpRequest();
 		  xhttp.onload = function() {
-		    document.getElementById("details").innerHTML = this.responseText;
+		    document.getElementById(`details${id}`).innerHTML = this.responseText;
 		  }
-		  let paragraphs = document.getElementsByTagName("p");
+		 /* let paragraphs = document.getElementsByTagName("p");
 		 
 		  
 		  for(let i = 0; i < box.getElementsByTagName("p").length; i++) {
@@ -60,10 +59,11 @@
 		  }
 		  
 		  document.getElementById("details").innerHTML = id;
-		  console.log(id);
+		  console.log(id);*/
+		  
 		  xhttp.open("GET", `/admin/reportDetails/${id}`);
 		  xhttp.send();
-		} */
+		} 
 </script>
 </body>
 

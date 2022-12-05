@@ -7,16 +7,16 @@
     <title>Menu</title>
 </head>
 <body>
-	<h1>Report Details </h1>
 	<div align= "center" class="box-modulo">
-		<p th:text="${modulo.modulo}"></p>  
 		<th:block th:each="feedback : ${feedback}">	
 		    			<tr>
-			         		<td th:text="${feedback.domanda.domanda}"></td>
+			         		<td th:text="${feedback.modulo.modulo}"></td>
 			         		<td th:text="${feedback.voto}"></td>
+			         		<td th:text="${feedback.utente.nome}"></td>
+			         		<td th:text="${feedback.domanda.domanda}"></td>
 			      		</tr>
 			</tbody>
-		</th:block>
+		</th:block> 
 	</div>
 </body>
 </html>
