@@ -28,9 +28,9 @@ public class Modulo {
 	@NotNull    
 	public String modulo;
 
-	 @OneToOne	
-	 @JoinColumn(name = "insegnante", referencedColumnName = "idutente" )
-	 public Utente utente;
+	@OneToOne	
+	@JoinColumn(name = "insegnante", referencedColumnName = "idutente" )
+	public Utente utente;
 	
 	@OneToMany(mappedBy = "modulo", fetch = FetchType.EAGER)
 	private Set<Feedback> moduloFeedback;
@@ -39,12 +39,15 @@ public class Modulo {
 	public Modulo() {
 		
 	}
-	
-	public Modulo(Integer idmodulo, @NotNull String modulo) {
+
+
+	public Modulo(Integer idmodulo, @NotNull String modulo, Utente utente) {
 		super();
 		this.idmodulo = idmodulo;
 		this.modulo = modulo;
+		this.utente = utente;
 	}
+
 
 	public Integer getIdmodulo() {
 		return idmodulo;
@@ -62,6 +65,16 @@ public class Modulo {
 		this.modulo = modulo;
 	}
 
+	
+	
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
+	}
 
 	@Override
 	public String toString() {

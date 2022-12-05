@@ -18,17 +18,15 @@ import com.gruppo2.fullstack.model.Utente;
 @Repository
 public interface FeedbackDao extends CrudRepository<Feedback, Integer> {
 	
-	Feedback findByidfeedback (Integer idfeedback);
-	//List<Feedback>findByvoto(Integer voto);
-	//List<Feedback>findBydata(String data);
-	//List<Feedback>findBydomanda(Domanda domanda);
-	//List<Feedback>findByutente(Utente utente);
-	//List<Feedback>findBymodulo(Modulo modulo);
+	List <Feedback> findByIdfeedback (Integer idfeedback);
+	Feedback findByvoto(double voto);
+	List<Feedback>findBydata(String data);
+	List<Feedback>findBydomanda(Domanda domanda);
+	List<Feedback>findByutente(Utente utente);
+	List<Feedback>findBymodulo(Modulo modulo);
 	
-	@Query(value = "SELECT domanda.domanda, AVG(voto) \r\n"
-			+ "FROM `feedback`\r\n"
-			+ "INNER JOIN domanda ON domanda.iddomanda = feedback.iddomanda\r\n"
-			+ "WHERE idmodulo = :idmodulo\r\n"
-			+ "GROUP BY domanda;", nativeQuery = true)
-	public Feedback dettagli(Integer idmodulo);
+	@Query(value = "SELECT * \r\n"
+			+ "FROM feedback \r\n"
+			+ "WHERE idmodulo= :idmodulo", nativeQuery = true)
+	public List <Feedback> dettagli(Integer idmodulo);
 }

@@ -2,6 +2,7 @@ package com.gruppo2.fullstack.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +36,7 @@ public class AdminController {
 	@Autowired
 	ModuloDao ModuloDao;
 	
-	@ResponseBody
+
 	@GetMapping("/report") 
 	public ModelAndView report(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
@@ -50,6 +51,7 @@ public class AdminController {
 			mavError.setViewName("error404");
 			return mavError;
 		}
+		
 	}
 	
 	@GetMapping("/reportDetails")
@@ -62,7 +64,7 @@ public class AdminController {
 	@RequestMapping("/reportDetails/{id}")
 	public ModelAndView reportDetails(HttpSession session, @PathVariable("id") Integer id) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		
+	
 		if (loggedUser != null) {
 			ModelAndView mavReportDetails = new ModelAndView();
 			mavReportDetails.setViewName("/reportDetails");
@@ -77,24 +79,19 @@ public class AdminController {
 			return mavError;
 		}
 	}
-	
-	/*@ResponseBody
-	@RequestMapping(value="/sent", method=RequestMethod.POST)
-	public ModelAndView postReportDetails(HttpSession session) {
-		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		
-		if (loggedUser != null) {
-			ModelAndView mavReportDetails = new ModelAndView();
-			mavReportDetails.setViewName("/reportDetails");
-			mavReportDetails.addObject("modulo", ModuloDao.findByidmodulo(null)); // La funzione Onclick nel post mi deve mandare l'id 
-			
-		}
-		ModelAndView mavReportDetails = new ModelAndView();
-		mavReportDetails.setViewName("/reportDetails");
-		return mavReportDetails;
-	}
-	*/
 
+	// Lista Utenti
+	@GetMapping("/listaUtenti")
+	public String lista(Model model, HttpSession session) {
+		
+		Utente utente = (Utente) session.getAttribute("loggedUser");
+			if(utente != null) {
+			model.addAttribute("utenti", UtenteDao.findAll());
+			return "listaUtenti";
+		} else {
+			return "redirect:/error404";
+		}
+	}
 }
 
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+	<th:block th:each="utente : ${utenti}">	
+		<tr>
+     		<td th:text="${utente.nome}"></td>
+     		<td th:text="${utente.cognome}"></td>
+     		<td th:text="${utente.email}"></td>
+			<td th:text="${utente.ruolo.ruolo}"></td>
+  		</tr>
+  	</th:block>
+</body>
+</html>

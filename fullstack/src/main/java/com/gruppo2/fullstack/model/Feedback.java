@@ -3,6 +3,7 @@ package com.gruppo2.fullstack.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,10 +23,10 @@ public class Feedback {
     public Integer idfeedback;
 	
 	
-	
-	
+
 	@NotNull  
-	public Integer voto;
+	@Column(name = "voto")
+	public double voto;
 	
 	
 	@NotNull  
@@ -49,7 +50,7 @@ public class Feedback {
 		
 	}
 
-	public Feedback(Integer idfeedback, @NotNull Integer voto, String data, Utente utente, Domanda domanda,
+	public Feedback(Integer idfeedback, double voto, String data, Utente utente, Domanda domanda,
 			Modulo modulo) {
 		super();
 		this.idfeedback = idfeedback;
@@ -68,11 +69,11 @@ public class Feedback {
 		this.idfeedback = idfeedback;
 	}
 
-	public Integer getVoto() {
+	public double getVoto() {
 		return voto;
 	}
 
-	public void setVoto(Integer voto) {
+	public void setVoto(double voto) {
 		this.voto = voto;
 	}
 
@@ -110,7 +111,12 @@ public class Feedback {
 
 
 
-
+	@Override
+	public String toString() {
+		return "Feedback [idfeedback=" + idfeedback + ", voto=" + voto + ", data=" + data + ", utente=" + utente
+				+ ", domanda=" + domanda + ", modulo=" + modulo + "]";
+	}
+	
 	
 	
 
