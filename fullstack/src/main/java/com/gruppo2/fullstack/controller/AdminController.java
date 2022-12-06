@@ -93,12 +93,14 @@ public class AdminController {
 			if (loggedUser == null){
 				ModelAndView mavLogin = new ModelAndView();
 				mavLogin.setViewName("login");
+				
 				return mavLogin;
 			}
 			
 			else if ((loggedUser.getRuolo().getidruolo() == 1) && (loggedUser != null) ) {
 				ModelAndView mavRegistrazione = new ModelAndView();
 				mavRegistrazione.setViewName("registrazione");
+				mavRegistrazione.addObject("utente", loggedUser);
 				mavRegistrazione.addObject("ruolo", RuoloDao.findAll());
 				
 			return mavRegistrazione;
