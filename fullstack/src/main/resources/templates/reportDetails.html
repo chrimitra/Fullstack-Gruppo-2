@@ -7,8 +7,7 @@
     <title>Menu</title>
 </head>
 <body>
-	<th:block th:each="feedback : ${feedback}">	
-	<table class="details-table">
+	<table th:each="feedback : ${feedback}" class="details-table">
 	       <tr>
 	       <td class="data"><p th:text="${feedback.data}"></p></td>
 	       <td class="number-question"><p th:text= "Domanda + ${feedback.domanda.iddomanda}"></p></td>
@@ -17,7 +16,6 @@
 	       <td class="dettagli"><button class="btn-dettagli"><i class='bx bx-detail'></i></button></td>
 	       </tr>
   	</table>
-  	</th:block> 
 </body>
 <style>
 

@@ -103,14 +103,14 @@ public class AdminController {
 				
 			return mavRegistrazione;
 			} 
-			ModelAndView mavLogin = new ModelAndView();//pagina di (errore da sostituire)
-			mavLogin.setViewName("login");
-			return mavLogin;
+			ModelAndView mavError = new ModelAndView();//pagina di (errore da sostituire)
+			mavError.setViewName("error404");
+			return mavError;
 		}
 		
 		
 		
-		@RequestMapping(value="/registrazione", method=RequestMethod.POST)
+		@RequestMapping(value="/register", method=RequestMethod.POST)
 		public String signin(@RequestParam("nome") String name,
 								@RequestParam("cognome") String surname,
 								@RequestParam("email") String email,
@@ -129,7 +129,8 @@ public class AdminController {
 		}else {
 			// se non ha tutti i requisiti necessari
 			System.out.println("male male male");
-			return "redirect:/registrazione";}	
+			return "redirect:/registrazione";
+		}
 		}
 	
 

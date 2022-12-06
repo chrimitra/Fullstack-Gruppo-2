@@ -64,19 +64,19 @@
     <!-- Qua va messo tutto il contenuto ovvero il report --> 
     <section class="home-section">
         <div class="title-container">
-            <p class="report-title"> Report  </p>
+            <p class="report-title"> REPORT  </p>
         </div>
         <div class="container-report">
             <div class="box-modulo" th:each="m : ${modulo}">
                 <div class="title-modulo">
                     <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p>
-                </div>
+                
             
                 <div class="details" th:id="details + ${m.idmodulo}">      
       			</div>
-      			<br>
-            </div>
-    
+      			
+            	</div>
+    		</div>
         </div>
 	</section>
     
@@ -122,13 +122,15 @@
 	    }
 	    }
 	    
+	  
+	    
 </script>
 </body>
 
 
 <!-- CSS STYLE -->
 <style>
-	
+
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -398,7 +400,6 @@
 }
 
 .title-container {
-  
     justify-content: center;
     width: 30%;
     text-align: center;
@@ -425,14 +426,18 @@
 
 .box-modulo {
   font-size: 25px;
+  margin-top: 25px;
 }
 
-
-.modulo-text {
+.title-modulo {
   border-radius: 12px;
   background-color: #002F56;
+
+}
+
+.modulo-text {
   color: white;
-  /* border-bottom: 1px solid black; */
+  
 }
 
 
@@ -458,52 +463,28 @@
   padding: 10px 20px;
   text-align: center;
   font-size: 17px;
+  
 
 }
 
 .details-table {
   table-layout: fixed;
-  
   border-collapse: collapse;
   word-break:keep-all;
+  width: 100%;
+  
 }
 
 /* table section */
 .details { 
-
   overflow: auto;
 }
-
-/* .number-question {
-
-    padding: 20px 20px 20px 20px;
-    text-align: center;
-    justify-content: center;
-    font-size: 15px;
-}
-
-
-
-.content-question {
-    padding: 20px 20px 20px 20px;
-    text-align: center;
-    justify-content: center;
-    margin: auto;
-    font-size: 15px;
-}
-
-.rating {
-    padding: 20px 20px 20px 20px;
-    text-align: center;
-    justify-content: center;
-    font-size: 15px;
-} */
-
 
 @media (max-width: 420px) {
   .sidebar li .tooltip{
     display: none;
   }
 }
+
 </style>
 </html>

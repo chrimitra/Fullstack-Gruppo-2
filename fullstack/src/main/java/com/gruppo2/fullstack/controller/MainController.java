@@ -73,7 +73,10 @@ public class MainController {
 	}
 		
 	
-	
+	@GetMapping("/error404")
+	public String error() {
+		return "error404";
+	}
 	
 	
 }
