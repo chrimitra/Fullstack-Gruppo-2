@@ -13,6 +13,7 @@ import com.gruppo2.fullstack.model.Utente;
 @Repository
 public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	
+	Utente findByIdutente(Integer utente);
 	List<Utente>findByNome(String nome);
 	List<Utente>findByCognome(String cognome);
 	List<Utente>findByEmail(String email);
