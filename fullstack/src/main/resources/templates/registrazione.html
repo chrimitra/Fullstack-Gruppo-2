@@ -115,6 +115,23 @@
         var onloadCallback = function() {
           alert("grecaptcha is ready!");
         };
+        /* Codice per le animazioni della navbar */
+	    let sidebar = document.querySelector(".sidebar");
+	    let closeBtn = document.querySelector("#btn");
+	    let searchBtn = document.querySelector(".bx-search");
+	
+	    closeBtn.addEventListener("click", ()=>{
+	        sidebar.classList.toggle("open");
+	        menuBtnChange();
+	    });
+
+	    function menuBtnChange() {
+	    if(sidebar.classList.contains("open")){
+	        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
+	    }else {
+	        closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
+	    }
+	    }
       </script>
 
 </body>
@@ -468,6 +485,30 @@ form .user-details .input-box {
     background-color: #1d1b31;
     color: white;
     cursor: pointer;
+}
+
+/* Responsive Form */
+
+@media (max-width: 584px) {
+	.container {
+		max-width:100%;
+	}
+	
+	form .user-details .input-box {
+		margin-bottom: 15px;
+		width: 100%;
+	}
+	
+	.container form .user-details {
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+	
+	.user-details::-webkit-scrollbar {
+		width: 0;
+	}
+	
+	
 }
 </style>
 </html>
