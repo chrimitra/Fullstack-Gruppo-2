@@ -3,6 +3,8 @@ package com.gruppo2.fullstack.model;
 
 import java.util.Date;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,8 +31,8 @@ public class Feedback {
 	public double voto;
 	
 	
-	@NotNull  
-	public String data;
+	  
+	public Date data;
 	
 	@ManyToOne
 	@JoinColumn(name="idutente")
@@ -50,7 +52,8 @@ public class Feedback {
 		
 	}
 
-	public Feedback(Integer idfeedback, double voto, String data, Utente utente, Domanda domanda,
+
+	public Feedback(Integer idfeedback, double voto,  Date data, Utente utente, Domanda domanda,
 			Modulo modulo) {
 		super();
 		this.idfeedback = idfeedback;
@@ -61,54 +64,65 @@ public class Feedback {
 		this.modulo = modulo;
 	}
 
+
 	public Integer getIdfeedback() {
 		return idfeedback;
 	}
+
 
 	public void setIdfeedback(Integer idfeedback) {
 		this.idfeedback = idfeedback;
 	}
 
+
 	public double getVoto() {
 		return voto;
 	}
+
 
 	public void setVoto(double voto) {
 		this.voto = voto;
 	}
 
-	public String getData() {
+
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+
+	public void setData(Date data) {
 		this.data = data;
 	}
+
 
 	public Utente getUtente() {
 		return utente;
 	}
 
+
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
+
 
 	public Domanda getDomanda() {
 		return domanda;
 	}
 
+
 	public void setDomanda(Domanda domanda) {
 		this.domanda = domanda;
 	}
+
 
 	public Modulo getModulo() {
 		return modulo;
 	}
 
+
 	public void setModulo(Modulo modulo) {
 		this.modulo = modulo;
 	}
-
 
 
 	@Override
@@ -117,6 +131,9 @@ public class Feedback {
 				+ ", domanda=" + domanda + ", modulo=" + modulo + "]";
 	}
 
+
+
+	
 	
 	
 
