@@ -74,7 +74,7 @@
             
                 <div class="details" th:id="details + ${m.idmodulo}">      
       			</div>
-      			
+      			<br>
             </div>
     
         </div>
@@ -128,6 +128,7 @@
 
 <!-- CSS STYLE -->
 <style>
+	
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -376,7 +377,7 @@
 }
 .home-section{
   position: relative;
-  background: #E4E9F7;
+  background: #ffffff;
   min-height: 100vh;
   top: 0;
   left: 78px;
@@ -406,46 +407,75 @@
     display: flex;
     margin: auto;
     top: 20px;
-    font-size: 40px;
+    font-size:55px;
     
 }
 
 
 .container-report {
-    
     justify-content: center;
-    width: 70%;
+    width: 80%;
     text-align: center;
     position: relative;
     height: 100%;
     margin: 20px auto;
     top: 20px;
-    font-size: 25px;
-}
-
-.box-modulo {
-    border: 2px solid black;
    
 }
 
+.box-modulo {
+  font-size: 25px;
+}
 
-.title-modulo {
-    border-bottom: 2px solid black;
+
+.modulo-text {
+  border-radius: 12px;
+  background-color: #002F56;
+  color: white;
+  /* border-bottom: 1px solid black; */
 }
 
 
 
 
 /* CSS reportDetails */
+.btn-dettagli {
+  width: 40px;
+  height: 40px;
+  background-color: #002F56;
+  border-radius: 12px;
+}
 
-
-.details-container {
-    display: flex;
+.btn-dettagli i{
+  color: white;
 }
 
 
-.number-question {
-    border-right: 2px solid black;
+.details-table td {
+  border: 3px solid rgb(238, 238, 255);
+  background-color: #f2f9ff;
+  border-top: none;
+  padding: 10px 20px;
+  text-align: center;
+  font-size: 17px;
+
+}
+
+.details-table {
+  table-layout: fixed;
+  
+  border-collapse: collapse;
+  word-break:keep-all;
+}
+
+/* table section */
+.details { 
+
+  overflow: auto;
+}
+
+/* .number-question {
+
     padding: 20px 20px 20px 20px;
     text-align: center;
     justify-content: center;
@@ -463,13 +493,11 @@
 }
 
 .rating {
-    border-left: 2px solid black;
     padding: 20px 20px 20px 20px;
     text-align: center;
     justify-content: center;
-    
     font-size: 15px;
-}
+} */
 
 
 @media (max-width: 420px) {
@@ -477,7 +505,5 @@
     display: none;
   }
 }
-
-
 </style>
 </html>
