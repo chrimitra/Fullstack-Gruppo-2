@@ -38,7 +38,7 @@ public class AdminController {
 	@Autowired
 	ModuloDao ModuloDao;
 	
-
+	// REPORT
 	@GetMapping("/report") 
 	public ModelAndView report(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
@@ -57,6 +57,7 @@ public class AdminController {
 		
 	}
 	
+	// DETTAGLI REPORT
 	@GetMapping("/reportDetails")
 	public String reportDetails() {
 		return "reportDetails";
@@ -72,6 +73,7 @@ public class AdminController {
 			ModelAndView mavReportDetails = new ModelAndView();
 			mavReportDetails.setViewName("/reportDetails");
 			mavReportDetails.addObject("modulo", ModuloDao.findByIdmodulo(id));
+			//mavReportDetails.addObject("feedback", FeedbackDao.media(id));
 			mavReportDetails.addObject("feedback", FeedbackDao.dettagli(id));
 			mavReportDetails.addObject("domanda", DomandaDao.findAll());
 			return mavReportDetails;
@@ -132,12 +134,13 @@ public class AdminController {
 	
 
 	// Lista Utenti
-	@GetMapping("/listaUtenti")
+	@RequestMapping("/listaUtenti")
 	public String lista(Model model, HttpSession session) {
 		
 		Utente utente = (Utente) session.getAttribute("loggedUser");
 			if(utente != null) {
 			model.addAttribute("utenti", UtenteDao.findAll());
+			model.addAttribute(utente);
 			return "listaUtenti";
 		} else {
 			return "redirect:/error404";

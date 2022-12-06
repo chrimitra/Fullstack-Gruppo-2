@@ -29,4 +29,14 @@ public interface FeedbackDao extends CrudRepository<Feedback, Integer> {
 			+ "FROM feedback \r\n"
 			+ "WHERE idmodulo= :idmodulo", nativeQuery = true)
 	public List <Feedback> dettagli(Integer idmodulo);
+	
+	
+	/*@Query(value = "SELECT idfeedback, data, domanda.iddomanda, idmodulo, idutente, voto, AVG(voto) \r\n"
+			+ "FROM `feedback` \r\n"
+			+ "INNER JOIN domanda ON domanda.iddomanda = feedback.iddomanda\r\n"
+			+ "WHERE idmodulo = :idmodulo \r\n"
+			+ "GROUP BY domanda", nativeQuery = true)
+	public List <Feedback> media(Integer idmodulo);*/
+	
+	// Me li ragruppa in domanda ma non mi prende la media
 }
