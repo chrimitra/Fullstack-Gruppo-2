@@ -113,34 +113,7 @@ public class AdminController {
 		}
 		
 		
-		
-		public String generatePassword () {
-		
-			String randomPassword = "";
-			
-			for(int i = 0; i < 7; i++) {
-				randomPassword += randomCharacter();
-			}
-			
-			return randomPassword;
-		}
-		
-		
-		public static char randomCharacter() {
-			int rand = (int)(Math.random()*62); // 62 caratteri possibili
-	
-			if(rand <= 9) { 
-				int ascii = rand += 48;
-				return (char)(ascii);
-			} else if (rand <= 35) {
-				int ascii = rand + 55;
-				return (char)(ascii);
-			} else {
-				int ascii = rand + 61;
-				return (char)(ascii);
-			}
-		}
-		
+
 		@RequestMapping(value="/register", method=RequestMethod.POST)
 		public String signin(@RequestParam("nome") String nome,
 								@RequestParam("cognome") String cognome,
@@ -170,6 +143,7 @@ public class AdminController {
 		
 		if (verifica == null){
 			Utente newUser = new Utente(null,nome, cognome, email,password, role);
+			
 			UtenteDao.save(newUser);
 			return "redirect:/"; // appena registrato mi porta alla login
 		}else {
@@ -181,22 +155,22 @@ public class AdminController {
 	
 		
 		
-		
-		
-		
-	// Lista Utenti
-	@RequestMapping("/listaUtenti")
-	public String lista(Model model, HttpSession session) {
-		
-		Utente utente = (Utente) session.getAttribute("loggedUser");
-			if(utente != null) {
-			model.addAttribute("utenti", UtenteDao.findAll());
-			model.addAttribute(utente);
-			return "listaUtenti";
-		} else {
-			return "redirect:/error404";
+		// Lista Utenti
+		@RequestMapping("/listaUtenti")
+		public String lista(Model model, HttpSession session) {
+			
+			Utente utente = (Utente) session.getAttribute("loggedUser");
+				if(utente != null) {
+				model.addAttribute("utenti", UtenteDao.findAll());
+				model.addAttribute(utente);
+				return "listaUtenti";
+			} else {
+				return "redirect:/error404";
+			}
 		}
-	}
+		
+		
+		
 }
 
 

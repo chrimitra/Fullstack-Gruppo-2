@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" xmlns:th="https://thymeleaf.org">
   <head>
     <meta charset="UTF-8">
     <title> Report </title>
@@ -65,12 +65,13 @@
     <section class="home-section">
         <div class="title-container">
             <p class="report-title"> REPORT  </p>
+            
         </div>
         <div class="container-report">
             <div class="box-modulo" th:each="m : ${modulo}">
                 <div class="title-modulo">
                     <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p>
-                
+                	
             
                 <div class="details" th:id="details + ${m.idmodulo}">      
       			</div>

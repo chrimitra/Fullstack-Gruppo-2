@@ -1,44 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>home</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Sondaggio</title>
 </head>
 <body>
 
-  <form  th:action="@{/studente/sondaggio/{materia}/{question}(materia = ${materia}, question = ${domanda.iddomanda})}" th:object="${feedback}" method="post" >
   
- <h1>SONDAGGIO</h1>
-  
-  	 
-    <div class="card" >               
-      <div class="card-body">        
-        <p class="card-text" th:text="${domanda.domanda}"></p>     
-        
-        <select id="voto"  th:field="${feedback.voto}" class="form-control form-control-sm" style="max-width: 200px;" >         
-          <option th:value=1 >Per niente soodisfatto</option>
-          <option th:value=2 >Poco soddisfatto</option>
-          <option th:value=3 >Indifferente</option>
-          <option th:value=4 >Abbastanza soddisfatto</option>
-          <option th:value=5 >soddisfatto</option>
-          
-      		
-          
-        </select>
-      </div>
-    </div>  
-    
-
-    
-
-    <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 30px;">Invia il sondaggio</button>
-
-  </form>
-  
+  	<div class="title-container">
+  		<div class="title">
+  			<p> Sondaggio </p>
+  		</div>
+  	</div>
+  	<div class="form">
+	  	<form action="/studente/sondaggio" method="post" >
+			<div th:each="domanda : ${domanda}" class="input-box">		
+			<h2 th:text=${domanda.domanda}></h2> 
+				<span class="details"> Risposta: </span>
+				<div>
+				  <label>
+				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />1</label>
+				  <label>
+				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />2</label>
+				  <label>
+				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />3</label>
+				  <label>
+				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />4</label>
+				  <label>
+				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />5</label>
+				</div>
+            </div> 
+	
+	    
+	
+	    
+	    	<button type="submit" class="btn">Invia il sondaggio</button>
+	  	</form>
+	 </div>
 
 
       
