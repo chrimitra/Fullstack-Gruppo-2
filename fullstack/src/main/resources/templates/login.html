@@ -4,58 +4,176 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
-<body style="background: rgb(66,69,73); background: radial-gradient(circle, rgba(66,69,73,1) 0%, rgba(30,33,36,1) 100%);  ">
-    <div class="container" style="margin-top: 10%;" >
-        <div class="row align-items-start">
-         
-        </div>
-        <div class="row align-items-center">       
-        
-           
-                <div class="col">            
-                </div>
-                
-      
-                <div class="col-6" style="border: 1px solid gray; -webkit-box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 32px 49px 48px 37px rgba(0,0,0,0); 
-                box-shadow: -10px 0px 13px -7px #000000, 10px 0px 13px -7px #000000, 32px 49px 48px 37px rgba(0,0,0,0); padding: 50px; background-color: whitesmoke;">
-                  <form  action="login" method="post">
-                    <h1 style="margin-bottom: 20px; margin-left: 35%; color: rgb(64, 64, 64);">Accedi</h1>
-                      <div class="form-group">
-                        <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" name="email"  id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
-                        
-                      </div>
-                      <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" name="password"  id="password" placeholder="Password" required>
-                      </div>
-                      
-                      <button type="submit" class="btn btn-success">Login</button>
-                      
-                  
-                     
-                        <a href="recuperapass"  style="display: block; margin-top: 10px;">Ho dimenticato la password</a>
-                     
-                      
-                    </form>
-                </div>
-                
-                <div class="col">        
-                </div>
-                
-              </div>
-          </div>
-        <div class="row align-items-end">
-          
-        </div>
- 
+<body>
+    <div class="container">
+			<div align="center" class="title"> Login </div>
+			<form action="/login" method="post">
+				<div class="user-details">
+					<div class="input-box">
+					  	<span class="details"> Email: </span>
+					  	<input type="text" name="email" placeholder= "Nome" required>
+			 		</div> 
+			 		<div class="input-box">    	
+					  	<span class="details"> Password: </span>
+					  	<input type="text" name="password"placeholder= "Password" required>
+					</div> 	
+		            <!-- Ho tolto il tag form, ma non so se c'è bisogno per il captcha -->
+		            <div class="input-box">        
+	                    <div class="captcha">
+	                      	<div class="g-recaptcha" data-sitekey="6LfOIysjAAAAAEoBl8tDQvc_7qtOb-2z3cm1sX-p"></div>
+	                    </div>
+		            </div>  
+		        </div>        
+			  		<div class="button">
+	                   <button class="btn" type="submit" value="Login"> Login </button>
+	    			</div>
+				
+			  	<!--  Success message
+				
+				<div th:if="${param.success}">
+					<div class="alert"> Grazie per esserti registrato! </div>
+					<div class="alert"><a href="/loginD">Tornare alla pagina login?</a></div>
+				</div> -->
+								
+			</form>
+	      
+	 	</div>
 
           
-
-      
+<script type="text/javascript">
+        var onloadCallback = function() {
+          alert("grecaptcha is ready!");
+        };
+</script>
 </body>
+<style>
+/* Navbar Style */
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+}
+
+
+/* Registration Form Style */ 
+
+
+.container {
+	width: 100%;
+	max-width: 700px;
+	padding: 25px 30px;
+	border-radius: 5px;
+    margin: 7% auto;
+    background: #002F56;
+    color: white;
+    
+}
+
+.container .title {
+	font-size: 30px;
+	font-weight: 500;
+	position: relative;
+	justify-content: center;
+}
+
+
+.container form .user-details {
+	justify-content: center;
+    align-items: center;
+	margin: 20px 0 12px 0;
+}
+
+
+form .user-details .input-box {
+	padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+	width: 60%;
+}
+
+.user-details .input-box .details {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 5px;
+
+}
+.user-details .input-box input{
+	height: 45px;
+	width: 100%;
+	outline: none;
+	border-radius: 5px;
+	font-size: 14px;	
+	padding-left: 15px;
+	border: 1px solid black;
+}
+
+.user-details .input-box select{
+	height: 45px;
+	width: 100%;
+	outline: none;
+	border-radius: 5px;
+	font-size: 14px;	
+	padding-left: 15px;
+	border: 1px solid black;
+}
+
+.button {
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    
+    width: 58%;
+}
+
+.btn {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1;
+    border-radius: 7px;
+    background-color: #1d1b31;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+    
+ 
+}
+
+
+/* Responsive Form */
+
+@media (max-width: 584px) {
+	.container {
+		max-width:80%;
+	}
+	
+	form .user-details .input-box {
+		margin-bottom: 15px;
+		width: 100%;
+	}
+	
+	.container form .user-details {
+		max-height: 800px;
+		overflow-y: scroll;
+	}
+	
+	.user-details::-webkit-scrollbar {
+		width: 0;
+	}
+	
+	
+}
+
+</style>
 </html>
