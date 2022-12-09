@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Utente;
 
 
@@ -18,7 +19,7 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	List<Utente>findByCognome(String cognome);
 	List<Utente>findByEmail(String email);
 	List<Utente>findByPassword(String password);
-
+	Utente findByRuolo(Ruolo ruolo);
 	
 
 	@Query(value = "select *  from utente where email= :email and password = :password",nativeQuery=true)
@@ -26,6 +27,10 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 
 	@Query(value = "select * from utente where email= :email",nativeQuery=true)
 		public Utente verificaMail(String email);
+	
+	
+	@Query(value = "SELECT idutente, nome, cognome, email, password, idruolo FROM utente", nativeQuery = true)
+		public List<Utente> listaUtente();
 
 }
 

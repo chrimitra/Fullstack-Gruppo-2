@@ -2,6 +2,7 @@ package com.gruppo2.fullstack.model;
 
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -20,7 +22,8 @@ public class Ruolo {
 	public Integer idruolo;
 	
 	
-	@NotNull    
+	@NotNull   
+	@Column(name = "ruolo")
 	public String ruolo;
 	
 	@OneToMany(mappedBy = "ruolo", fetch = FetchType.EAGER)
@@ -47,6 +50,7 @@ public class Ruolo {
 		this.idruolo = idruolo;
 	}
 
+	@Transactional
 	public String getruolo() {
 		return ruolo;
 	}
