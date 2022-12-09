@@ -5,11 +5,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.gruppo2.fullstack.model.Insegnamento;
+<<<<<<< HEAD
 import com.gruppo2.fullstack.model.Modulo;
+=======
+>>>>>>> branch 'main' of https://github.com/chrimitra/Fullstack-Gruppo-2.git
 
 @Repository
 public interface InsegnamentoDao extends CrudRepository<Insegnamento, Integer>{
 
+<<<<<<< HEAD
 	
 	
 	
@@ -18,3 +22,8 @@ public interface InsegnamentoDao extends CrudRepository<Insegnamento, Integer>{
 			+ "where idutente= :x",nativeQuery=true)
 	public String Materia(Integer x) ;
 }
+=======
+	Insegnamento findByIdinsegnamento(Integer idinsegnamento);
+	
+}
+>>>>>>> branch 'main' of https://github.com/chrimitra/Fullstack-Gruppo-2.git
