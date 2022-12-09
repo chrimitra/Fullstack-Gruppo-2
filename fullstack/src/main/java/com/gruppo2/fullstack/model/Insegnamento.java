@@ -73,7 +73,7 @@ public class Insegnamento {
 
 	public Insegnamento() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 

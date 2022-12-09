@@ -20,7 +20,7 @@ public interface ModuloDao extends CrudRepository<Modulo, Integer> {
 	//List<Modulo> findBymodulo(String modulo);
 	Modulo findByIdmodulo(Integer idmodulo);
 	Modulo findBymodulo(String modulo);
-	List<Modulo> findByUtente(Utente insegnante);
+
 	
 
 }
