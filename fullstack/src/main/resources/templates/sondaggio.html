@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <form  th:action="@{/studente/sondaggio/{materia}/{question}(materia = ${materia}, question = ${domanda.iddomanda})}" th:object="${feedback}" method="post" >
+  <form  th:action="@{/studente/sondaggio/{materia}/{question}(materia = ${materia}, question = ${domanda})}" th:object="${feedback}" method="post" >
   
  <h1>SONDAGGIO</h1>
   
