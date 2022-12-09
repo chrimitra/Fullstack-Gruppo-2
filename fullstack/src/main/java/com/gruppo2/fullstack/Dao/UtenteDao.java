@@ -34,7 +34,7 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	@Query(value = "SELECT idutente, nome, cognome, email, password, idruolo FROM utente", nativeQuery = true)
 		public List<Utente> listaUtente();
 	
-	@Query(value = "UPDATE `utente` SET `password` = :password WHERE `utente`.`idutente` = :idutente", nativeQuery = true)
+	@Query(value = "UPDATE utente SET `password` = :password WHERE idutente = :idutente", nativeQuery = true)
 	public Utente cambiaPassword(String password, Integer idutente);
 }
 

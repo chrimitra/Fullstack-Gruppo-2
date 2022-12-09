@@ -67,17 +67,38 @@ public class InsegnanteController {
 			return "redirect:/error404";
 		}
 	}
+	// MODIFICA PASSWORD(Mappatura)
 	
-	// MODIFICA PASSWORD
-	@RequestMapping("/modificaPassword")
-	public String modificaPassword(HttpSession session, Model model, 
+	@GetMapping("/modificaPassword")
+	public ModelAndView modificaPassword(HttpSession session) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		if (loggedUser != null) {
+			ModelAndView mavMP = new ModelAndView();
+			mavMP.setViewName("modificaPassword");
+			mavMP.addObject("utente", loggedUser);
+			return mavMP;
+		}else {
+			ModelAndView mavError = new ModelAndView();
+			mavError.setViewName("error404");
+			return mavError;
+		}
+	}
+	
+	
+	
+	// MODIFICA PASSWORD (post)
+	@RequestMapping("/Modifica")
+	public String ModificaPassword(HttpSession session, Model model, 
 			@RequestParam String nuovaPassword, 
 			@RequestParam String confermaPassword) {
+		
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		
 		if(nuovaPassword.equals(confermaPassword)) {
-			model.addAttribute("utente", loggedUser);
-			UtenteDao.cambiaPassword(nuovaPassword, loggedUser.idutente);
+			//model.addAttribute("utente", loggedUser);
+			loggedUser.setPassword(confermaPassword);
+			UtenteDao.save(loggedUser);
+			session.setAttribute("loggedUser", loggedUser);
 			return "redirect:/insegnante/profilo";
 		} else {
 			return "redirect:/error404"; // Messaggio di errore che le password non sono uguali
