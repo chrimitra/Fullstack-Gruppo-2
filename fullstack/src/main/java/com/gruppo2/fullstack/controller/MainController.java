@@ -52,7 +52,7 @@ public class MainController {
 			return"redirect:/admin/report";
 			
 		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //Se è docente
-			return "redirect:/login";
+			return "redirect:/insegnante/risultati";
 		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //Se è studente
 			
 			return"redirect:/studente/menuFeedback";
