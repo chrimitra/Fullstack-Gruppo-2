@@ -27,22 +27,13 @@ public class Insegnamento {
 	private Utente utente;
 
 
-	public Insegnamento(Modulo modulo, Utente utente) {
-		super();
-		this.modulo = modulo;
-		this.utente = utente;
+	public Integer getIdinsegnamento() {
+		return idinsegnamento;
 	}
 
 
-	public Insegnamento() {
-		super();
-	
-	}
-
-
-	@Override
-	public String toString() {
-		return "Insegnamento [modulo=" + modulo + ", utente=" + utente + "]";
+	public void setIdinsegnamento(Integer idinsegnamento) {
+		this.idinsegnamento = idinsegnamento;
 	}
 
 
@@ -64,6 +55,30 @@ public class Insegnamento {
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Insegnamento [idinsegnamento=" + idinsegnamento + ", modulo=" + modulo + ", utente=" + utente + "]";
+	}
+
+
+	public Insegnamento(Integer idinsegnamento, Modulo modulo, Utente utente) {
+		super();
+		this.idinsegnamento = idinsegnamento;
+		this.modulo = modulo;
+		this.utente = utente;
+	}
+
+
+	public Insegnamento() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+
+
+
 	
 	
 	
