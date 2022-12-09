@@ -34,21 +34,47 @@
 	            <!--<img src="profile.jpg" alt="profileImg">-->
 	            <div class="name_job">
 	                <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
-	                <div class="job"><p th:text="${utente.ruolo.ruolo}"></div> <!-- Ruolo -->
+	                <!-- <div class="job"><p th:text="${utente.getRuolo().getruolo()}"></div> <!-- Ruolo -->
 	            </div>
 	            </div>
 	            <a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
 	        </li>
 	        </ul>
 	    </div>
-
-	<!-- Qua va messo tutto il contenuto --> 
+	  	
+    <!-- Profilo Dati -->
     <section class="home-section">
-		<div class="container"> 
-			<h1 th:text=${materia}></h1>
-			
-		</div>
-	</section>
+	  	
+	  <div class="title-container">
+        <div class="title">
+            <p> Profilo </p>
+        </div>
+      </div>	
+	  	
+        
+     <div class="table-container" >
+        <table>
+          <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Email</th>
+            <th>Ruolo</th>
+            <th>Password</th>
+
+           
+          </tr>
+          <tr>
+            <td th:text="${utente.nome}"></td>
+            <td th:text="${utente.cognome}"></td>
+            <td th:text="${utente.email}"></td>
+           	<td th:text="${utente.ruolo.ruolo}"></td>
+            <td th:text="${utente.password}"></td>
+        </tr>
+        </table>
+      </div>
+    </section>  
+    
+    
 <script type="text/javascript">
    
     var onloadCallback = function() {
@@ -391,5 +417,4 @@
 }
 
 </style>
-</body>
 </html>
