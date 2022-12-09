@@ -1,5 +1,7 @@
 package com.gruppo2.fullstack.controller;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gruppo2.fullstack.Dao.DomandaDao;
 import com.gruppo2.fullstack.Dao.FeedbackDao;
+import com.gruppo2.fullstack.Dao.InsegnamentoDao;
 import com.gruppo2.fullstack.Dao.ModuloDao;
 import com.gruppo2.fullstack.Dao.RuoloDao;
 import com.gruppo2.fullstack.Dao.UtenteDao;
 import com.gruppo2.fullstack.model.Feedback;
+import com.gruppo2.fullstack.model.Insegnamento;
+import com.gruppo2.fullstack.model.Modulo;
 import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Utente;
 
@@ -39,12 +44,13 @@ public class AdminController {
 	RuoloDao RuoloDao;
 	@Autowired
 	ModuloDao ModuloDao;
+	@Autowired
+	InsegnamentoDao InsegnamentoDao;
 	
 	// REPORT
 	@GetMapping("/report") 
 	public ModelAndView report(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		
 		if (loggedUser != null) {
 			ModelAndView mavReport = new ModelAndView();
 			mavReport.setViewName("report");
@@ -61,7 +67,8 @@ public class AdminController {
 	
 	// DETTAGLI REPORT
 	@GetMapping("/reportDetails")
-	public String reportDetails() {
+	public String reportDetails(HttpSession session) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		return "reportDetails";
 	}
 	
@@ -91,7 +98,7 @@ public class AdminController {
 		@GetMapping("/registrazione")
 		public ModelAndView registrazione(HttpSession session) {
 			Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-
+			
 			if (loggedUser == null){
 				ModelAndView mavLogin = new ModelAndView();
 				mavLogin.setViewName("login");
@@ -104,6 +111,7 @@ public class AdminController {
 				mavRegistrazione.setViewName("registrazione");
 				mavRegistrazione.addObject("utente", loggedUser);
 				mavRegistrazione.addObject("ruolo", RuoloDao.findAll());
+				mavRegistrazione.addObject("modulo", ModuloDao.findAll());
 				
 			return mavRegistrazione;
 			} 
@@ -118,11 +126,12 @@ public class AdminController {
 		public String signin(@RequestParam("nome") String nome,
 								@RequestParam("cognome") String cognome,
 								@RequestParam("email") String email,
-								@RequestParam("ruolo") String ruolo) { //cambiare html, levando password e mettendo una select con i ruoli
-			
+								@RequestParam("ruolo") String ruolo,
+								@RequestParam("modulo")String modulo, HttpSession session) { //cambiare html, levando password e mettendo una select con i ruoli
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");	
 		//verificaMail se è gia esistente
 		Ruolo role = (Ruolo) RuoloDao.findByruolo(ruolo);
-		
+		Modulo mod = (Modulo) ModuloDao.findBymodulo(modulo);
 		// generare una password random
 		String upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String lower = "abcdefghijklmnopqrstuvwxyz";
@@ -143,13 +152,15 @@ public class AdminController {
 		
 		if (verifica == null){
 			Utente newUser = new Utente(null,nome, cognome, email,password, role);
-			
 			UtenteDao.save(newUser);
-			return "redirect:/"; // appena registrato mi porta alla login
+			Insegnamento newInsegnamento = new Insegnamento(null, mod, newUser);
+			InsegnamentoDao.save(newInsegnamento);
+			
+			return "redirect:registrazione?success"; // appena registrato mi porta alla login
 		}else {
 			// se non ha tutti i requisiti necessari
-			System.out.println("male male male");
-			return "redirect:/registrazione";
+			
+			return "redirect:/registrazione?error";
 		}
 		}
 	
@@ -158,11 +169,13 @@ public class AdminController {
 		// Lista Utenti
 		@RequestMapping("/listaUtenti")
 		public String lista(Model model, HttpSession session) {
+			Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 			
-			Utente utente = (Utente) session.getAttribute("loggedUser");
-				if(utente != null) {
-				model.addAttribute("utenti", UtenteDao.findAll());
-				model.addAttribute(utente);
+			
+				if(loggedUser != null) {
+				model.addAttribute("utenti", UtenteDao.listaUtente());
+				model.addAttribute(loggedUser);
+				
 				return "listaUtenti";
 			} else {
 				return "redirect:/error404";

@@ -113,6 +113,7 @@ public class StudenteController {
 		}
 	}
 	
+	
 	@RequestMapping(value="/sondaggio", method=RequestMethod.POST)
 	public String postSondaggio(HttpSession session, @PathVariable("id") Integer id) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
