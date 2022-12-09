@@ -19,20 +19,12 @@
 	  	<form action="/studente/sondaggio" method="post" >
 			<div th:each="domanda : ${domanda}" class="input-box">		
 			<h2 th:text=${domanda.domanda}></h2> 
-				<span class="details"> Risposta: </span>
-				<div>
-				  <label>
-				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />1</label>
-				  <label>
-				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />2</label>
-				  <label>
-				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />3</label>
-				  <label>
-				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />4</label>
-				  <label>
-				    <input type="checkbox" class="radio" value="1" name="voto[1][]" />5</label>
-				</div>
-            </div> 
+				<div class="input-box">		
+						<span class="details"> Risposta: </span>
+						<select class="form-control" id="voto" name="voto" required>
+	                           <option th:each="" th:value="" text="" ></option>
+	                    </select>
+		            </div>
 	
 	    
 	
