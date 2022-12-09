@@ -65,6 +65,9 @@ public class MainController {
 	 return "redirect:/login";
 	}
 
+	
+	
+	
 	// LOGOUT
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
