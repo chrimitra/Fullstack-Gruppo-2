@@ -10,10 +10,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
+
 
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 
@@ -46,11 +46,11 @@ public class Modulo {
 	}
 
 
-	public Modulo(Integer idmodulo, @NotNull String modulo, Utente utente) {
+	public Modulo(Integer idmodulo, @NotNull String modulo ) {
 		super();
 		this.idmodulo = idmodulo;
 		this.modulo = modulo;
-		this.utente = utente;
+		
 	}
 
 
@@ -73,17 +73,10 @@ public class Modulo {
 	
 	
 
-	public Utente getUtente() {
-		return utente;
-	}
-
-	public void setUtente(Utente utente) {
-		this.utente = utente;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "Modulo [idmodulo=" + idmodulo + ", modulo=" + modulo + ", utente=" + utente + "]";
+		return "Modulo [idmodulo=" + idmodulo + ", modulo=" + modulo +  "]";
 	}
 
 
