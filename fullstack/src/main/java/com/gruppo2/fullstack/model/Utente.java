@@ -47,16 +47,16 @@ public class Utente {
 
 
 
-	@OneToOne(mappedBy = "utente", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Modulo modulo;
+
 	
 	
 	@OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
 	private Set<Feedback> feedback;
 
 	
-	
+	@OneToMany(mappedBy = "utente", fetch = FetchType.EAGER)
+	private Set<Insegnamento> insegnamento;
+
 	
 	
 

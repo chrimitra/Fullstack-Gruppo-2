@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.gruppo2.fullstack.Dao.DomandaDao;
 import com.gruppo2.fullstack.Dao.FeedbackDao;
@@ -38,7 +39,7 @@ public class StudenteController {
 	@Autowired
 	ModuloDao ModuloDao;
 	
-	@GetMapping("/modulo")
+	/*@GetMapping("/modulo")
 	 public String modulo(Model model){		
 		Iterable<Modulo> materie = ModuloDao.findAll();		
 		model.addAttribute("materie", materie);        
@@ -69,9 +70,59 @@ public class StudenteController {
 		
 		return "menuFeedback";
 		
-	}
+	}*/
 	
 		
+	@GetMapping("/menuFeedback")
+  	public ModelAndView menuFeedback(HttpSession session, Model model) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		
+		if (loggedUser != null) {
+			ModelAndView mavMenuFeedback = new ModelAndView();
+			mavMenuFeedback.setViewName("menuFeedback");
+			mavMenuFeedback.addObject("modulo", ModuloDao.findAll());
+			mavMenuFeedback.addObject("utente", loggedUser);
+			return mavMenuFeedback;
+		} else {
+			ModelAndView mavError = new ModelAndView();
+			mavError.setViewName("error404");
+			return mavError;
+		}
+	}
+	
+	@GetMapping("/sondaggio")
+	public String sondaggio() {
+		return "sondaggio";
+	}
+	
+	@RequestMapping("/sondaggio/{id}")
+	public ModelAndView sondaggio(HttpSession session, @PathVariable("id") Integer id) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+	
+		if (loggedUser != null) {
+			ModelAndView mavSondaggio = new ModelAndView();
+			mavSondaggio.setViewName("sondaggio");
+			mavSondaggio.addObject("modulo", ModuloDao.findByIdmodulo(id));
+			mavSondaggio.addObject("domanda", DomandaDao.findAll());
+			return mavSondaggio;
+
+		} else {
+			ModelAndView mavError = new ModelAndView();
+			mavError.setViewName("error404");
+			return mavError;
+		}
+	}
+	
+	@RequestMapping(value="/sondaggio", method=RequestMethod.POST)
+	public String postSondaggio(HttpSession session, @PathVariable("id") Integer id) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		return "redirect:/error404";
+	}
+	
+	
+	
+	// POST SONDAGGIO
+	
 	
 	
 	

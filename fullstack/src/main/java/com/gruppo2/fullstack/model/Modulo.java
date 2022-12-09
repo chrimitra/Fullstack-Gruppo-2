@@ -28,12 +28,17 @@ public class Modulo {
 	@NotNull    
 	public String modulo;
 
-	@OneToOne	
-	@JoinColumn(name = "insegnante", referencedColumnName = "idutente" )
-	public Utente utente;
+
 	
 	@OneToMany(mappedBy = "modulo", fetch = FetchType.EAGER)
 	private Set<Feedback> moduloFeedback;
+	
+	@OneToMany(mappedBy = "modulo", fetch = FetchType.EAGER)
+	private Set<Insegnamento> insegnamento;
+
+	
+
+	
 
 	
 	public Modulo() {

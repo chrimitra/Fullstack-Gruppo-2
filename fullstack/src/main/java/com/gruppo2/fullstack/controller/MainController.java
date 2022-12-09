@@ -49,18 +49,13 @@ public class MainController {
 		session.setAttribute("loggedUser", utente);
 		
 		if((utente != null) && (utente.getRuolo().getidruolo() == 1)) { //Se è admin
-			
-			// controllare se l'utente ha la password o no
-			// se l'utente si registra per la prima volta fare un update nel db e un set sulla password dell'utente
-			// se si logga admin va nel menu
-			// se si logga l'utente va nel modulo
 			return"redirect:/admin/report";
 			
-		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //SE è docente
-			return "redirect:/login"; // da cambiare con la pagina "modulo bianco"----------------------------------
-		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //SE è studente
+		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //Se è docente
+			return "redirect:/login";
+		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //Se è studente
 			
-			return"redirect:/studente/menu";
+			return"redirect:/studente/menuFeedback";
 		}
 	 return "redirect:/login";
 	}

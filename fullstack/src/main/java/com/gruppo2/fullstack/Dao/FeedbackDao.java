@@ -4,6 +4,7 @@ package com.gruppo2.fullstack.Dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,6 +13,8 @@ import com.gruppo2.fullstack.model.Domanda;
 import com.gruppo2.fullstack.model.Feedback;
 import com.gruppo2.fullstack.model.Modulo;
 import com.gruppo2.fullstack.model.Utente;
+
+import jakarta.transaction.Transactional;
 
 
 
@@ -39,4 +42,13 @@ public interface FeedbackDao extends CrudRepository<Feedback, Integer> {
 	public List <Feedback> media(Integer idmodulo);*/
 	
 	// Me li ragruppa in domanda ma non mi prende la media
+	
+	
+	
+	//aggiunta feedback
+	@Modifying
+	@Transactional
+	@Query(value="INSERT INTO `feedbacks` (`idfeedback`, `voto`, `data`, `idutente`, `iddomanda`, `idmodulo`) "
+			+ "VALUES (NULL, :voto, current_timestamp(), :idutente, :iddomanda, :idmodulo);",nativeQuery = true)
+	public void aggiuntaFeedback(double voto, Integer idutente, Integer iddomanda, Integer idmodulo);
 }
