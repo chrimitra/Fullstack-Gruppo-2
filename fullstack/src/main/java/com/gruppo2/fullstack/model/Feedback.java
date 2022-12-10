@@ -83,9 +83,7 @@ public class Feedback {
 	public void setVoto(double voto) {
 		this.voto = voto;
 	}
-	
 
-	
 
 	public Date getData() {
 		return data;

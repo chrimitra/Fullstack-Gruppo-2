@@ -21,19 +21,27 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	List<Utente>findByPassword(String password);
 	Utente findByRuolo(Ruolo ruolo);
 	
-
+	// LOGIN
 	@Query(value = "select *  from utente where email= :email and password = :password",nativeQuery=true)
-		public Utente login(String email, String password) ;
+	public Utente login(String email, String password) ;
 
+	// VERIFICA MAIL
 	@Query(value = "select * from utente where email= :email",nativeQuery=true)
-		public Utente verificaMail(String email);
+	public Utente verificaMail(String email);
 	
+	// VERIFICA PASSWORD
 	@Query(value = "select * from utente where password= :password",nativeQuery=true)
 	public Utente verificaPassword(String password);
 	
+	// SELECT ALL
 	@Query(value = "SELECT idutente, nome, cognome, email, password, idruolo FROM utente", nativeQuery = true)
-		public List<Utente> listaUtente();
+	public List<Utente> listaUtente();
 	
+	// SELECT DI UN SINGOLO UTENTE
+	@Query(value = "SELECT idutente, nome, cognome, email, password, idruolo FROM utente WHERE idutente = :idutente", nativeQuery = true)
+	public Utente singoloUtente(Integer idutente);
+		
+	// EDIT DI UN SINGOLO UTENTE
 	@Query(value = "UPDATE utente SET `password` = :password WHERE idutente = :idutente", nativeQuery = true)
 	public Utente cambiaPassword(String password, Integer idutente);
 }
