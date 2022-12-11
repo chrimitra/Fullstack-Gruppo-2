@@ -9,32 +9,26 @@
 </head>
 <body>
 
-<!---
-  <form  th:action="@{/studente/sondaggio/{materia}/{question}(materia = ${materia}, question = ${domanda})}" th:object="${feedback}" method="post" >
 
- -->
-  	<div class="title-container">
-  		<div class="title">
-  			<p> Sondaggio </p>
-  		</div>
-  	</div>
-  	<div class="form">
-	  	<form action="/studente/sondaggio" method="post" >
-			<div th:each="domanda : ${domanda}" class="input-box">		
-			<h2 th:text=${domanda.domanda}></h2> 
-				<div class="input-box">		
-						<span class="details"> Risposta: </span>
-						<select class="form-control" id="voto" name="voto" required>
-	                           <option th:each="" th:value="" text="" ></option>
-	                    </select>
-		            </div>
+	  	
 	
-	    
-	
-	    
+	  	<form   th:action="@{/studente/sondaggio/{modulo}(modulo = ${modulo})}" th:object="${feedbacks}" method="post">
+			<div th:each="feedback, itemStat : *{feedbacklist}" class="input-box">		
+				<h2 th:text=*{feedbacklist[__${itemStat.index}__].domanda.domanda}></h2> 
+					<div class="input-box">		
+							<span class="details"> Risposta: </span>
+							<select class="form-control"  th:field="*{feedbacklist[__${itemStat.index}__].voto}" required>	                          
+		                           <option th:value="1.0" >non ricordo</option>
+		                           <option th:value="2.0" >non ricordo g</option>
+		                           <option th:value="3.0" >indifferente</option>
+		                           <option th:value="4.0" >abbastanza soddisfatto</option>
+		                           <option th:value="5.0" >soddisfatto</option>        
+		                    </select>
+			        </div>
+		    </div>	    
 	    	<button type="submit" class="btn">Invia il sondaggio</button>
-	  	</form>
-	 </div>
+	  	</form> 
+
 
 
       

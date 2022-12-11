@@ -65,20 +65,21 @@
 	<section class="home-section">
 		
 		<div class="container">
-			<div align="center" class="title"> Registrazione </div>
-			<form action="/admin/register" method="post">
+			<div align="center" class="title"> Modifica Utente </div>
+			<form action="/modifica" method="post" th:object="${utenteMod}">
 				<div class="user-details">
+					<input type="hidden" name="id" th:value="${utenteMod.idutente}">
 					<div class="input-box">
 					  	<span class="details"> Nome: </span>
-					  	<input type="text" name="nome" placeholder= "Nome" required>
+					  	<input th:field="*{nome}" type="text" name="nome" placeholder= "Nome" required>
 			 		</div> 
 			 		<div class="input-box">    	
 					  	<span class="details"> Cognome: </span>
-					  	<input type="text" name="cognome"placeholder= "Cognome" required>
+					  	<input th:field="*{cognome}" type="text" name="cognome"placeholder= "Cognome" required>
 					</div> 	
 					<div class="input-box">	
 					  	<span class="details"> Email: </span>
-					  	<input type="text" name="email"placeholder= "Email" required>
+					  	<input th:field="*{email}" type="text" name="email"placeholder= "Email" required>
 					</div> 	  
 					
 					
@@ -88,15 +89,7 @@
 	                           <option th:each="r:${ruolo}" th:value="${r.ruolo}" th:text="${r.ruolo}" ></option>
 	                    </select>
 		            </div> 
-		            <div class="input-box">	
-			            <div id="ifYes" style="display: none;">
-						 
-							<span class="details"> Modulo: </span>
-							<select class="form-control" id="modulo" name="modulo" required>
-		                           <option th:each="m:${modulo}" th:value="${m.modulo}" th:text="${m.modulo}" ></option>
-		                    </select>
-	                    </div>
-					</div>
+		   
 					
 		                    <!-- Ho tolto il tag form, ma non so se c'è bisogno per il captcha -->
 		            <div class="input-box">        

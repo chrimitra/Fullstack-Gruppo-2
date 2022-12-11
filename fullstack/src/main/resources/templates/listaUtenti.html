@@ -11,7 +11,7 @@
     <title>Menu</title>
 </head>
 <body>
-<!--  Navbar on the left -->
+ <!--  Navbar on the left -->
     <div class="sidebar">
         <div class="logo-details">
 
@@ -19,9 +19,17 @@
             <div class="logo_name"></div>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
-
         
         <ul class="nav-list">
+        
+         <li>
+            <a href="/admin/report"> 
+                <i class='bx bxs-report' ></i>
+            <span class="links_name">Report</span>
+            </a>
+            <span class="tooltip">Report</span>
+        </li>
+        
         <li>
             <a href="/admin/listaUtenti">
             <i class='bx bxs-user-detail'></i>
@@ -38,31 +46,21 @@
             </a>
             <span class="tooltip">Registrazione</span>
         </li>
-            
-            
+        
 
-        <li> 
-            <a href="/"> 
-            <i class='bx bxs-user' ></i>
-            <span class="links_name">Login</span>
-            </a>
-            <span class="tooltip">Login </span>
-        </li>
-      
 
         <li class="profile">
             <div class="profile-details">
             <!--<img src="profile.jpg" alt="profileImg">-->
             <div class="name_job">
                 <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
-                <div class="job"><p th:text="${utente.getRuolo().getruolo()}"></div> <!-- Ruolo -->
+                
             </div>
             </div>
             <a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
         </li>
         </ul>
     </div>
-
 	  	
     <!-- Lista Utenti -->
     <section class="home-section">
@@ -82,8 +80,9 @@
             <th>Email</th>
             <th>Ruolo</th>
             <th>Password</th>
-
-           
+			<th></th>
+            <th></th>
+            
           </tr>
           <tr th:each="utenti : ${utenti}">
             <td th:text="${utenti.nome}"></td>
@@ -91,6 +90,8 @@
             <td th:text="${utenti.email}"></td>
            	<td th:text="${utenti.ruolo.getruolo()}"></td>
             <td th:text="${utenti.password}"></td>
+            <td><a th:href="@{'/admin/listaUtenti/modifica/' + ${utenti.getIdutente()}}"> Modifica </a></td>
+            <td><a th:href="@{'/admin/listaUtenti/rimuovi/' + ${utenti.getIdutente()}}">Rimuovi</a></td>
         </tr>
         </table>
       </div>

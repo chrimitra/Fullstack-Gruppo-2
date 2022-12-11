@@ -17,9 +17,17 @@
             <div class="logo_name"></div>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
-
         
         <ul class="nav-list">
+        
+         <li>
+            <a href="/admin/report"> 
+                <i class='bx bxs-report' ></i>
+            <span class="links_name">Report</span>
+            </a>
+            <span class="tooltip">Report</span>
+        </li>
+        
         <li>
             <a href="/admin/listaUtenti">
             <i class='bx bxs-user-detail'></i>
@@ -36,24 +44,15 @@
             </a>
             <span class="tooltip">Registrazione</span>
         </li>
-            
-            
+        
 
-        <li> 
-            <a href="/"> 
-            <i class='bx bxs-user' ></i>
-            <span class="links_name">Login</span>
-            </a>
-            <span class="tooltip">Login </span>
-        </li>
-      
 
         <li class="profile">
             <div class="profile-details">
             <!--<img src="profile.jpg" alt="profileImg">-->
             <div class="name_job">
                 <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
-                <div class="job"><p th:text="${utente.ruolo.ruolo}"></div> <!-- Ruolo -->
+                
             </div>
             </div>
             <a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
@@ -64,36 +63,39 @@
     <!-- Qua va messo tutto il contenuto ovvero il report --> 
     <section class="home-section">
         <div class="title-container">
-            <p class="report-title"> REPORT  </p>
+            <p class="report-title"> REPORT PER MODULO </p>
             
         </div>
         <div class="container-report">
-            <div class="box-modulo" th:each="m : ${modulo}">
+            <div id="box-modulo" class="box-modulo" th:each="m : ${modulo}">
                 <div class="title-modulo">
-                    <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text"><td th:text="${m.modulo}"></td></p>
-                	
+                    <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text" th:text="${m.modulo}"></p>
+                </div>	
             
                 <div class="details" th:id="details + ${m.idmodulo}">      
       			</div>
       			
             	</div>
     		</div>
-        </div>
+     
 	</section>
     
 <!-- JavaScript -->
 <script type="text/javascript">
-	function loadDoc(clicked_id) {
-		  let id = clicked_id;
-		  console.log(id);
-		  const xhttp = new XMLHttpRequest();
-		  xhttp.onload = function() {
-		    document.getElementById(`details${id}`).innerHTML = this.responseText;
-		  }
-		
-		  xhttp.open("GET", `/admin/reportDetails/${id}`);
-		  xhttp.send();
-		} 
+		function loadDoc(clicked_id) {
+			  let id = clicked_id;
+			  console.log(id);
+			  const xhttp = new XMLHttpRequest();
+			  xhttp.onload = function() {
+			    document.getElementById(`details${id}`).innerHTML = this.responseText;
+			    
+			  }
+			
+			  xhttp.open("GET", `/admin/reportDetails/${id}`);
+			  xhttp.send();
+			} 
+	
+	
 	
 		/* Codice per le animazioni della navbar */
 	    let sidebar = document.querySelector(".sidebar");
@@ -416,7 +418,7 @@
 
 .container-report {
     justify-content: center;
-    width: 80%;
+    width: 70%;
     text-align: center;
     position: relative;
     height: 100%;
@@ -428,19 +430,27 @@
 .box-modulo {
   font-size: 25px;
   margin-top: 25px;
+  
+  
 }
 
 .title-modulo {
   border-radius: 12px;
-  background-color: #002F56;
-
+  background: #002f56;
+  
+  height: 70px;
+  
 }
 
 .modulo-text {
   color: white;
-  
+  text-decoration: underline;
+  padding-top: 18px;
 }
 
+.title-modulo p {
+	cursor: pointer;
+}
 
 
 

@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-   
-    <title>Registrazione</title>
+
+    <link rel="stylesheet" href="pr.css">
+    <title>Menu</title>
 </head>
 <body>
-	 <!--  Navbar on the left -->
+ <!--  Navbar on the left -->
     <div class="sidebar">
         <div class="logo-details">
 
@@ -23,7 +23,7 @@
         <ul class="nav-list">
         
          <li>
-            <a href="/admin/report"> 
+            <a href="/admin/reportAll"> 
                 <i class='bx bxs-report' ></i>
             <span class="links_name">Report</span>
             </a>
@@ -61,113 +61,64 @@
         </li>
         </ul>
     </div>
-	<!-- Registration Form -->
-	<section class="home-section">
-		
-		<div class="container">
-			<div align="center" class="title"> Registrazione </div>
-			<form action="/admin/register" method="post">
-				<div class="user-details">
-					<div class="input-box">
-					  	<span class="details"> Nome: </span>
-					  	<input type="text" name="nome" placeholder= "Nome" required>
-			 		</div> 
-			 		<div class="input-box">    	
-					  	<span class="details"> Cognome: </span>
-					  	<input type="text" name="cognome"placeholder= "Cognome" required>
-					</div> 	
-					<div class="input-box">	
-					  	<span class="details"> Email: </span>
-					  	<input type="text" name="email"placeholder= "Email" required>
-					</div> 	  
-					
-					
-					<div class="input-box">		
-						<span class="details"> Ruolo: </span>
-						<select onchange="yesnoCheck(this)" class="form-control" id="ruolo" name="ruolo" required>
-	                           <option th:each="r:${ruolo}" th:value="${r.ruolo}" th:text="${r.ruolo}" ></option>
-	                    </select>
-		            </div> 
-		            <div class="input-box">	
-			            <div id="ifYes" style="display: none;">
-						 
-							<span class="details"> Modulo: </span>
-							<select class="form-control" id="modulo" name="modulo" required>
-		                           <option th:each="m:${modulo}" th:value="${m.modulo}" th:text="${m.modulo}" ></option>
-		                    </select>
-	                    </div>
-					</div>
-					
-		                    <!-- Ho tolto il tag form, ma non so se c'è bisogno per il captcha -->
-		            <div class="input-box">        
-	                    <div class="form-group row">
-	                      	<div class="g-recaptcha" data-sitekey="6LfOIysjAAAAAEoBl8tDQvc_7qtOb-2z3cm1sX-p"></div>
-	                    </div>
-		            </div>  
-		        </div>        
-				  		<div class="button">
-		                   <button class="btn" type="submit" value="Registrati"> Registrati </button>
-		    			</div>
-				
-			  	<!--  Success message -->
-				
-				<div class="success" th:if="${param.success}">
-					<div class="alert-success"> Utente registrato con successo! </div>
-              
-					<div class="alert-lgn"><a href="/">Tornare alla pagina login?</a></div>
-				</div>
-				
-				<!--  Error message -->
-				
-				<div class="error" th:if="${param.error}">
-					<div class="alert-error"> Utente già registrato! </div>
-              
-					<div class="alert-lista"><a href="/admin/listaUtenti">Vedere la lista utenti? </a></div>
-				</div>
-								
-			</form>
-	      
-	 	</div>
-	    
-    </section>
-      <script type="text/javascript">
-        var onloadCallback = function() {
-          alert("grecaptcha is ready!");
-        };
-        /* Codice per le animazioni della navbar */
-	    let sidebar = document.querySelector(".sidebar");
-	    let closeBtn = document.querySelector("#btn");
-	    let searchBtn = document.querySelector(".bx-search");
-	
-	    closeBtn.addEventListener("click", ()=>{
-	        sidebar.classList.toggle("open");
-	        menuBtnChange();
-	    });
+	  	
+    <!-- Lista Utenti -->
+    <section class="home-section">
+	  	
+	  <div class="title-container">
+        <div class="title">
+            <p class="report-title"> REPORT </p>
+        </div>
+      </div>	
+	  	
+        
+     <div class="table-container" >
+        <table>
+          <tr>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Modulo</th>
+            <th>Domanda</th>
+			<th>Voto</th>
+            
+          </tr>
+          <tr th:each="feedback : ${feedback}">
+            <td th:text="${feedback.data}"></td>
+            <td th:text="${feedback.utente.nome}"></td>
+            <td th:text="${feedback.utente.cognome}"></td>
+           	<td th:text="${feedback.modulo.modulo}"></td>
+            <td th:text="${feedback.domanda.domanda}"></td> 
+            <td th:text="${feedback.voto}"></td>
+       		
+        </tr>
+        </table>
+        
+        <div class="modulo">
+        	<a href="/admin/report"> Guarda il report per modulo </a>
+        </div>
+      </div>
+    </section>  
+    
+<script type="text/javascript">
+   
+    var onloadCallback = function() {
+      alert("grecaptcha is ready!");
+    };
+    /* Codice per le animazioni della navbar */
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
 
-	    function menuBtnChange() {
-	    if(sidebar.classList.contains("open")){
-	        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-	    }else {
-	        closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
-	    }
-	    }
-	    
-	    /* Codice per l'input modulo del docente */
-	    function yesnoCheck(that) {
-		    if (that.value == "Docente") {
-		        document.getElementById("ifYes").style.display = "block";
-		    } else {
-		        document.getElementById("ifYes").style.display = "none";
-		    }
-		}
-	   
-	    
-      </script>
-
+    closeBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("open");
+        menuBtnChange();
+    });
+    
+    </script>
 </body>
 <!-- CSS STYLE -->
 <style>
-/* Navbar Style */
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -423,7 +374,6 @@
   width: calc(100% - 78px);
   transition: all 0.5s ease;
   z-index: 2;
-  padding: 10px;
 }
 .sidebar.open ~ .home-section{
   left: 250px;
@@ -437,172 +387,59 @@
   margin: 18px
 }
 
-/* Registration Form Style */ 
 
 
-.container {
-	width: 100%;
-	max-width: 700px;
-	padding: 25px 30px;
-	border-radius: 5px;
-    margin: 7% auto;
-    background: #002F56;
-    color: white;
-    
+
+/* Lista utenti CSS */
+.title-container {
+    padding-top: 20px;
+    width: 40%;
+   
+    margin: auto;
+    align-items: center;
 }
 
-.container .title {
-	font-size: 30px;
-	font-weight: 500;
-	position: relative;
-	justify-content: center;
-}
-
-
-.container form .user-details {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	margin: 20px 0 12px 0;
-}
-
-
-form .user-details .input-box {
-	margin-bottom: 15px;
-	width: calc(100% / 2 - 20px);
-}
-
-.user-details .input-box .details {
-	display: block;
-	font-weight: 500;
-	margin-bottom: 5px;
-
-}
-.user-details .input-box input{
-	height: 45px;
-	width: 100%;
-	outline: none;
-	border-radius: 5px;
-	font-size: 14px;	
-	padding-left: 15px;
-	border: 1px solid black;
-}
-
-.user-details .input-box select{
-	height: 45px;
-	width: 100%;
-	outline: none;
-	border-radius: 5px;
-	font-size: 14px;	
-	padding-left: 15px;
-	border: 1px solid black;
-}
-
-.button {
-    height: 45px;
-    margin: 15px 0;
-}
-
-.btn {
-    height: 100%;
+.title {
     width: 100%;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 1;
-    border-radius: 7px;
-    background-color: #1d1b31;
-    color: white;
-    cursor: pointer;
-}
-
-
-.success {
-	width: 100%;
+    margin: auto;
     justify-content: center;
-    align-items: center;
-}
-
-.alert-success {
-    background-color: green;
-	width: 100%;
-    height: 30px;
     text-align: center;
-    margin: auto;
-    border-radius: 5px;
-    padding-top: 4px;
+
 }
 
-.alert-lgn {
-    padding-top: 12px;
-	width: 100%;
-    height: 30px;
+.title p {
+    font-size: 30px;
+}
+
+
+.table-container {
+    overflow-x: auto;
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
+}
+
+.table-container table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 0.5px solid #002F56;
+}
+
+.table-container table th {
     text-align: center;
-    margin: auto;
-
-}
-
-.alert-lgn a {
+    padding: 8px;
+    background-color: #002F56;
     color: white;
+    border: 0.5px solid #ffffff;
+    border-bottom: none;
 }
 
-
-.error {
-	width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.alert-error {
- 	background-color: red;
-	width: 100%;
-    height: 30px;
+.table-container table td {
     text-align: center;
-    margin: auto;
-    border-radius: 5px;
-    padding-top: 4px;
+    padding: 8px;
+    border: 0.5px solid #002F56;
 }
 
-.alert-lista {
-	padding-top: 12px;
-	width: 100%;
-    height: 30px;
-    text-align: center;
-    margin: auto;
-}
-
-
-.alert-lista a {
-    color: white;
-}
-
-/* Responsive Form */
-
-@media (max-width: 584px) {
-	.container {
-		max-width:100%;
-	}
-	
-	form .user-details .input-box {
-		margin-bottom: 15px;
-		width: 100%;
-	}
-	
-	.container form .user-details {
-		max-height: 300px;
-		overflow-y: scroll;
-	}
-	
-	.user-details::-webkit-scrollbar {
-		width: 0;
-	}
-	
-	
-}
 </style>
 </html>
-
-
-
-

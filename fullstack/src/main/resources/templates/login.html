@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,15 +10,15 @@
 <body>
     <div class="container">
 			<div align="center" class="title"> Login </div>
-			<form action="/login" method="post">
+			<form action="/login" method="post" id="login-form">
 				<div class="user-details">
 					<div class="input-box">
 					  	<span class="details"> Email: </span>
-					  	<input type="text" name="email" placeholder= "Nome" required>
+					  	<input type="text" name="email" placeholder= "Email" required>
 			 		</div> 
 			 		<div class="input-box">    	
 					  	<span class="details"> Password: </span>
-					  	<input type="text" name="password"placeholder= "Password" required>
+					  	<input type="password" name="password"placeholder= "Password" required>
 					</div> 	
 		            <!-- Ho tolto il tag form, ma non so se c'è bisogno per il captcha -->
 		            <div class="input-box">        
@@ -26,17 +26,20 @@
 	                      	<div class="g-recaptcha" data-sitekey="6LfOIysjAAAAAEoBl8tDQvc_7qtOb-2z3cm1sX-p"></div>
 	                    </div>
 		            </div>  
-		        </div>        
+		        </div>       
+		        <!--  Error message -->
+				
+				<div class="error" th:if="${param.error}">
+					<div class="alert-error"> Credenziali sbagliate! </div>
+				</div> 
+				<br>
 			  		<div class="button">
 	                   <button class="btn" type="submit" value="Login"> Login </button>
 	    			</div>
 				
-			  	<!--  Success message
 				
-				<div th:if="${param.success}">
-					<div class="alert"> Grazie per esserti registrato! </div>
-					<div class="alert"><a href="/loginD">Tornare alla pagina login?</a></div>
-				</div> -->
+				
+				
 								
 			</form>
 	      
@@ -47,6 +50,7 @@
         var onloadCallback = function() {
           alert("grecaptcha is ready!");
         };
+ 
 </script>
 </body>
 <style>
@@ -61,6 +65,8 @@
 }
 
 
+
+
 /* Registration Form Style */ 
 
 
@@ -72,6 +78,7 @@
     margin: 7% auto;
     background: #002F56;
     color: white;
+   
     
 }
 
@@ -148,6 +155,25 @@ form .user-details .input-box {
     justify-content: center;
     
  
+}
+
+
+
+.error {
+	width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.alert-error {
+ 	background-color: red;
+	width: 60%;
+    height: 30px;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+    padding-top: 4px;
 }
 
 
