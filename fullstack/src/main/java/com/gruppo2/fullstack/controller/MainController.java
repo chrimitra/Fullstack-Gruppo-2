@@ -65,16 +65,20 @@ public class MainController {
 		if((utente != null) && (utente.getRuolo().getidruolo() == 1)) { //Se è admin
 			if(utente.getPassword().equals(password)) {
 				return"redirect:/admin/reportAll";
-			} else {
-				// Printami i messaggi d'errore;
 			}
-		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //Se è docente
-			return "redirect:/insegnante/risultati";
-		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //Se è studente
 			
+		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //Se è docente
+			if(utente.getPassword().equals(password)) {
+				return "redirect:/insegnante/risultati";
+			}
+			
+		}else if ((utente != null) && (utente.getRuolo().getidruolo() == 3)) { //Se è studente
+			if(utente.getPassword().equals(password)) {
 			return"redirect:/studente/menuFeedback";
+			}
 		}
-	 return "redirect:/login";
+	// SE LE CREDEBZIALI SONO SBAGLIATE MI PRINTA IL MESSAGGIO D'ERRORE
+	 return "redirect:/?error"; 
 	}
 	
 	
@@ -88,7 +92,7 @@ public class MainController {
 	}
 		
 	
-	@GetMapping("/error404")
+	@RequestMapping("/error404")
 	public String error() {
 		return "error404";
 	}

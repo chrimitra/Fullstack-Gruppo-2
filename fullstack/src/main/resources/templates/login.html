@@ -10,7 +10,7 @@
 <body>
     <div class="container">
 			<div align="center" class="title"> Login </div>
-			<form action="/login" method="post" id="login-form"->
+			<form action="/login" method="post" id="login-form">
 				<div class="user-details">
 					<div class="input-box">
 					  	<span class="details"> Email: </span>
@@ -26,18 +26,20 @@
 	                      	<div class="g-recaptcha" data-sitekey="6LfOIysjAAAAAEoBl8tDQvc_7qtOb-2z3cm1sX-p"></div>
 	                    </div>
 		            </div>  
-		        </div>        
+		        </div>       
+		        <!--  Error message -->
+				
+				<div class="error" th:if="${param.error}">
+					<div class="alert-error"> Credenziali sbagliate! </div>
+				</div> 
+				<br>
 			  		<div class="button">
 	                   <button class="btn" type="submit" value="Login"> Login </button>
 	    			</div>
 				
 				
 				
-				<!--  Error message -->
 				
-				<div class="error" th:if="${param.error}">
-					<div class="alert-error"> Credenziali sbagliate! </div>
-				</div>
 								
 			</form>
 	      
@@ -63,6 +65,8 @@
 }
 
 
+
+
 /* Registration Form Style */ 
 
 
@@ -74,6 +78,7 @@
     margin: 7% auto;
     background: #002F56;
     color: white;
+   
     
 }
 
@@ -158,11 +163,12 @@ form .user-details .input-box {
 	width: 100%;
     justify-content: center;
     align-items: center;
+    
 }
 
 .alert-error {
  	background-color: red;
-	width: 100%;
+	width: 60%;
     height: 30px;
     text-align: center;
     margin: auto;

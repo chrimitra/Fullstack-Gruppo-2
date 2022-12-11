@@ -53,7 +53,7 @@ public class AdminController {
 		RestTemplate restTemplate;
 		
 		// REPORT 
-		@RequestMapping("/reportAll")
+		@GetMapping("/reportAll")
 		public String reportDomanda(HttpSession session, Model model) {
 			Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 			model.addAttribute("utente", loggedUser);
