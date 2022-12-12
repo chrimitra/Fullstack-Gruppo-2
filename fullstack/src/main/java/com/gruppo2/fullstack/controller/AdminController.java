@@ -23,6 +23,7 @@ import com.gruppo2.fullstack.Dao.InsegnamentoDao;
 import com.gruppo2.fullstack.Dao.ModuloDao;
 import com.gruppo2.fullstack.Dao.RuoloDao;
 import com.gruppo2.fullstack.Dao.UtenteDao;
+import com.gruppo2.fullstack.model.Domanda;
 import com.gruppo2.fullstack.model.Feedback;
 import com.gruppo2.fullstack.model.Insegnamento;
 import com.gruppo2.fullstack.model.Modulo;
@@ -52,16 +53,58 @@ public class AdminController {
 	@Autowired
 	RestTemplate restTemplate;
 	
-	// REPORT 
+	// REPORT NORMALE
 	@GetMapping("/reportAll")
 	public String reportDomanda(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		model.addAttribute("utente", loggedUser);
-		List <Feedback> feedback = FeedbackDao.domanda();
+		List <Feedback> feedback = FeedbackDao.feedback();
 		model.addAttribute("feedback", feedback);
 		
 		return "reportAll";
 	}
+	
+	// REPORT FILTRATO ORDINE PER DATA
+	@RequestMapping("/reportAll/data")
+	public String reportData(HttpSession session, Model model) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		model.addAttribute("utente", loggedUser);
+		List <Feedback> feedback = FeedbackDao.ordineData();
+		model.addAttribute("feedback", feedback);
+		
+		return "reportData";
+	}
+	
+	// REPORT FILTRATO ORDINE PER VOTO
+	@RequestMapping("/reportAll/voto")
+	public String reportVoto(HttpSession session, Model model) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		model.addAttribute("utente", loggedUser);
+		List <Feedback> feedback = FeedbackDao.ordineVoto();
+		model.addAttribute("feedback", feedback);
+		
+		return "reportVoto";
+	}
+	
+	
+	// REPORT FILTRATO ORDINE PER DOMANDA
+	@RequestMapping("/reportAll/domanda")
+	public String reportPerDomanda(HttpSession session, Model model) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		model.addAttribute("utente", loggedUser);
+		List <Feedback> feedback = FeedbackDao.ordineDomanda();
+		model.addAttribute("feedback", feedback);
+		
+		return "reportDomanda";
+	}
+	
+	
+	// FILTRO
+	@GetMapping("/filtro")
+	public String filtro() {
+		return "filtro";
+	}
+	
 	
 	
 	// REPORT PER MODULO
@@ -112,6 +155,12 @@ public class AdminController {
 			return mavError;
 			}
 	}
+	
+	
+	
+	
+	
+	
 
 	// REGISTRAZIONE (solo admin)
 	@GetMapping("/registrazione")
@@ -177,14 +226,16 @@ public class AdminController {
 	if (verifica == null){
 		Utente newUser = new Utente(null,nome, cognome, email,password, role);
 		// CONTROLLO SE IL CAPTCHA E' CHECKATO E SE LA PASSWORD E' LUNGA ALMENO 5 CARATTERI
-		if(reCaptchaResponse.isSuccess() && password.length() >= 5) {
-			UtenteDao.save(newUser);
-		}
-		Ruolo ruoloDocente = RuoloDao.findByruolo("Docente");
-		// CONTROLLO SE L'UTENTE E' UN DOCENTE
+		System.out.println(role);
+		Ruolo ruoloDocente = (Ruolo) RuoloDao.findByidruolo(2);
+		// CONTROLLO SE IL RUOLO E' DOCENTE
 		if(role.equals(ruoloDocente)) {
+			UtenteDao.save(newUser);
 			Insegnamento newInsegnamento = new Insegnamento(null, mod, newUser);
 			InsegnamentoDao.save(newInsegnamento);
+			
+		} else {
+			UtenteDao.save(newUser);
 		}
 		return "redirect:registrazione?success"; // appena registrato mi porta alla login
 	}else {
@@ -213,6 +264,7 @@ public class AdminController {
 	public String modificaUtente(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		model.addAttribute("utente", loggedUser);
+		System.out.println("modificaUtente");
 		if(loggedUser != null) {
 			return "modificaUtente";
 		} else {
@@ -222,9 +274,10 @@ public class AdminController {
 	
 	
 	// MODIFICA UTENTI
-	@RequestMapping("listaUtenti/modifica/{id}")
+	@RequestMapping("/listaUtenti/modifica/{id}")
 	public String modifica(HttpSession session, @PathVariable("id") Integer id, Model model) {
 		Utente utenteMod = UtenteDao.singoloUtente(id);
+		System.out.println("id");
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		model.addAttribute("ruolo", RuoloDao.findAll());
 		model.addAttribute("utente", loggedUser);
@@ -234,28 +287,25 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping(value="/modifica", method=RequestMethod.POST)
+	@RequestMapping(value="/edit", method=RequestMethod.POST)
 	public String postModifica(@RequestParam("id") Integer idutente,
 			@RequestParam ("nome") String nome,  
-			@RequestParam ("cogome") String cognome,
+			@RequestParam ("cognome") String cognome,
 			@RequestParam ("email") String email,
-			@RequestParam ("password") String password,
 			@RequestParam ("ruolo") String ruolo,
-			@RequestParam ("modulo") String modulo,
 			Model model, HttpSession session) {
 		
 		Utente utente = UtenteDao.singoloUtente(idutente);
 		Ruolo role = (Ruolo) RuoloDao.findByruolo(ruolo);
-		Modulo mod = (Modulo) ModuloDao.findBymodulo(modulo);
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		model.addAttribute("utente", loggedUser);
 		model.addAttribute("ruolo", RuoloDao.findAll());
 		utente.setNome(nome);
 		utente.setCognome(cognome);
 		utente.setEmail(email);
-		utente.setPassword(password);
+		//utente.setPassword(password);
 		utente.setRuolo(role);
-       
+		UtenteDao.save(utente);
         return "redirect:/admin/listaUtenti";
 	}
 	
@@ -263,23 +313,26 @@ public class AdminController {
 	// RIMUOVI UTENTE
 	@RequestMapping("/listaUtenti/rimuovi/{id}")
 	public String rimuoviUtente(@PathVariable("id") Integer id) {
-		UtenteDao.deleteById(id);
+		Utente utente = UtenteDao.singoloUtente(id);
+		
+		//Insegnamento insegnamento = InsegnamentoDao.singoloInsegnamento(id);
+		//if(utente.getRuolo().getruolo().equals("insegnante")) {
+		//InsegnamentoDao.rimuoviInsegnamento(id);
+		UtenteDao.rimuoviUtente(id);
+		//} else {
+		//	UtenteDao.deleteById(id);
+		//}
+		
+		
 		return "redirect:/admin/listaUtenti";
 	}
 	
 	
-	// REPORT DOMANDA SINGOLA
-	/*@GetMapping("/report/domanda")
-	public String domanda(HttpSession session, Model model) {
-	Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		if(loggedUser != null) {
-			model.addAttribute("feedback", FeedbackDao.findAll());
-			model.addAttribute(loggedUser);
-				return "domanda";
-		} else {
-			return "redirect:/error404";
-		}
-	}*/
+	
+
+	
+	
+
 	
 		
 		

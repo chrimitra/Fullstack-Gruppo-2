@@ -66,7 +66,7 @@
 		
 		<div class="container">
 			<div align="center" class="title"> Modifica Utente </div>
-			<form action="/modifica" method="post" th:object="${utenteMod}">
+			<form action="/admin/edit" method="post" th:object="${utenteMod}">
 				<div class="user-details">
 					<input type="hidden" name="id" th:value="${utenteMod.idutente}">
 					<div class="input-box">

@@ -62,14 +62,15 @@ public class InsegnanteController {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
 			model.addAttribute(loggedUser);
+			
 			return "profilo";
 		}else {
 			return "redirect:/error404";
 		}
 	}
-	// MODIFICA PASSWORD(Mappatura)
 	
-	@GetMapping("/modificaPassword")
+	// MODIFICA PASSWORD(Mappatura)
+	@RequestMapping("/modificaPassword")
 	public ModelAndView modificaPassword(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		if (loggedUser != null) {

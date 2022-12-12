@@ -50,12 +50,12 @@
     <section class="home-section">
         <div class="title-container">
             <p class="report-title"> MENU FEEDBACK  </p>
-            <h4 align="center"> Scegli il modulo a cui a fare il sondaggio: </h4>
+            <p> Scegli il modulo a cui vuoi fare il sondaggio: </p>
         </div>
         <div class="container-report">
             <div class="box-modulo" th:each="m : ${modulo}">
-                <div class="title-modulo">
-                    <a onclick="getId(this.id)"th:id="${m.idmodulo}" class="modulo-text" th:text="${m.modulo}"></a>
+                <div class="title-modulo" onclick="getId(this.id)" th:id="${m.idmodulo}" >
+                    <a class="modulo-text" th:text="${m.modulo}"></a>
              		
       			
             	</div>
@@ -77,7 +77,7 @@
 		console.log(id);
 		
 		$(document).ready(function(){
-			  $(".modulo-text").click(function(clicked_id){
+			  $(".title-modulo").click(function(clicked_id){
 			    $.ajax({url: "", success: function(result){
 			    	window.location = `/studente/sondaggio/${id}`;
 			    }});
@@ -384,7 +384,7 @@
 
 .title-container {
     justify-content: center;
-    width: 30%;
+    width: 70%;
     text-align: center;
     position: relative;
     height: 100%;
@@ -416,11 +416,14 @@
 .title-modulo {
   border-radius: 12px;
   background-color: #002F56;
+  width: 100%;
+  border: 2px solid blackm
 
 }
 
 .modulo-text {
   color: white;
+  width: 100%;
   
 }
 

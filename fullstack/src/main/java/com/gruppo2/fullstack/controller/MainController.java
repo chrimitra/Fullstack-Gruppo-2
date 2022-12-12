@@ -69,6 +69,7 @@ public class MainController {
 			
 		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //Se è docente
 			if(utente.getPassword().equals(password)) {
+				// Return della pagina che avvisa se vuoi cambiare la password da subito
 				return "redirect:/insegnante/risultati";
 			}
 			

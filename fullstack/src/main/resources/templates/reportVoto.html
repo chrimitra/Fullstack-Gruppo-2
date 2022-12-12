@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <title> Report </title>
-    <link rel="stylesheet" href="style.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   </head>
-    <body>
-    <!--  Navbar on the left -->
+
+    <link rel="stylesheet" href="pr.css">
+    <title>Menu</title>
+</head>
+<body>
+ <!--  Navbar on the left -->
     <div class="sidebar">
         <div class="logo-details">
 
@@ -59,81 +61,91 @@
         </li>
         </ul>
     </div>
-
-    <!-- Qua va messo tutto il contenuto ovvero il report --> 
+	  	
+    <!-- Lista Utenti -->
     <section class="home-section">
-        <div class="title-container">
-            <p class="report-title"> Report per Modulo </p>
-            
+	  	
+	  <div class="title-container">
+        <div class="title">
+            <p class="report-title"> REPORT </p>
         </div>
-        <div class="container-report">
-            <div id="box-modulo" class="box-modulo" th:each="m : ${modulo}">
-                <div class="title-modulo">
-                    <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text" th:text="${m.modulo}"></p>
-                </div>	
+      </div>	
+	  <div id="filtro-container">
+      		<button onclick="loadDoc()"> Filtro </button>
+      	</div>	
+        
+     <div class="table-container" >
+        <table>
+          <tr>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Modulo</th>
+            <th>Domanda</th>
+			<th>Voto</th>
             
-                <div class="details" th:id="details + ${m.idmodulo}">      
-      			</div>
-      			
-            	</div>
-    		</div>
-     
-	</section>
+          </tr>
+          <tr th:each="feedback : ${feedback}">
+            <td th:text="${feedback.data}"></td>
+            <td th:text="${feedback.utente.nome}"></td>
+            <td th:text="${feedback.utente.cognome}"></td>
+           	<td th:text="${feedback.modulo.modulo}"></td>
+            <td th:text="${feedback.domanda.domanda}"></td> 
+            <td th:text="${feedback.voto}"></td>
+       		
+        </tr>
+        </table>
+        
+        <div class="modulo">
+        	<a href="/admin/report"> Guarda il report per modulo </a>
+        </div>
+      </div>
+    </section>  
     
-<!-- JavaScript -->
 <script type="text/javascript">
-		function loadDoc(clicked_id) {
-			  let id = clicked_id;
-			  console.log(id);
-			  const xhttp = new XMLHttpRequest();
-			  xhttp.onload = function() {
-			    document.getElementById(`details${id}`).innerHTML = this.responseText;
-			    
-			  }
-			
-			  xhttp.open("GET", `/admin/reportDetails/${id}`);
-			  xhttp.send();
-			} 
+function loadDoc() {
+	  const xhttp = new XMLHttpRequest();
+	  xhttp.onload = function() {
+	    document.getElementById("filtro-container").innerHTML = this.responseText;
+	    
+	  }
 	
+	  xhttp.open("GET", "/admin/filtro");
+	  xhttp.send();
+	} 
+
+
+function filtraData() {
+	window.location = "/admin/reportAll/data"
+}
 	
-	
-		/* Codice per le animazioni della navbar */
-	    let sidebar = document.querySelector(".sidebar");
-	    let closeBtn = document.querySelector("#btn");
-	    let searchBtn = document.querySelector(".bx-search");
-	
-	    closeBtn.addEventListener("click", ()=>{
-	        sidebar.classList.toggle("open");
-	        menuBtnChange();
-	    });
-	    
-	    
-	    /*Sidebar si apre quando viene cliccata l'icona search
-	    
-	    searchBtn.addEventListener("click", ()=>{
-	        sidebar.classList.toggle("open");
-	        menuBtnChange(); //calling the function(optional)
-	    });*/
-	    
-	    
-	   
-	    function menuBtnChange() {
-	    if(sidebar.classList.contains("open")){
-	        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-	    }else {
-	        closeBtn.classList.replace("bx-menu-alt-right","bx-menu");
-	    }
-	    }
-	    
-	  
-	    
-</script>
+function filtraVoto() {
+	window.location = "/admin/reportAll/voto"
+}
+
+function filtraDomanda() {
+	window.location = "/admin/reportAll/domanda"
+}
+   
+   
+   
+    var onloadCallback = function() {
+      alert("grecaptcha is ready!");
+    };
+    /* Codice per le animazioni della navbar */
+    let sidebar = document.querySelector(".sidebar");
+    let closeBtn = document.querySelector("#btn");
+    let searchBtn = document.querySelector(".bx-search");
+
+    closeBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("open");
+        menuBtnChange();
+    });
+    
+    </script>
 </body>
-
-
 <!-- CSS STYLE -->
 <style>
-
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
@@ -402,99 +414,58 @@
   margin: 18px
 }
 
+
+
+
+/* Lista utenti CSS */
 .title-container {
-    justify-content: center;
-    width: 30%;
-    text-align: center;
-    position: relative;
-    height: 100%;
-    display: flex;
-    margin: auto;
-    top: 20px;
-    font-size:30px;
-    
-}
-
-
-.container-report {
-    justify-content: center;
-    width: 70%;
-    text-align: center;
-    position: relative;
-    height: 100%;
-    margin: 20px auto;
-    top: 20px;
+    padding-top: 20px;
+    width: 40%;
    
+    margin: auto;
+    align-items: center;
 }
 
-.box-modulo {
-  font-size: 25px;
-  margin-top: 25px;
-  
-  
-}
-
-.title-modulo {
-  border-radius: 12px;
-  background: #002f56;
-  
-  height: 70px;
-  
-}
-
-.modulo-text {
-  color: white;
-  text-decoration: underline;
-  padding-top: 18px;
-}
-
-.title-modulo p {
-	cursor: pointer;
-}
-
-
-
-/* CSS reportDetails */
-.btn-dettagli {
-  width: 40px;
-  height: 40px;
-  background-color: #002F56;
-  border-radius: 12px;
-}
-
-.btn-dettagli i{
-  color: white;
-}
-
-
-.details-table td {
-  border: 3px solid rgb(238, 238, 255);
-  background-color: #f2f9ff;
-  border-top: none;
-  padding: 10px 20px;
-  text-align: center;
-  font-size: 17px;
-  
+.title {
+    width: 100%;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
 
 }
 
-.details-table {
-  table-layout: fixed;
-  border-collapse: collapse;
-  word-break:keep-all;
-  width: 100%;
-  
+.title p {
+    font-size: 30px;
 }
 
-/* table section */
-.details { 
-  overflow: auto;
+
+.table-container {
+    overflow-x: auto;
+    width: 80%;
+    margin: auto;
+    padding-top: 40px;
 }
 
-@media (max-width: 420px) {
-  .sidebar li .tooltip{
-    display: none;
-  }
+.table-container table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 0.5px solid #002F56;
+}
+
+.table-container table th {
+    text-align: center;
+    padding: 8px;
+    background-color: #002F56;
+    color: white;
+    border: 0.5px solid #ffffff;
+    border-bottom: none;
+}
+
+.table-container table td {
+    text-align: center;
+    padding: 8px;
+    border: 0.5px solid #002F56;
 }
 
 </style>

@@ -45,7 +45,7 @@ public class StudenteController {
 	ModuloDao ModuloDao;
 
 	
-	//pagina menu feedback
+	//PAGINA MENU FEEDBACK
 	@GetMapping("/menuFeedback")
 	public ModelAndView menuFeedback(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
@@ -65,7 +65,7 @@ public class StudenteController {
 
 	
 	
-	//creazione pagina domande 
+	//CREAZIONE PAGINE DOMANDE
 	@GetMapping("/sondaggio/{id}")
 	public ModelAndView sondaggio(HttpSession session, @PathVariable("id") Integer id, Model model) {
 		
@@ -100,24 +100,16 @@ public class StudenteController {
 	   
 		
 	}
-		
 
-	
-
-	
-	
 	
 	  @RequestMapping(value = "/sondaggio/{id}", method = RequestMethod.POST) 
 	  public ModelAndView postSondaggio(HttpSession session, @PathVariable("id") Integer id, @ModelAttribute Feedbacks feedbacks){
 		  
 		  Iterable<Domanda> domande = DomandaDao.findAll();
 		  Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		  Date data = new Date();
-		  
+		  Date data = new Date();  
 		  Integer contatore = 0;
-		  
-		
-		  
+  
 		  if (loggedUser != null) {
 			  
 			  //parte per il salvataggio in simultanea dei feedback
@@ -132,9 +124,7 @@ public class StudenteController {
 				  FeedbackDao.save(feedback);
 				  contatore++;
 			  }
-			  
-			  
-			  
+
 			  	//parte per la pagina menufeedback
 				ModelAndView mavMenuFeedback = new ModelAndView();
 				mavMenuFeedback.setViewName("menuFeedback");
@@ -147,13 +137,56 @@ public class StudenteController {
 				mavError.setViewName("error404");
 				return mavError;
 			}
-
-	  
-	
 	  }
 	 
-	  
-	  
-
+	// PROFILO 
+	@RequestMapping("/profilo")
+	public String profilo(Model model, HttpSession session) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		if (loggedUser != null) {
+			model.addAttribute(loggedUser);
+			model.addAttribute("ruolo", loggedUser.ruolo);
+			return "profilo";
+		}else {
+			return "redirect:/error404";
+		}
+	}
+	
+	// MODIFICA PASSWORD(Mappatura)
+	
+	@RequestMapping("/modificaPassword")
+	public ModelAndView modificaPassword(HttpSession session) {
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		if (loggedUser != null) {
+			ModelAndView mavMP = new ModelAndView();
+			mavMP.setViewName("modificaPassword");
+			mavMP.addObject("utente", loggedUser);
+			return mavMP;
+		}else {
+			ModelAndView mavError = new ModelAndView();
+			mavError.setViewName("error404");
+			return mavError;
+		}
+	}
+	
+	// MODIFICA PASSWORD (post)
+		@RequestMapping("/Modifica")
+		public String ModificaPassword(HttpSession session, Model model, 
+				@RequestParam String nuovaPassword, 
+				@RequestParam String confermaPassword) {
+			
+			Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+			
+			if(nuovaPassword.equals(confermaPassword)) {
+				//model.addAttribute("utente", loggedUser);
+				loggedUser.setPassword(confermaPassword);
+				UtenteDao.save(loggedUser);
+				session.setAttribute("loggedUser", loggedUser);
+				return "redirect:/studente/profilo";
+			} else {
+				return "redirect:/error404"; // Messaggio di errore che le password non sono uguali
+			}
+		}
+			
 
 }

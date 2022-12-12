@@ -14,7 +14,9 @@ import com.gruppo2.fullstack.model.Ruolo;
 @Repository
 public interface RuoloDao extends CrudRepository<Ruolo, Integer> {
 	
-	List<Ruolo> findByidruolo(Integer idruolo);
+	Ruolo findByidruolo(Integer idruolo);
 	Ruolo findByruolo(String ruolo);
 
+	
+	
 }

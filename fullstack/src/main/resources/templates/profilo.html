@@ -27,13 +27,7 @@
 	            </a>
 	            <span class="tooltip">Profilo</span>
 	        </li> 
-	        <li>
-	            <a href="/insegnante/modificaPassword">
-	            <i class='bx bxs-user-detail'></i>
-	            <span class="links_name">Modifica Password</span>
-	            </a>
-	            <span class="tooltip">Modifica Password</span>
-	        </li> 
+	       
 	      
 	
 	        <li class="profile">
@@ -74,11 +68,13 @@
             <td th:text="${utente.nome}"></td>
             <td th:text="${utente.cognome}"></td>
             <td th:text="${utente.email}"></td>
-           	<td th:text="${utente.ruolo.ruolo}"></td>
+           	<td th:text="${utente.getRuolo().getruolo()}"></td>
             <td th:text="${utente.password}"></td>
         </tr>
         </table>
       </div>
+      
+      <a th:href="@{/{role}/modificaPassword(role = ${utente.getRuolo().getruolo()})}">Modifica Password</a>
     </section>  
     
     

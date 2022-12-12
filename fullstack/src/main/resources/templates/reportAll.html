@@ -70,6 +70,9 @@
             <p class="report-title"> REPORT </p>
         </div>
       </div>	
+      	<div id="filtro-container">
+      		<button onclick="loadDoc()"> Filtro </button>
+      	</div>
 	  	
         
      <div class="table-container" >
@@ -102,6 +105,29 @@
     
 <script type="text/javascript">
    
+	function loadDoc() {
+		  const xhttp = new XMLHttpRequest();
+		  xhttp.onload = function() {
+		    document.getElementById("filtro-container").innerHTML = this.responseText;
+		    
+		  }
+		
+		  xhttp.open("GET", "/admin/filtro");
+		  xhttp.send();
+		} 
+   
+
+	function filtraData() {
+		window.location = "/admin/reportAll/data"
+	}
+		
+	function filtraVoto() {
+		window.location = "/admin/reportAll/voto"
+	}
+	
+	function filtraDomanda() {
+		window.location = "/admin/reportAll/domanda"
+	}
     var onloadCallback = function() {
       alert("grecaptcha is ready!");
     };

@@ -2,12 +2,15 @@ package com.gruppo2.fullstack.Dao;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Utente;
+
+import jakarta.transaction.Transactional;
 
 
 
@@ -44,6 +47,13 @@ public interface UtenteDao extends CrudRepository<Utente, Integer> {
 	// EDIT DI UN SINGOLO UTENTE
 	@Query(value = "UPDATE utente SET `password` = :password WHERE idutente = :idutente", nativeQuery = true)
 	public Utente cambiaPassword(String password, Integer idutente);
+	
+	
+	// DELETE DI UN SINGOLO UTENTE
+	@Transactional
+	@Modifying
+	@Query(value = "DELETE FROM `utente` WHERE `utente`.`idutente` = :idutente", nativeQuery = true)
+	public void rimuoviUtente(Integer idutente);
 }
 
 
