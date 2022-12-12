@@ -1,5 +1,8 @@
 package com.gruppo2.fullstack.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +17,9 @@ import com.gruppo2.fullstack.Dao.ModuloDao;
 import com.gruppo2.fullstack.Dao.RuoloDao;
 import com.gruppo2.fullstack.Dao.UtenteDao;
 import com.gruppo2.fullstack.Dao.InsegnamentoDao;
+import com.gruppo2.fullstack.model.Domanda;
 import com.gruppo2.fullstack.model.Modulo;
+import com.gruppo2.fullstack.model.Statistiche;
 import com.gruppo2.fullstack.model.Utente;
 
 import jakarta.servlet.http.HttpSession;
