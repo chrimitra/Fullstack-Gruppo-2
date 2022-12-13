@@ -59,4 +59,13 @@ public interface FeedbackDao extends CrudRepository<Feedback, Integer> {
             +"INNER JOIN modulo ON modulo.idmodulo = feedback.idmodulo \r\n"
             + "WHERE modulo = :modulo && iddomanda = :iddomanda ", nativeQuery = true)
     public List<Double> Voti(String modulo , Integer iddomanda);
+	
+	// 
+	@Query(value = "SELECT * FROM feedback WHERE idutente = :idutente && idmodulo = :idmodulo", nativeQuery = true)
+	public List<Feedback> controlloFeedback(Integer idutente, Integer idmodulo);
 }
+
+
+
+
+

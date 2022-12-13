@@ -66,48 +66,7 @@ public class AdminController {
 		
 		return "reportAll";
 	}
-	
-	// REPORT FILTRATO ORDINE PER DATA
-	@RequestMapping("/reportAll/data")
-	public String reportData(HttpSession session, Model model) {
-		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		model.addAttribute("utente", loggedUser);
-		List <Feedback> feedback = FeedbackDao.ordineData();
-		model.addAttribute("feedback", feedback);
-		
-		return "reportData";
-	}
-	
-	// REPORT FILTRATO ORDINE PER VOTO
-	@RequestMapping("/reportAll/voto")
-	public String reportVoto(HttpSession session, Model model) {
-		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		model.addAttribute("utente", loggedUser);
-		List <Feedback> feedback = FeedbackDao.ordineVoto();
-		model.addAttribute("feedback", feedback);
-		
-		return "reportVoto";
-	}
-	
-	
-	// REPORT FILTRATO ORDINE PER DOMANDA
-	@RequestMapping("/reportAll/domanda")
-	public String reportPerDomanda(HttpSession session, Model model) {
-		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		model.addAttribute("utente", loggedUser);
-		List <Feedback> feedback = FeedbackDao.ordineDomanda();
-		model.addAttribute("feedback", feedback);
-		
-		return "reportDomanda";
-	}
-	
-	
-	// FILTRO
-	@GetMapping("/filtro")
-	public String filtro() {
-		return "filtro";
-	}
-	
+
 	
 	
 	// REPORT PER MODULO
@@ -320,15 +279,10 @@ public class AdminController {
 	// RIMUOVI UTENTE
 	@RequestMapping("/listaUtenti/rimuovi/{id}")
 	public String rimuoviUtente(@PathVariable("id") Integer id) {
-		Utente utente = UtenteDao.singoloUtente(id);
 		
-		//Insegnamento insegnamento = InsegnamentoDao.singoloInsegnamento(id);
-		//if(utente.getRuolo().getruolo().equals("insegnante")) {
-		//InsegnamentoDao.rimuoviInsegnamento(id);
-		UtenteDao.rimuoviUtente(id);
-		//} else {
-		//	UtenteDao.deleteById(id);
-		//}
+		
+		UtenteDao.bloccoPassword(null,id);
+
 		
 		
 		return "redirect:/admin/listaUtenti";

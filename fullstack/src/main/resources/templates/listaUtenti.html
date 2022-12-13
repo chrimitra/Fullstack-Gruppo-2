@@ -80,6 +80,7 @@
             <th>Email</th>
             <th>Ruolo</th>
             <th>Password</th>
+            <th>Stato</th>
 			<th></th>
             <th></th>
             
@@ -90,8 +91,13 @@
             <td th:text="${utenti.email}"></td>
            	<td th:text="${utenti.ruolo.getruolo()}"></td>
             <td th:text="${utenti.password}"></td>
+            <td>
+	            <span th:if="${utenti.password == null}"><span class="dot"></span></span>
+	            <span th:unless="${utenti.password == null}"><span class="dot2"></span></span>
+	         </td>  
+	           
             <td><a th:href="@{'/admin/listaUtenti/modifica/' + ${utenti.getIdutente()}}"> Modifica </a></td>
-            <td><a th:href="@{'/admin/listaUtenti/rimuovi/' + ${utenti.getIdutente()}}">Rimuovi</a></td>
+            <td><a onclick="blockAlert()" th:href="@{'/admin/listaUtenti/rimuovi/' + ${utenti.getIdutente()}}">Blocca</a></td>
         </tr>
         </table>
       </div>
@@ -100,6 +106,10 @@
     
     <script type="text/javascript">
    
+    function blockAlert() {
+		alert("L'utente è stato bloccato");
+    }
+    
     var onloadCallback = function() {
       alert("grecaptcha is ready!");
     };
@@ -397,6 +407,8 @@
     align-items: center;
 }
 
+
+
 .title {
     width: 100%;
     margin: auto;
@@ -409,6 +421,22 @@
     font-size: 30px;
 }
 
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot2 {
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+}
 
 .table-container {
     overflow-x: auto;
