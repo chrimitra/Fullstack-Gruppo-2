@@ -7,13 +7,20 @@
     <title>Menu</title>
 </head>
 <body>
-	<table th:each="feedback : ${feedback}" class="details-table">
-	       <tr>
-	       <td class="data"><p th:text="${feedback.data}"></p></td>
-	       <td class="number-question"><p th:text= "Domanda + ${feedback.domanda.iddomanda}"></p></td>
-	       <td class="content-question"><p th:text= "${feedback.domanda.domanda}"></p></td>
-	       <td class="rating"><p th:text="${feedback.voto}"></p></td>
-	       </tr>
+	<table class="details-table">
+		<tr>
+            <th>Domanda</th>
+            <th>Totale dei Voti</th>
+            <th>Media</th>
+
+       </tr>
+       
+	        <tr th:each="s: ${stats}">
+            <td th:text="${s.domanda}"></td>
+            <td th:text="${s.totale}"></td>
+            <td th:text="${s.media}"></td>
+
+        </tr>
   	</table>
 <script>
 		
