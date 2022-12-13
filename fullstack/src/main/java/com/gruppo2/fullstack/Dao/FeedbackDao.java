@@ -53,4 +53,10 @@ public interface FeedbackDao extends CrudRepository<Feedback, Integer> {
 	// FILTRA PER DOMANDA
 	@Query(value="SELECT * FROM `feedback` ORDER BY iddomanda ASC", nativeQuery = true)
 	public List <Feedback> ordineDomanda();
+	
+	// VISUALIZZARE VOTI 
+	@Query(value=" SELECT voto FROM feedback \r\n"
+            +"INNER JOIN modulo ON modulo.idmodulo = feedback.idmodulo \r\n"
+            + "WHERE modulo = :modulo && iddomanda = :iddomanda ", nativeQuery = true)
+    public List<Double> Voti(String modulo , Integer iddomanda);
 }

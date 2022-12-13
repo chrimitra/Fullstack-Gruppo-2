@@ -68,13 +68,13 @@
             <td th:text="${utente.nome}"></td>
             <td th:text="${utente.cognome}"></td>
             <td th:text="${utente.email}"></td>
-           	<td th:text="${utente.getRuolo().getruolo()}"></td>
+           	<td th:text="${ruolo.ruolo}"></td>
             <td th:text="${utente.password}"></td>
         </tr>
         </table>
       </div>
       
-      <a th:href="@{/{role}/modificaPassword(role = ${utente.getRuolo().getruolo()})}">Modifica Password</a>
+      <a th:href="@{/{role}/modificaPassword(role = ${ruolo.ruolo})}">Modifica Password</a>
     </section>  
     
     

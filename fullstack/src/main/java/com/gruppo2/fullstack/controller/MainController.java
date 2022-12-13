@@ -89,6 +89,7 @@ public class MainController {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.setAttribute("loggedUtente", null);
+		
 		return "redirect:/";
 	}
 		

@@ -1,56 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <title>Risultati</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Boxicons CDN Link -->
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+<title>Risultati</title>
 </head>
 <body>
-	<!--  Navbar on the left -->
-	    <div class="sidebar">
-	        <div class="logo-details">
-	
-	        <i></i>
-	            <div class="logo_name"></div>
-	            <i class='bx bx-menu' id="btn" ></i>
-	        </div>
-	
-	        
-	        <ul class="nav-list">
-	        <li>
-	            <a href="/insegnante/profilo">
-	            <i class='bx bxs-user-detail'></i>
-	            <span class="links_name">Profilo</span>
-	            </a>
-	            <span class="tooltip">Profilo</span>
-	        </li> 
-	      
-	
-	        <li class="profile">
-	            <div class="profile-details">
-	            <!--<img src="profile.jpg" alt="profileImg">-->
-	            <div class="name_job">
-	                <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
-	                <div class="job"><p th:text="${utente.ruolo.ruolo}"></div> <!-- Ruolo -->
-	            </div>
-	            </div>
-	            <a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
-	        </li>
-	        </ul>
-	    </div>
+<!--  Navbar on the left -->
+<div class="sidebar">
+<div class="logo-details">
 
-	<!-- Qua va messo tutto il contenuto --> 
-    <section class="home-section">
-		<div class="container"> 
-			<h1 th:text=${materia}></h1>
-			
-		</div>
-	</section>
+<i></i>
+<div class="logo_name"></div>
+<i class='bx bx-menu' id="btn" ></i>
+</div>
+
+
+<ul class="nav-list">
+<li>
+<a href="/insegnante/profilo">
+<i class='bx bxs-user-detail'></i>
+<span class="links_name">Profilo</span>
+</a>
+<span class="tooltip">Profilo</span>
+</li> 
+
+
+<li class="profile">
+<div class="profile-details">
+<!--<img src="profile.jpg" alt="profileImg">-->
+<div class="name_job">
+<div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
+<div class="job"><p th:text="${utente.ruolo.ruolo}"></div> <!-- Ruolo -->
+</div>
+</div>
+<a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
+</li>
+</ul>
+</div>
+
+ 
+
+    <!-- Qua va messo tutto il contenuto --> 
+<section class="home-section">
+
+<div class="container"> 
+<h1 th:text=${materia}></h1>
+</div>
+
+<div class="table-container" >
+<table>
+<tr>
+<th>Domanda</th>
+<th>Totale dei Voti</th>
+<th>Media</th>
+
+ 
+
+
+
+</tr>
+<tr th:each="s: ${stats}">
+<td th:text="${s.domanda}"></td>
+<td th:text="${s.totale}"></td>
+<td th:text="${s.media}"></td>
+
+ 
+
+        </tr>
+</table>
+</div>
+
+
+
+</section>
 <script type="text/javascript">
-   
+
     var onloadCallback = function() {
       alert("grecaptcha is ready!");
     };
@@ -59,11 +87,13 @@
     let closeBtn = document.querySelector("#btn");
     let searchBtn = document.querySelector(".bx-search");
 
+ 
+
     closeBtn.addEventListener("click", ()=>{
         sidebar.classList.toggle("open");
         menuBtnChange();
     });
-    
+
 </script>
 </body>
 <!-- CSS STYLE -->
@@ -77,7 +107,9 @@
   font-family: "Poppins" , sans-serif;
 }
 
+ 
 
+ 
 
 .sidebar{
   position: fixed;
@@ -91,9 +123,13 @@
   transition: all 0.5s ease;
 }
 
+ 
+
 .sidebar.open{
   width: 250px;
 }
+
+ 
 
 
 .sidebar .logo-details{
@@ -103,11 +139,15 @@
   position: relative;
 }
 
+ 
+
 
 .sidebar .logo-details .icon{
   opacity: 0;
   transition: all 0.5s ease;
 }
+
+ 
 
 
 .sidebar .logo-details .logo_name{
@@ -118,11 +158,15 @@
   transition: all 0.5s ease;
 }
 
+ 
+
 
 .sidebar.open .logo-details .icon,
 .sidebar.open .logo-details .logo_name{
   opacity: 1;
 }
+
+ 
 
 
 .sidebar .logo-details #btn{
@@ -137,6 +181,8 @@
   cursor: pointer;
   transition: all 0.5s ease;
 }
+
+ 
 
 
 .sidebar.open .logo-details #btn{
@@ -230,6 +276,8 @@
   background: #11101D;
 }
 
+ 
+
 
 .sidebar li a:hover{
   background: #FFF;
@@ -248,6 +296,8 @@
   pointer-events: auto;
 }
 
+ 
+
 
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i{
@@ -260,6 +310,8 @@
   font-size: 18px;
   border-radius: 12px;
 }
+
+ 
 
 
 .sidebar li.profile{
@@ -336,17 +388,21 @@
   margin: 18px
 }
 
+ 
 
+ 
 
 
 /* Lista utenti CSS */
 .title-container {
     padding-top: 20px;
     width: 40%;
-   
+
     margin: auto;
     align-items: center;
 }
+
+ 
 
 .title {
     width: 100%;
@@ -354,11 +410,17 @@
     justify-content: center;
     text-align: center;
 
+ 
+
 }
+
+ 
 
 .title p {
     font-size: 30px;
 }
+
+ 
 
 
 .table-container {
@@ -368,12 +430,16 @@
     padding-top: 40px;
 }
 
+ 
+
 .table-container table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
     border: 0.5px solid #002F56;
 }
+
+ 
 
 .table-container table th {
     text-align: center;
@@ -384,11 +450,15 @@
     border-bottom: none;
 }
 
+ 
+
 .table-container table td {
     text-align: center;
     padding: 8px;
     border: 0.5px solid #002F56;
 }
+
+ 
 
 </style>
 </body>

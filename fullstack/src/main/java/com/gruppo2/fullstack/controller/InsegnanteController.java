@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +20,7 @@ import com.gruppo2.fullstack.Dao.UtenteDao;
 import com.gruppo2.fullstack.Dao.InsegnamentoDao;
 import com.gruppo2.fullstack.model.Domanda;
 import com.gruppo2.fullstack.model.Modulo;
+import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Statistiche;
 import com.gruppo2.fullstack.model.Utente;
 
@@ -46,8 +48,7 @@ public class InsegnanteController {
 	public ModelAndView risultati(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		String Materia = InsegnamentoDao.Materia(loggedUser.getIdutente());
-		
-		
+
 		if (loggedUser != null) {
 			ModelAndView mavRisultati = new ModelAndView();
 			mavRisultati.setViewName("risultati");
@@ -56,13 +57,13 @@ public class InsegnanteController {
 //----------------------------------------------------------------
 			List<Statistiche> stats = Statistiche(Materia);
 			mavRisultati.addObject("stats", stats);
+			
 			return mavRisultati;
-		}
-		else {
+		} 
 			ModelAndView mavError = new ModelAndView();
 			mavError.setViewName("error404");
 			return mavError;
-		}
+		
 	}
 	
 	
@@ -71,8 +72,10 @@ public class InsegnanteController {
 	public String profilo(Model model, HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
-			model.addAttribute(loggedUser);
-			
+			model.addAttribute("utente",loggedUser);
+			Integer idDocente = loggedUser.getRuolo().getidruolo();
+			Ruolo ruoloUtente = RuoloDao.findByidruolo(idDocente);
+			model.addAttribute("ruolo", ruoloUtente);
 			return "profilo";
 		}else {
 			return "redirect:/error404";
@@ -84,13 +87,17 @@ public class InsegnanteController {
 	public ModelAndView modificaPassword(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
+			
 			ModelAndView mavMP = new ModelAndView();
+			Integer idDocente = loggedUser.getRuolo().getidruolo();
+			Ruolo ruoloUtente = RuoloDao.findByidruolo(idDocente);
+			mavMP.addObject("ruolo", ruoloUtente);
 			mavMP.setViewName("modificaPassword");
 			mavMP.addObject("utente", loggedUser);
 			return mavMP;
 		}else {
 			ModelAndView mavError = new ModelAndView();
-			mavError.setViewName("error404");
+			mavError.setViewName("error404"); 
 			return mavError;
 		}
 	}
@@ -98,7 +105,7 @@ public class InsegnanteController {
 	
 	
 	// MODIFICA PASSWORD (post)
-	@RequestMapping("/Modifica")
+	@RequestMapping(value = "/Modifica", method=RequestMethod.POST)
 	public String ModificaPassword(HttpSession session, Model model, 
 			@RequestParam String nuovaPassword, 
 			@RequestParam String confermaPassword) {
@@ -107,12 +114,13 @@ public class InsegnanteController {
 		
 		if(nuovaPassword.equals(confermaPassword)) {
 			//model.addAttribute("utente", loggedUser);
+			
 			loggedUser.setPassword(confermaPassword);
 			UtenteDao.save(loggedUser);
 			session.setAttribute("loggedUser", loggedUser);
 			return "redirect:/insegnante/profilo";
 		} else {
-			return "redirect:/error404"; // Messaggio di errore che le password non sono uguali
+			return "redirect:/insegnante/modificaPassword?error";  // Messaggio di errore che le password non sono uguali
 		}
 	}
 	

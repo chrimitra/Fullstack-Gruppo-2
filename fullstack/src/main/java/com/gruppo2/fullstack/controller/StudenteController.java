@@ -22,6 +22,7 @@ import com.gruppo2.fullstack.Dao.UtenteDao;
 import com.gruppo2.fullstack.model.Domanda;
 import com.gruppo2.fullstack.model.Feedback;
 import com.gruppo2.fullstack.model.Modulo;
+import com.gruppo2.fullstack.model.Ruolo;
 import com.gruppo2.fullstack.model.Utente;
 import com.gruppo2.fullstack.risorse.Feedbacks;
 
@@ -49,7 +50,7 @@ public class StudenteController {
 	@GetMapping("/menuFeedback")
 	public ModelAndView menuFeedback(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-
+		
 		if (loggedUser != null) {
 			ModelAndView mavMenuFeedback = new ModelAndView();
 			mavMenuFeedback.setViewName("menuFeedback");
@@ -140,53 +141,61 @@ public class StudenteController {
 	  }
 	 
 	// PROFILO 
-	@RequestMapping("/profilo")
+  @RequestMapping("/profilo")
 	public String profilo(Model model, HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
-			model.addAttribute(loggedUser);
-			model.addAttribute("ruolo", loggedUser.ruolo);
+			model.addAttribute("utente",loggedUser);
+			Integer idDocente = loggedUser.getRuolo().getidruolo();
+			Ruolo ruoloUtente = RuoloDao.findByidruolo(idDocente);
+			model.addAttribute("ruolo", ruoloUtente);
 			return "profilo";
 		}else {
 			return "redirect:/error404";
 		}
 	}
 	
-	// MODIFICA PASSWORD(Mappatura)
-	
+//MODIFICA PASSWORD(Mappatura)
 	@RequestMapping("/modificaPassword")
 	public ModelAndView modificaPassword(HttpSession session) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		if (loggedUser != null) {
+			
 			ModelAndView mavMP = new ModelAndView();
+			Integer idStudente = loggedUser.getRuolo().getidruolo();
+			Ruolo ruoloUtente = RuoloDao.findByidruolo(idStudente);
+			mavMP.addObject("ruolo", ruoloUtente);
 			mavMP.setViewName("modificaPassword");
 			mavMP.addObject("utente", loggedUser);
 			return mavMP;
 		}else {
 			ModelAndView mavError = new ModelAndView();
-			mavError.setViewName("error404");
+			mavError.setViewName("error404"); 
 			return mavError;
 		}
 	}
 	
+	
+	
 	// MODIFICA PASSWORD (post)
-		@RequestMapping("/Modifica")
-		public String ModificaPassword(HttpSession session, Model model, 
-				@RequestParam String nuovaPassword, 
-				@RequestParam String confermaPassword) {
+	@RequestMapping(value = "/Modifica", method=RequestMethod.POST)
+	public String ModificaPassword(HttpSession session, Model model, 
+			@RequestParam String nuovaPassword, 
+			@RequestParam String confermaPassword) {
+		
+		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		
+		if(nuovaPassword.equals(confermaPassword)) {
+			//model.addAttribute("utente", loggedUser);
 			
-			Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-			
-			if(nuovaPassword.equals(confermaPassword)) {
-				//model.addAttribute("utente", loggedUser);
-				loggedUser.setPassword(confermaPassword);
-				UtenteDao.save(loggedUser);
-				session.setAttribute("loggedUser", loggedUser);
-				return "redirect:/studente/profilo";
-			} else {
-				return "redirect:/error404"; // Messaggio di errore che le password non sono uguali
-			}
+			loggedUser.setPassword(confermaPassword);
+			UtenteDao.save(loggedUser);
+			session.setAttribute("loggedUser", loggedUser);
+			return "redirect:/studente/profilo";
+		} else {
+			return "redirect:/studente/modificaPassword?error";  // Messaggio di errore che le password non sono uguali
 		}
+	}
 			
 
 }

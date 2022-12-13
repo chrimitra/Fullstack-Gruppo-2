@@ -69,7 +69,8 @@
         <div class="container-report">
             <div id="box-modulo" class="box-modulo" th:each="m : ${modulo}">
                 <div class="title-modulo">
-                    <p onclick="loadDoc(this.id);" th:id="${m.idmodulo}" class="modulo-text" th:text="${m.modulo}"></p>
+                    <p onclick="loadDoc(this.id); closeDoc();" th:id="${m.idmodulo}" class="modulo-text" th:text="${m.modulo}"></p>
+      
                 </div>	
             
                 <div class="details" th:id="details + ${m.idmodulo}">      
@@ -87,15 +88,14 @@
 			  console.log(id);
 			  const xhttp = new XMLHttpRequest();
 			  xhttp.onload = function() {
-			    document.getElementById(`details${id}`).innerHTML = this.responseText;
-			    
+			    	document.getElementById(`details${id}`).innerHTML = this.responseText;
 			  }
 			
 			  xhttp.open("GET", `/admin/reportDetails/${id}`);
 			  xhttp.send();
 			} 
-	
-	
+		
+		
 	
 		/* Codice per le animazioni della navbar */
 	    let sidebar = document.querySelector(".sidebar");

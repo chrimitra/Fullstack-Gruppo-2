@@ -39,6 +39,7 @@ public class Utente {
 	public String password;	
 	
 	
+	
 	@ManyToOne
 	@JoinColumn(name="idruolo")
 	public Ruolo ruolo;
