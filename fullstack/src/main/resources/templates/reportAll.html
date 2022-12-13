@@ -79,8 +79,6 @@
         <table>
           <tr>
             <th>Data</th>
-            <th>Nome</th>
-            <th>Cognome</th>
             <th>Modulo</th>
             <th>Domanda</th>
 			<th>Voto</th>
@@ -88,8 +86,6 @@
           </tr>
           <tr th:each="feedback : ${feedback}">
             <td th:text="${feedback.data}"></td>
-            <td th:text="${feedback.utente.nome}"></td>
-            <td th:text="${feedback.utente.cognome}"></td>
            	<td th:text="${feedback.modulo.modulo}"></td>
             <td th:text="${feedback.domanda.domanda}"></td> 
             <td th:text="${feedback.voto}"></td>
