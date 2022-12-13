@@ -6,7 +6,6 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="pr.css">
     <title>Menu</title>
 </head>
@@ -14,7 +13,6 @@
  <!--  Navbar on the left -->
     <div class="sidebar">
         <div class="logo-details">
-
         <i></i>
             <div class="logo_name"></div>
             <i class='bx bx-menu' id="btn" ></i>
@@ -37,8 +35,6 @@
             </a>
             <span class="tooltip">Lista Utenti</span>
         </li>
-
-
         <li>
             <a href="/admin/registrazione"> 
                 <i class='bx bxs-user-plus' ></i>
@@ -47,13 +43,11 @@
             <span class="tooltip">Registrazione</span>
         </li>
         
-
-
         <li class="profile">
             <div class="profile-details">
             <!--<img src="profile.jpg" alt="profileImg">-->
             <div class="name_job">
-                <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
+                <div class="name"><p th:text= "${utenteLoggato.nome}"></p></div> <!-- Nome Utente -->
                 
             </div>
             </div>
@@ -73,8 +67,8 @@
       	<div id="filtro-container">
       		<button onclick="loadDoc()"> Filtro </button>
       	</div>
-	  	
-        
+
+
      <div class="table-container" >
         <table>
           <tr>
@@ -98,29 +92,29 @@
         </div>
       </div>
     </section>  
-    
+
 <script type="text/javascript">
-   
+
 	function loadDoc() {
 		  const xhttp = new XMLHttpRequest();
 		  xhttp.onload = function() {
 		    document.getElementById("filtro-container").innerHTML = this.responseText;
-		    
+
 		  }
-		
+
 		  xhttp.open("GET", "/admin/filtro");
 		  xhttp.send();
 		} 
-   
+
 
 	function filtraData() {
 		window.location = "/admin/reportAll/data"
 	}
-		
+
 	function filtraVoto() {
 		window.location = "/admin/reportAll/voto"
 	}
-	
+
 	function filtraDomanda() {
 		window.location = "/admin/reportAll/domanda"
 	}
@@ -131,7 +125,6 @@
     let sidebar = document.querySelector(".sidebar");
     let closeBtn = document.querySelector("#btn");
     let searchBtn = document.querySelector(".bx-search");
-
     closeBtn.addEventListener("click", ()=>{
         sidebar.classList.toggle("open");
         menuBtnChange();
@@ -149,9 +142,6 @@
   box-sizing: border-box;
   font-family: "Poppins" , sans-serif;
 }
-
-
-
 .sidebar{
   position: fixed;
   left: 0;
@@ -163,26 +153,19 @@
   z-index: 99;
   transition: all 0.5s ease;
 }
-
 .sidebar.open{
   width: 250px;
 }
-
-
 .sidebar .logo-details{
   height: 60px;
   display: flex;
   align-items: center;
   position: relative;
 }
-
-
 .sidebar .logo-details .icon{
   opacity: 0;
   transition: all 0.5s ease;
 }
-
-
 .sidebar .logo-details .logo_name{
   color: #fff;
   font-size: 20px;
@@ -190,14 +173,10 @@
   opacity: 0;
   transition: all 0.5s ease;
 }
-
-
 .sidebar.open .logo-details .icon,
 .sidebar.open .logo-details .logo_name{
   opacity: 1;
 }
-
-
 .sidebar .logo-details #btn{
   position: absolute;
   top: 50%;
@@ -210,8 +189,6 @@
   cursor: pointer;
   transition: all 0.5s ease;
 }
-
-
 .sidebar.open .logo-details #btn{
   text-align: right;
 }
@@ -302,8 +279,6 @@
   transition: all 0.4s ease;
   background: #11101D;
 }
-
-
 .sidebar li a:hover{
   background: #FFF;
 }
@@ -320,8 +295,6 @@
   opacity: 1;
   pointer-events: auto;
 }
-
-
 .sidebar li a:hover .links_name,
 .sidebar li a:hover i{
   transition: all 0.5s ease;
@@ -333,8 +306,6 @@
   font-size: 18px;
   border-radius: 12px;
 }
-
-
 .sidebar li.profile{
   position: fixed;
   height: 60px;
@@ -408,10 +379,6 @@
   font-weight: 500;
   margin: 18px
 }
-
-
-
-
 /* Lista utenti CSS */
 .title-container {
     padding-top: 20px;
@@ -420,34 +387,27 @@
     margin: auto;
     align-items: center;
 }
-
 .title {
     width: 100%;
     margin: auto;
     justify-content: center;
     text-align: center;
-
 }
-
 .title p {
     font-size: 30px;
 }
-
-
 .table-container {
     overflow-x: auto;
     width: 80%;
     margin: auto;
     padding-top: 40px;
 }
-
 .table-container table {
     border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
     border: 0.5px solid #002F56;
 }
-
 .table-container table th {
     text-align: center;
     padding: 8px;
@@ -456,12 +416,10 @@
     border: 0.5px solid #ffffff;
     border-bottom: none;
 }
-
 .table-container table td {
     text-align: center;
     padding: 8px;
     border: 0.5px solid #002F56;
 }
-
 </style>
 </html>

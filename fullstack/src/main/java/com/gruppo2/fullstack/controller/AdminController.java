@@ -59,9 +59,9 @@ public class AdminController {
 	@GetMapping("/reportAll")
 	public String reportDomanda(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		System.out.println(loggedUser.getRuolo().getruolo());
-		model.addAttribute("utente", loggedUser);
+		model.addAttribute("utenteLoggato", loggedUser);
 		List <Feedback> feedback = FeedbackDao.feedback();
+		System.out.println(feedback);
 		model.addAttribute("feedback", feedback);
 		
 		return "reportAll";
