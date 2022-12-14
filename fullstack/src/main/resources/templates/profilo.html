@@ -27,15 +27,22 @@
                 </a>
                 <span class="tooltip">Profilo</span>
             </li> 
-    
-            <li>
+    	
+    		
+            <li th:if="${ruolo.ruolo == 'insegnante'}">
                 <a href="/insegnante/risultati">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Reportistica</span>
                 </a>
                 <span class="tooltip">Reportistica</span>
             </li> 
-
+			<li th:unless="${ruolo.ruolo == 'insegnante'}">
+	           <a href="/studente/menuFeedback"> 
+	               <i class='bx bx-align-middle'></i>
+	           <span class="links_name">Menu</span>
+	           </a>
+	           <span class="tooltip">Menu </span>
+        	</li>
 
 
 	        <li class="profile">

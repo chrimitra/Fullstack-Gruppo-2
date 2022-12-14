@@ -163,11 +163,8 @@ public class AdminController {
 							@RequestParam("ruolo") String ruolo,
 							@RequestParam("modulo")String modulo,
 							HttpSession session,
-							Model model,
-							@RequestParam("g-recaptcha-response") String captchaResponse) { //cambiare html, levando password e mettendo una select con i ruoli
-	String url = "https://www.google.com/recaptcha/api/siteverify";
-	String params = "?secret=6LcmWycjAAAAAL_CPGuBMw7G9MzzVYRjOYGV0joE&response="+captchaResponse;		
-	ReCaptchaResponse reCaptchaResponse = restTemplate.exchange(url+params, HttpMethod.POST,null,ReCaptchaResponse.class).getBody();	
+							Model model) { 
+
 	
 	Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 	model.addAttribute("utente", loggedUser);

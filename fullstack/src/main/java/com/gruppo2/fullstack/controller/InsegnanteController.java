@@ -118,7 +118,7 @@ public class InsegnanteController {
 			loggedUser.setPassword(confermaPassword);
 			UtenteDao.save(loggedUser);
 			session.setAttribute("loggedUser", loggedUser);
-			return "redirect:/insegnante/profilo";
+			return "redirect:/insegnante/modificaPassword?success";
 		} else {
 			return "redirect:/insegnante/modificaPassword?error";  // Messaggio di errore che le password non sono uguali
 		}
