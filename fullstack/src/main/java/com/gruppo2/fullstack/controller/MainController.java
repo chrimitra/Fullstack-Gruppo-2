@@ -64,7 +64,7 @@ public class MainController {
 		
 		if((utente != null) && (utente.getRuolo().getidruolo() == 1)) { //Se è admin
 			if(utente.getPassword().equals(password)) {
-				return"redirect:/admin/reportAll";
+				return"redirect:/admin/report";
 			}
 			
 		} else if ((utente != null) && (utente.getRuolo().getidruolo() == 2)) { //Se è docente

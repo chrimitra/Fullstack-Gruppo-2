@@ -9,7 +9,9 @@
 </head>
 <body>
     <div class="container">
+      <img src="/images/logo.png">
 			<div align="center" class="title"> Login </div>
+    
 			<form action="/login" method="post" id="login-form">
 				<div class="user-details">
 					<div class="input-box">
@@ -31,20 +33,24 @@
 				
 				<div class="error" th:if="${param.error}">
 					<div class="alert-error"> Credenziali sbagliate! </div>
-				</div> 
+				</div>  
 				<br>
 			  		<div class="button">
 	                   <button class="btn" type="submit" value="Login"> Login </button>
 	    			</div>
 				
 				
-				
+	
 				
 								
 			</form>
 	      
 	 	</div>
+    <div class="footer">
 
+      <p class="footer-text">© 2021-2022 ITS Tech Srl All rights reserved.<br>
+        Leggi le nostre <u>Privacy Policy</u> e <u>Cookie Policy</u></p>
+    </div>
           
 <script type="text/javascript">
         var onloadCallback = function() {
@@ -79,28 +85,44 @@
   
 }
 
+body {
+background-image: url("/images/bluedark.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+ 
 
+}
 
 /* Registration Form Style */ 
 
 
 .container {
 	width: 100%;
-	max-width: 700px;
-	padding: 25px 30px;
-	border-radius: 5px;
-    margin: 7% auto;
-    background: #002F56;
-    color: white;
-   
-    
+	max-width: 600px;
+	padding: 20px 30px;
+	border-radius: 16px;
+  margin: 4% auto;
+  color: white;    
+  background-color:#362A7E;
 }
+
+.container img {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
 
 .container .title {
 	font-size: 30px;
 	font-weight: 500;
 	position: relative;
 	justify-content: center;
+  margin-top: 10px;
 }
 
 
@@ -163,7 +185,7 @@ form .user-details .input-box {
     font-weight: 500;
     letter-spacing: 1;
     border-radius: 7px;
-    background-color: #1d1b31;
+    background-color: #3DD6A3;
     color: white;
     cursor: pointer;
     justify-content: center;
@@ -188,6 +210,22 @@ form .user-details .input-box {
     margin: auto;
     border-radius: 5px;
     padding-top: 4px;
+}
+
+.footer {
+  margin: auto;
+  width: 50%;
+  color: white;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 10px;
+}
+
+.footer-text {
+  justify-content: center;
+  
 }
 
 
