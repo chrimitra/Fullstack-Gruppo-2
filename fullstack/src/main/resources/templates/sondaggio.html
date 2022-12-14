@@ -52,8 +52,6 @@
     </div>
 
 
-    <!-- ------------------------->
-
 
     <section class="home-section">
         <div class="title-container">
@@ -82,11 +80,11 @@
                 </div>
 					<div class="input-box">		
 							<select class="form-control"  th:field="*{feedbacklist[__${itemStat.index}__].voto}" required>	                          
-		                           <option th:value="1.0" >non ricordo</option>
-		                           <option th:value="2.0" >non ricordo g</option>
-		                           <option th:value="3.0" >indifferente</option>
-		                           <option th:value="4.0" >abbastanza soddisfatto</option>
-		                           <option th:value="5.0" >soddisfatto</option>        
+		                           <option th:value="1.0" >Non soddisfatto</option>
+		                           <option th:value="2.0" >Poco soddisfatto</option>
+		                           <option th:value="3.0" >Abbastanza soddisfatto</option>
+		                           <option th:value="4.0" >Molto soddisfatto</option>
+		                           <option th:value="5.0" >Soddisfattissimo</option>        
 		                    </select>
 			        </div>
 		    </div>	
