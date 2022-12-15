@@ -51,11 +51,47 @@ public class StudenteController {
 	@GetMapping("/menuFeedback")
   	public ModelAndView menuFeedback(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+		Iterable<Feedback> listaFeedback = FeedbackDao.feedback();
+	    Iterable<Modulo> exModuli = ModuloDao.findAll();
+	    
+	    List<Modulo> listaModuli = new ArrayList<>();
+	    
+	    for (Modulo exModulo : exModuli) {
+	    	
+	    	listaModuli.add(exModulo);
+	    	
+	    }
+	    
 
 		if (loggedUser != null) {
+			
+			
+			// CONTROLLO SE STUDENTE HA GIA' FATTO IL SONDAGGIO
+			for (Feedback feedback : listaFeedback) {
+				
+				if(feedback.getUtente().getIdutente().equals(loggedUser.getIdutente())) {
+					
+					Modulo modulo = feedback.getModulo();
+					
+					
+					if(listaModuli.contains(modulo)) {
+						listaModuli.remove(modulo);
+					    
+					
+					}
+						
+						
+					}
+					
+					
+				}
+				
+			System.out.println(listaModuli);
+			
+			
 			ModelAndView mavMenuFeedback = new ModelAndView();
 			mavMenuFeedback.setViewName("menuFeedback");
-			mavMenuFeedback.addObject("modulo", ModuloDao.findAll());
+			mavMenuFeedback.addObject("modulo", listaModuli);
 			mavMenuFeedback.addObject("utente", loggedUser);
 			return mavMenuFeedback;
 		} else {
@@ -74,10 +110,17 @@ public class StudenteController {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
 		Feedbacks feedbacks = new Feedbacks();	
 		Iterable<Domanda> domande = DomandaDao.findAll();	
-		 
-	    
+	
+		
+		
+		
 		
 		if (loggedUser != null) {
+			
+			
+			
+			
+
 			
 		    for (Domanda domanda: domande) {	    	
 		    	
