@@ -1,14 +1,259 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu</title>
+    <title>Login</title>
+   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-	<h1 align="center"> ERROR 404 </h1>
-		<h3> Devi loggarti prima! </h3>
-		<p><a href="/">  Tornare alla pagina login? </a> </p>
+    <div class="container">
+      <img src="/images/logo.png">
+			<div align="center" class="title"> ERROR 404 </div>
+			<p align="center"> Qualcosa è andato storto! </p> 
+	
+	</div>
+    		<div align="center" class="button">
+				<a id="a" href="/"><button class="btn">Tornare alla pagina Login</button></a>
+			</div>
+    <div class="footer">
+
+      <p class="footer-text">© 2021-2022 ITS Tech Srl All rights reserved.<br>
+        Leggi le nostre <u>Privacy Policy</u> e <u>Cookie Policy</u></p>
+    </div>
+          
+<script type="text/javascript">
+        var onloadCallback = function() {
+          alert("grecaptcha is ready!");
+        };
+ 
+        document.getElementById("login-form").addEventListener("submit",function(evt)
+                {
+                
+                var response = grecaptcha.getResponse();
+                if(response.length == 0)
+                {
+                  
+                  alert("Please verify you're human!");
+                  evt.preventDefault();
+                  return false;
+                }
+                
+                
+              });
+</script>
 </body>
-</html>s
+<style>
+/* Navbar Style */
+/* Google Font Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins" , sans-serif;
+  
+}
+
+body {
+background-image: url("/images/bluedark.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+ 
+
+}
+
+/* Registration Form Style */ 
+
+
+.container {
+	width: 100%;
+	max-width: 600px;
+	padding: 20px 30px;
+	border-radius: 16px;
+  margin: 4% auto;
+  color: white;    
+  background-color:#362A7E;
+}
+
+.container img {
+  width: 80px;
+  height: 80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.container .title {
+	font-size: 30px;
+	font-weight: 500;
+	position: relative;
+	justify-content: center;
+  margin-top: 10px;
+}
+
+
+.container form .user-details {
+	justify-content: center;
+    align-items: center;
+	margin: 20px 0 12px 0;
+}
+
+
+form .user-details .input-box {
+	padding: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+	width: 60%;
+}
+
+.user-details .input-box .details {
+	display: block;
+	font-weight: 500;
+	margin-bottom: 5px;
+
+}
+.user-details .input-box input{
+	height: 45px;
+	width: 100%;
+	outline: none;
+	border-radius: 5px;
+	font-size: 14px;	
+	padding-left: 15px;
+	border: 1px solid black;
+}
+
+.user-details .input-box select{
+	height: 45px;
+	width: 100%;
+	outline: none;
+	border-radius: 5px;
+	font-size: 14px;	
+	padding-left: 15px;
+	border: 1px solid black;
+}
+
+.button {
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    
+    width: 58%;
+}
+
+.btn {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1;
+    border-radius: 7px;
+    background-color: #3DD6A3;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+    
+ 
+}
+
+
+
+.error {
+	width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.alert-error {
+ 	background-color: red;
+	width: 60%;
+    height: 30px;
+    text-align: center;
+    margin: auto;
+    border-radius: 5px;
+    padding-top: 4px;
+}
+
+.footer {
+  margin: auto;
+  width: 50%;
+  color: white;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 10px;
+}
+
+.footer-text {
+  justify-content: center;
+  
+}
+
+.button {
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 58%;
+    color: white;
+}
+
+.btn {
+    height: 100%;
+    width: 30%;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1;
+    border-radius: 7px;
+    background-color: #3DD6A3;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+ 
+}
+
+#a {
+	color: white;
+	font-size: 13px;
+	text-decration: none;
+}
+
+
+/* Responsive Form */
+
+@media (max-width: 584px) {
+	.container {
+		max-width:80%;
+	}
+	
+	form .user-details .input-box {
+		margin-bottom: 15px;
+		width: 100%;
+	}
+	
+	.container form .user-details {
+		max-height: 800px;
+		overflow-y: scroll;
+	}
+	
+	.user-details::-webkit-scrollbar {
+		width: 0;
+	}
+	
+	
+}
+
+</style>
+</html>

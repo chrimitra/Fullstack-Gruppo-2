@@ -2,28 +2,31 @@
 <html lang="en" xmlns:th="https://thymeleaf.org">
   <head>
     <meta charset="UTF-8">
-    <title> Menu Feedback </title>
-    <link rel="stylesheet" href="style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title> Report </title>
+
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
     <body>
-    <!--  Navbar on the left -->
+   <!--  Navbar on the left -->
     <div class="sidebar">
         <div class="logo-details">
-
         <i></i>
             <div class="logo_name"></div>
             <i class='bx bx-menu' id="btn" ></i>
         </div>
-
         
         <ul class="nav-list">
-
-
-      
+        
+         
+        <li>
+            <a href="/studente/menuFeedback"> 
+                <i class='bx bx-align-middle'></i>
+            <span class="links_name">Menu</span>
+            </a>
+            <span class="tooltip">Menu </span>
+        </li>
 
         <li>
             <a href="/studente/profilo"> 
@@ -33,80 +36,38 @@
             <span class="tooltip">Profilo</span>
         </li>
             
-  		<li>
-            <a href="/studente/menuFeedback"> 
-                <i class='bx bx-align-middle'></i>
-            <span class="links_name">Menu</span>
-            </a>
-            <span class="tooltip">Menu </span>
-        </li>
-      
+
 
         <li class="profile">
             <div class="profile-details">
             <!--<img src="profile.jpg" alt="profileImg">-->
-            <div class="name_job">
-                <div class="name"><p th:text= "${utente.nome}"></p></div> <!-- Nome Utente -->
-                <div class="job"><p th:text="${utente.ruolo.ruolo}"></div> <!-- Ruolo -->
-            </div>
+            
             </div>
             <a href="/logout"><i class='bx bx-log-out' id="log_out" ></i></a> <!-- Mapping che mi fa il logout -->
         </li>
         </ul>
     </div>
 
-    <!-- Qua va messo tutto il contenuto ovvero il report --> 
-    <section class="home-section">
-      <div class="title-container">
-        <img src="../static/images/logo.png" th:src="@{/images/logo.png}"/>
-        
-    </div>
-    <div class="header">
-      <div class="studente"> 
-          <p class="text-doc"><b>STUDENTE: </b><p>&nbsp;</p></p><p class="text-doc" th:text= "${utente.nome}"></p><p>&nbsp;</p><p class="text-doc" th:text= "${utente.cognome}">
-      </div>
-    </div>
-  <hr class="hr">
-  <div class="container-choose">
-      <p class="container-text"> Scegli il modulo a cui vuoi fare il sondaggio </p>
-  </div>
-    <div class="container-report">
-        <div id="box-modulo" class="box-modulo" th:each="m : ${modulo}">
-            <div class="title-modulo">
-                <p onclick="getId(this.id)" th:id="${m.idmodulo}" class="modulo-text" th:text="${m.modulo}"></p>
-  
-            </div>	
-        
-            <div class="details" th:id="details + ${m.idmodulo}">      
-        </div>
-        
-          </div>
-        </div>
-     
-	</section>
-    
-<!-- JavaScript -->
-<script>
-		var id;
-		function getId(clicked_id) {
-			  id = clicked_id;
-			  console.log(id);
-		}
-		
-		
-		console.log(id);
 
-		$(document).ready(function(){
-			  $(".title-modulo").click(function(clicked_id){
-			    $.ajax({url: "", success: function(result){
-			    	window.location = `/studente/sondaggio/${id}`;
-			    }});
-			  })
-		});
-		
-		
-		/* Codice per le animazioni della navbar */
-	    let sidebar = document.querySelector(".sidebar");
+
+    <section class="home-section">
+        <div class="title-container">
+            <div class="image">
+                <img src="logo.png" th:src="@{/images/logo.png}" >
+                <p class="img-text"> Grazie per aver effettuato il sondaggio! </p>
+            </div>
+        </div>
+   
+            <div class="button"> 
+	    	    <a id="a" href="/studente/menuFeedback"><button class="btn">Tornare al menu?</button></a>
+            </div>   
+    </section>
+
+
+      
+</body>
+<script>
+ let sidebar = document.querySelector(".sidebar");
 	    let closeBtn = document.querySelector("#btn");
 	    let searchBtn = document.querySelector(".bx-search");
 	
@@ -114,15 +75,10 @@
 	        sidebar.classList.toggle("open");
 	        menuBtnChange();
 	    });
-	    
 </script>
 
-	  
-</body>
-
-<!-- CSS STYLE -->
 <style>
-
+/* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
   margin: 0;
@@ -356,66 +312,21 @@
   margin: 18px
 }
 
+.title-container {
+    width: 60%;
+    margin: 20px auto;
+    align-items: center;
+    height: 200px;
+    background-color: #183C5A;
+    border-radius: 16px;
+}
 
 .title-container img {
-  width: 100px;
-  height: 100px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
 }
 
-
-.title-container {
-    padding-top: 20px;
-    width: 40%;
-
-    margin: auto;
-    align-items: center;
-}
-
-
-
-.container-report {
-    justify-content: center;
-    width: 60%;
-    text-align: center;
-    position: relative;
-    height: 100%;
-    margin: 20px auto;
-   
-}
-
-.box-modulo {
-  font-size: 20px;
-  margin-top: 25px;
-  
-  
-}
-
-.title-modulo {
-  border-radius: 12px;
-  background: #002f56;
-  
-  height: 60px;
-  
-}
-
-.modulo-text {
-  color: white;
-  text-decoration: underline;
-  padding-top: 18px;
-}
-
-.title-modulo p {
-	cursor: pointer;
-}
-
-.modulo-text {
-  color: white;
-  width: 100%;
-  
-}
 
 .header {
     width: 60%;
@@ -425,39 +336,101 @@
     padding-top: 20px;
 }
  
-.studente {
+
+.docente {
     width: 20%;
     text-align: left;
-	display: flex;
-	color:#183C5A;
+  display: flex;
 }
 
+.modulo {
+    text-align: center;
+    width: 20%;
+    text-align: left;
+}
 
 .hr {
     width: 60%;
     margin: auto;
 }
 
-.container-choose {
-  width: 100%;
-  margin-top: 30px;
-  text-align: center;
+.img-text {
+    text-align: center;
+    width: 60%;
+    color: white;
+    font-size: 35px;
+    padding-top: 70px;
+
 }
 
-.container-text {
-  color:#002f56;
-  font-weight: 700;
-  width: 60%;
-  margin: auto;
-  font-size: 18px;
+.image {
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-form {
+    background-color: #183C5A;
+    border-radius: 15px;
+    width: 60%;
+    margin: 20px auto;
+    height: 190px;
+
+}
+.question {
+
+    height: 80px;
+}
+
+.input-box {
+    height: 40px;
+    width: 30%;
+    margin-top: 20px;
+    margin: 30px auto auto 50px;
+}
+
+.form-control {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: none;
+    font-weight: 300;
+    color: #141029;
+    border:none;
+}
+
+.button {
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 58%;
+    color: white;
+}
+
+.btn {
+    height: 100%;
+    width: 30%;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1;
+    border-radius: 7px;
+    background-color: #3DD6A3;
+    color: white;
+    cursor: pointer;
+    justify-content: center;
+ 
 }
 
 
-@media (max-width: 420px) {
-  .sidebar li .tooltip{
-    display: none;
-  }
+
+#a {
+	color: white;
+	font-size: 16px;
+	text-decration: none;
 }
+
 
 </style>
 </html>

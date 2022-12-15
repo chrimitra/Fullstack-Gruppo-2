@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title> Report </title>
-    <link rel="stylesheet" href="style.css">
+
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,9 +64,9 @@
             <div class="docente"> 
                <p class="text-doc"><b>STUDENTE: </b><p>&nbsp;</p></p><p class="text-doc" th:text= "${utente.nome}"></p><p>&nbsp;</p><p class="text-doc" th:text= "${utente.cognome}">
             </div>
-            <div class="modulo"> 
-                <p class="text-mod"> MODULO: </p><p class="text-doc" th:text="${modulo.modulo}"></p>
-            </div>
+            <!--  <div class="modulo"> 
+                <p class="text-doc"><b>MODULO: </b></p><p>&nbsp;</p><p class="text-mod" th:text= "${modulo.modulo}"></p>
+            </div>-->
             
         </div>
         <hr class="hr">
@@ -76,7 +76,7 @@
 	  	<form   th:action="@{/studente/sondaggio/{modulo}(modulo = ${modulo})}" th:object="${feedbacks}" method="post">
 			<div th:each="feedback, itemStat : *{feedbacklist}" class="container-form">	
                 <div class="question">
-				    <p th:text=*{feedbacklist[__${itemStat.index}__].domanda.domanda}></p> 
+				    <p class="domanda-text" th:text=*{feedbacklist[__${itemStat.index}__].domanda.domanda}></p> 
                 </div>
 					<div class="input-box">		
 							<select class="form-control"  th:field="*{feedbacklist[__${itemStat.index}__].voto}" required>	                          
@@ -424,6 +424,9 @@
     height: 100%;
     border-radius: 10px;
     border: none;
+    font-weight: 300;
+    color: #141029;
+    border:none;
 }
 
 .button {
@@ -449,6 +452,14 @@
     justify-content: center;
  
 }
+
+.domanda-text {
+	padding-top: 40px;
+	padding-left: 30px;
+	color: white;
+	font-size: 20px;
+}
+
 
 </style>
 </html>

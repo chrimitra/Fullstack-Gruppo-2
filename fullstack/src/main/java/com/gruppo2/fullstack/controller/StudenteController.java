@@ -47,6 +47,7 @@ public class StudenteController {
 
 	
 	//PAGINA MENU FEEDBACK
+	
 	@GetMapping("/menuFeedback")
   	public ModelAndView menuFeedback(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
@@ -89,6 +90,7 @@ public class StudenteController {
 		    mavSondaggio.setViewName("sondaggio");
 		    mavSondaggio.addObject("feedbacks", feedbacks);
 		    mavSondaggio.addObject("modulo", id);
+		    mavSondaggio.addObject("utente", loggedUser);
 		   
 		    
 		    
@@ -135,14 +137,27 @@ public class StudenteController {
 				mavMenuFeedback.setViewName("menuFeedback");
 				mavMenuFeedback.addObject("modulo", ModuloDao.findAll());
 				mavMenuFeedback.addObject("utente", loggedUser);
-				
-				return mavMenuFeedback;
+				ModelAndView mavRingraziamenti = new ModelAndView();
+				mavRingraziamenti.setViewName("ringraziamenti");
+				return mavRingraziamenti;
 			} else {
 				ModelAndView mavError = new ModelAndView();
 				mavError.setViewName("error404");
 				return mavError;
 			}
 	  }
+	  
+	  
+	 // RINGRAZIAMENTI
+	  @GetMapping("/ringraziamenti")
+	  public String ringraziamenti(Model model, HttpSession session) {
+		  Utente loggedUser = (Utente) session.getAttribute("loggedUser");
+			if (loggedUser != null) {
+				return "ringraziamenti";
+			} else {
+				return "error404";
+	  }
+	}	
 	 
 	// PROFILO 
   @RequestMapping("/profilo")
@@ -200,6 +215,8 @@ public class StudenteController {
 			return "redirect:/studente/modificaPassword?error";  // Messaggio di errore che le password non sono uguali
 		}
 	}
+	
+	
 			
 
 }
