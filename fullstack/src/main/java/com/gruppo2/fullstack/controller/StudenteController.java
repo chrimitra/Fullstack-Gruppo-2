@@ -48,25 +48,11 @@ public class StudenteController {
 	
 	//PAGINA MENU FEEDBACK
 	@GetMapping("/menuFeedback")
-	public ModelAndView menuFeedback(HttpSession session, Model model) {
+  	public ModelAndView menuFeedback(HttpSession session, Model model) {
 		Utente loggedUser = (Utente) session.getAttribute("loggedUser");
-		Feedbacks feedbacks = new Feedbacks();	
-		
-		
+
 		if (loggedUser != null) {
 			ModelAndView mavMenuFeedback = new ModelAndView();
-			// CONTROLLO SE STUDENTE HA GIA' FATTO IL SONDAGGIO
-			/*Iterable<Feedback> listaFeedback = FeedbackDao.feedback();
-			for (Feedback feedback : listaFeedback) {
-				if(feedback.getUtente().getIdutente().equals(loggedUser.getIdutente())) {
-					feedbacks.addFeeds(feedback);
-					System.out.println(feedback);
-					
-				}
-				
-			}*/
-			
-			
 			mavMenuFeedback.setViewName("menuFeedback");
 			mavMenuFeedback.addObject("modulo", ModuloDao.findAll());
 			mavMenuFeedback.addObject("utente", loggedUser);
